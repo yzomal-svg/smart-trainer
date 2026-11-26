@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b1f4b">
+<meta name="author" content="د. ياسر زمل">
+<meta name="copyright" content="© د. ياسر زمل — جميع الحقوق محفوظة">
 <link rel="icon" href="data:,"><title>الذكاء الاصطناعي… من الصفر إلى الإنجاز — العرض المباشر</title>
 <style>/*
 VOICE: مدرّب واثق في قاعة تدريب سعودية؛ جمل قصيرة، رقم واحد كبير، ولا زخرفة بلا وظيفة.
@@ -524,7 +526,7 @@ body.display #frame{inset:0}
 body.m{overflow:auto;background:#f2f4fa;color:var(--ink);font-size:17px}
 body.m.remote{background:#0b1430;color:#e8eeff}
 #app{min-height:100%}
-.m-wrap{max-width:520px;margin:0 auto;padding:28px 18px 60px;min-height:100vh;display:flex;flex-direction:column;justify-content:center;gap:18px}
+.m-wrap{max-width:520px;margin:0 auto;padding:28px 18px 24px;min-height:calc(100vh - 48px);min-height:calc(100dvh - 48px);display:flex;flex-direction:column;justify-content:center;gap:18px}
 .m-card{background:#fff;color:var(--ink);border-radius:24px;padding:26px 22px;box-shadow:0 10px 30px rgba(11,31,75,.08)}
 .m-card h1,.m-hero h1{margin:4px 0 18px;font-size:28px;color:var(--navy)}
 .m-kick{margin:0;color:var(--mag);font-weight:700;font-size:14px}
@@ -980,7 +982,7 @@ h1{letter-spacing:0}h2{letter-spacing:-.2px}
 
 /* ═══════ الجوال: بطاقة «تابع الشاشة» — ألوان هادئة ثابتة وشخصية شاشة لطيفة ═══════ */
 .p-main:has(.p-watch){padding:12px}
-.p-watch{position:relative;overflow:hidden;min-height:calc(100dvh - 92px);border-radius:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:30px 24px;color:#fff;isolation:isolate;
+.p-watch{position:relative;overflow:hidden;min-height:calc(100dvh - 140px);border-radius:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:30px 24px;color:#fff;isolation:isolate;
   background:radial-gradient(120% 70% at 85% 0%,color-mix(in srgb,var(--a) 55%,#fff) 0%,transparent 55%),radial-gradient(90% 60% at 0% 100%,color-mix(in srgb,var(--b) 70%,#000) 0%,transparent 60%),linear-gradient(165deg,var(--a) 0%,var(--b) 100%);
   box-shadow:0 22px 50px -26px var(--b);transition:background .6s}
 .p-watch::before{content:"";position:absolute;inset:0;z-index:-1;background-image:radial-gradient(rgba(255,255,255,.13) 1.2px,transparent 1.4px);background-size:22px 22px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 75%);mask-image:linear-gradient(180deg,#000,transparent 75%)}
@@ -1037,6 +1039,12 @@ h1{letter-spacing:0}h2{letter-spacing:-.2px}
 #slide-host .legend{transition:opacity .3s}
 .poplink path.tipa{stroke-dasharray:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;animation:none}
 #pop .tagpin{position:absolute;width:48px;height:48px;font-size:24px;z-index:3;animation:popin .4s .15s cubic-bezier(.2,1.4,.4,1) both;box-shadow:0 0 0 6px rgba(224,17,95,.22),0 8px 20px rgba(224,17,95,.4)}
+
+/* حفظ الحقوق */
+.slide .meta .rights{position:absolute;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:19px;opacity:.85;letter-spacing:.2px}
+body.m::after{content:"© د. ياسر زمل — جميع الحقوق محفوظة";display:block;text-align:center;font-size:12px;color:#7a86a3;padding:10px 16px calc(14px + env(safe-area-inset-bottom));font-family:var(--f-txt)}
+body.m.remote::after{padding-top:4px;color:rgba(255,255,255,.55)}
+body.m #app{min-height:calc(100% - 40px)}
 </style>
 </head>
 <body class="m">
@@ -2660,7 +2668,7 @@ async function Display() {
     const skey = [mode, s?.id, d.session.item_state, !!d.reveal, ui.model, JSON.stringify(ui.flip), d.session.joins_locked,
       mode === "lb" || mode === "teams" ? JSON.stringify([d.leaderboard, d.teams]) : "", mode === "item" && s?.type === "exercise" && (d.session.item_state === "closed" || d.session.item_state === "revealed")].join("|");
     if (skey !== last.skey) {
-      host.innerHTML = isolate(`<section class="slide in ${["cover", "section", "closing", "join", "lb", "teams", "end"].includes(mode === "item" ? s.type : mode) ? "dark" : ""}" data-type="${mode === "item" ? s.type : mode}">${body(mode, s, d)}<div class="meta"><span>${esc(s ? RD.mods[s.mod] : d.session.title)}</span><span>${s ? `${SL.indexOf(s) + 1} من ${SL.length}` : ""}</span></div></section>`);
+      host.innerHTML = isolate(`<section class="slide in ${["cover", "section", "closing", "join", "lb", "teams", "end"].includes(mode === "item" ? s.type : mode) ? "dark" : ""}" data-type="${mode === "item" ? s.type : mode}">${body(mode, s, d)}<div class="meta"><span>${esc(s ? RD.mods[s.mod] : d.session.title)}</span><span class="rights">© د. ياسر زمل — جميع الحقوق محفوظة</span><span>${s ? `${SL.indexOf(s) + 1} من ${SL.length}` : ""}</span></div></section>`);
       paintBg(mode === "item" && s ? s.mod : 0);
       if (mode === "join" || (mode === "item" && s.type === "survey")) qr(d);
       if (mode === "item" && s.type === "prepost") summary();
