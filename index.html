@@ -978,34 +978,59 @@ h1{letter-spacing:0}h2{letter-spacing:-.2px}
 .slide:not(.dark) :is(.card,.step,.exm,.week,.side,.stat,.ex-steps li,.opt,.pcol,.legend li){box-shadow:0 14px 34px -24px rgba(11,31,75,.35)}
 @media (prefers-reduced-motion:reduce){#bgfx *{animation:none!important;transition:none!important}}
 
-/* ═══════ الجوال: بطاقة «تابع الشاشة» الحية ═══════ */
+/* ═══════ الجوال: بطاقة «تابع الشاشة» — ألوان هادئة ثابتة وشخصية شاشة لطيفة ═══════ */
 .p-main:has(.p-watch){padding:12px}
-.p-watch{position:relative;overflow:hidden;min-height:calc(100dvh - 92px);border-radius:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;padding:32px 24px;color:#fff;
-  background:linear-gradient(140deg,var(--a),var(--b),var(--a));background-size:220% 220%;animation:wGrad 9s ease-in-out infinite;box-shadow:0 22px 50px -24px var(--a)}
-@keyframes wGrad{0%,100%{background-position:0% 30%}50%{background-position:100% 70%}}
-.p-watch>*{position:relative;z-index:1}
-.p-watch>i{position:absolute;z-index:0;border-radius:50%;background:rgba(255,255,255,.16)}
-.w-o1{width:240px;height:240px;top:-70px;inset-inline-end:-70px;animation:wFloat 7s ease-in-out infinite alternate}
-.w-o2{width:160px;height:160px;bottom:-40px;inset-inline-start:-40px;animation:wFloat 9s ease-in-out infinite alternate-reverse}
-.w-o3{width:70px;height:70px;top:22%;inset-inline-start:12%;background:rgba(255,255,255,.22)!important;animation:wFloat 6s ease-in-out infinite alternate}
-@keyframes wFloat{to{transform:translate(18px,26px) scale(1.12)}}
-.w-screen{width:120px;height:80px;border-radius:18px;background:rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;gap:16px;box-shadow:0 0 0 0 rgba(255,255,255,.55);animation:wPulse 2.2s ease-out infinite;margin-bottom:6px}
-.w-screen::after{content:"";position:absolute;bottom:-14px;width:44px;height:8px;border-radius:4px;background:rgba(255,255,255,.85)}
-.w-screen{position:relative}
-@keyframes wPulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.55)}100%{box-shadow:0 0 0 26px rgba(255,255,255,0)}}
-.w-eye{width:20px;height:20px;border-radius:50%;background:var(--a);position:relative;animation:wBlink 4s infinite}
-.w-eye::after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:#fff;top:4px;inset-inline-end:4px;animation:wLook 4s ease-in-out infinite}
-@keyframes wBlink{0%,46%,54%,100%{transform:scaleY(1)}50%{transform:scaleY(.1)}}
-@keyframes wLook{0%,100%{transform:translate(0,0)}30%{transform:translate(-6px,1px)}65%{transform:translate(2px,5px)}}
-.w-mod{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700;letter-spacing:.2px}
-.p-watch h2{margin:0;font-family:var(--f-dis);font-size:27px;line-height:1.4;color:#fff;text-wrap:balance;text-shadow:0 2px 14px rgba(0,0,0,.15)}
-.w-cue{margin:0;font-size:16px;opacity:.92;animation:wCue 3s ease-in-out infinite}
-@keyframes wCue{0%,100%{opacity:.92;transform:none}50%{opacity:.7;transform:translateY(-3px)}}
-.w-prog{width:72%;height:7px;border-radius:999px;background:rgba(255,255,255,.25);overflow:hidden;margin-top:8px}
+.p-watch{position:relative;overflow:hidden;min-height:calc(100dvh - 92px);border-radius:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:30px 24px;color:#fff;isolation:isolate;
+  background:radial-gradient(120% 70% at 85% 0%,color-mix(in srgb,var(--a) 55%,#fff) 0%,transparent 55%),radial-gradient(90% 60% at 0% 100%,color-mix(in srgb,var(--b) 70%,#000) 0%,transparent 60%),linear-gradient(165deg,var(--a) 0%,var(--b) 100%);
+  box-shadow:0 22px 50px -26px var(--b);transition:background .6s}
+.p-watch::before{content:"";position:absolute;inset:0;z-index:-1;background-image:radial-gradient(rgba(255,255,255,.13) 1.2px,transparent 1.4px);background-size:22px 22px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 75%);mask-image:linear-gradient(180deg,#000,transparent 75%)}
+.p-watch>*{position:relative}
+.w-glow{position:absolute!important;width:300px;height:300px;border-radius:50%;top:calc(50% - 250px);left:calc(50% - 150px);background:radial-gradient(circle,rgba(255,255,255,.28),transparent 65%);animation:wBreath 6s ease-in-out infinite;z-index:-1}
+@keyframes wBreath{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+.w-bot{position:relative;width:170px;margin-top:34px}
+.bot{width:170px;height:auto;overflow:visible;display:block}
+.b-body{animation:bBob 3.2s ease-in-out infinite;transform-origin:90px 140px}
+@keyframes bBob{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-6px) rotate(-2deg)}70%{transform:translateY(-3px) rotate(2deg)}}
+.b-shadow{fill:rgba(0,0,0,.18);animation:bShadow 3.2s ease-in-out infinite;transform-origin:90px 160px}
+@keyframes bShadow{0%,100%{transform:scaleX(1)}30%{transform:scaleX(.82)}}
+.b-shell{fill:#fff;filter:drop-shadow(0 8px 14px rgba(0,0,0,.18))}
+.b-screen{fill:color-mix(in srgb,var(--a) 10%,#fff);stroke:color-mix(in srgb,var(--a) 22%,#fff);stroke-width:2}
+.b-ant{stroke:#fff;stroke-width:4;stroke-linecap:round}
+.b-ball{fill:#fde68a;animation:bBall 2s ease-in-out infinite}
+@keyframes bBall{50%{fill:#fff7cc;filter:drop-shadow(0 0 6px #fde68a)}}
+.b-eye ellipse{fill:#1e1b4b}.b-glint{fill:#fff}
+.b-eyes{animation:bLook 7s ease-in-out infinite}
+.b-eye{transform-box:fill-box;transform-origin:center;animation:bBlink 4.5s infinite}
+@keyframes bBlink{0%,44%,50%,100%{transform:scaleY(1)}47%{transform:scaleY(.08)}}
+@keyframes bLook{0%,20%,100%{transform:translate(0,0)}30%,45%{transform:translate(-6px,1px)}60%,75%{transform:translate(6px,0)}}
+.b-happy path,.b-mouth{fill:none;stroke:#1e1b4b;stroke-width:4;stroke-linecap:round}
+.b-happy{opacity:0}
+.b-cheek{fill:#fb7185;opacity:.45}
+.b-hand{fill:#fff;stroke:color-mix(in srgb,var(--a) 25%,#fff);stroke-width:2;transition:transform .5s cubic-bezier(.3,1.4,.5,1)}
+.b-hand.l{animation:bWave 3.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes bWave{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.b-leg{fill:#fff}
+.b-phones{opacity:0;transition:opacity .4s}.b-band{fill:none;stroke:#1e1b4b;stroke-width:6;stroke-linecap:round}.b-cup{fill:#1e1b4b}
+/* التعابير */
+.m-shy .b-eyes{opacity:0}.m-shy .b-happy{opacity:1}.m-shy .b-cheek{opacity:.85}
+.m-shy .b-hand.l{animation:none;transform:translate(42px,-30px)}.m-shy .b-hand.r{transform:translate(-42px,-30px)}
+.m-listen .b-phones{opacity:1}.m-listen .b-eyes{opacity:0}.m-listen .b-happy{opacity:1}
+.m-happy .b-eyes{opacity:0}.m-happy .b-happy{opacity:1}.m-happy .b-mouth,.m-listen .b-mouth{opacity:0}.m-happy .b-mouth2,.m-listen .b-mouth2{opacity:1}
+.b-mouth2{fill:#be123c;stroke:#1e1b4b;stroke-width:3.5;stroke-linejoin:round;opacity:0;transition:opacity .25s}.b-mouth{transition:opacity .25s}
+.m-up .b-eyes{animation:none;transform:translate(0,-7px)}.m-up .b-hand.r{transform:translate(4px,-46px)}
+.b-eyes,.b-happy{transition:opacity .25s}
+/* فقاعة الكلام */
+.w-bubble{position:absolute;bottom:calc(100% - 6px);left:50%;transform:translate(-50%,10px) scale(.8);opacity:0;margin:0;white-space:nowrap;background:#fff;color:#1e1b4b;font-family:var(--f-dis);font-size:16px;padding:10px 16px;border-radius:18px;box-shadow:0 10px 24px rgba(0,0,0,.18);transition:opacity .35s,transform .45s cubic-bezier(.2,1.4,.4,1);pointer-events:none;z-index:2}
+.w-bubble::after{content:"";position:absolute;top:100%;left:50%;margin-left:-9px;border:9px solid transparent;border-top-color:#fff}
+.talk .w-bubble{opacity:1;transform:translate(-50%,0) scale(1)}
+.w-mod{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.32);border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700}
+.p-watch h2{margin:0;font-family:var(--f-dis);font-size:27px;line-height:1.4;color:#fff;text-wrap:balance;text-shadow:0 2px 14px rgba(0,0,0,.18)}
+.w-cue{margin:0;font-size:16px;opacity:.9}
+.w-prog{width:72%;height:7px;border-radius:999px;background:rgba(255,255,255,.22);overflow:hidden;margin-top:6px}
 .w-prog i{display:block;height:100%;border-radius:999px;background:#fff;transition:width .6s}
 .w-n{font-size:13px;opacity:.85}.w-n b{font-family:var(--f-dis)}
-.p-main.fresh .p-watch{animation:wGrad 9s ease-in-out infinite,wIn .5s cubic-bezier(.2,1.2,.4,1) both}
-@keyframes wIn{from{opacity:0;transform:scale(.94)}}
+.p-main.fresh .p-watch{animation:wIn .5s cubic-bezier(.2,1.2,.4,1) both}
+@keyframes wIn{from{opacity:0;transform:scale(.95)}}
 @media (prefers-reduced-motion:reduce){.p-watch,.p-watch *{animation:none!important}}
 
 #slide-host.popping .legend{opacity:.18;transition:opacity .3s}
@@ -3032,18 +3057,24 @@ async function Join(rawCode) {
   });
   function react() {
     const id = g.item?.id || null;
-    if (id !== lastItem) { sel = []; text = ""; err = ""; lastItem = id; lastReveal = false; fresh = true; vibrate(20); }
+    if (id !== lastItem) { sel = []; text = ""; err = ""; lastItem = id; lastReveal = false; fresh = true; watchSince = Date.now(); vibrate(20); }
     if (g.reveal && !lastReveal) { lastReveal = true; if (g.my_answer?.is_correct === true) vibrate([60, 40, 60]); else if (g.my_answer?.is_correct === false) vibrate(250); }
   }
   const send = async (fn) => { sending = true; err = ""; paint(); try { await fn(); vibrate(25); L.send("sync"); await L.refresh(); } catch (e) { err = msg(e); } sending = false; paint(); };
 
+  let lastKey = "";
   function paint() {
-    if (!g) { app.innerHTML = `<main class="m-wrap"><p class="m-soft">جارٍ الاتصال…</p></main>`; return; }
+    if (!g) { lastKey = ""; app.innerHTML = `<main class="m-wrap"><p class="m-soft">جارٍ الاتصال…</p></main>`; return; }
     const it = g.item, s = it ? byId[it.payload?.slide] : null, st = g.session.item_state;
     const ae = document.activeElement?.name; const caret = document.activeElement?.selectionStart;
     const keepY = window.scrollY;
-    app.innerHTML = isolate(`<header class="p-top"><div><b>${esc(g.me.name)}</b><button class="p-role" data-rolechip style="--c:${roleLbl().color}">${roleLbl().icon} ${esc(roleLbl().label)}</button>${g.me.team ? `<span class="p-team" style="background:${esc(g.me.team.color)}">${esc(g.me.team.name)}</span>` : ""}</div><div class="p-pts"><b class="ltr">${g.me.points}</b> نقطة • #<span class="ltr">${g.me.rank}</span></div></header>
+    const html = isolate(`<header class="p-top"><div><b>${esc(g.me.name)}</b><button class="p-role" data-rolechip style="--c:${roleLbl().color}">${roleLbl().icon} ${esc(roleLbl().label)}</button>${g.me.team ? `<span class="p-team" style="background:${esc(g.me.team.color)}">${esc(g.me.team.name)}</span>` : ""}</div><div class="p-pts"><b class="ltr">${g.me.points}</b> نقطة • #<span class="ltr">${g.me.rank}</span></div></header>
       <main class="p-main ${fresh ? "fresh" : ""}">${err ? `<p class="m-err">${esc(err)}</p>` : ""}${body(it, s, st)}</main>`);
+    /* لا نعيد الرسم إن لم يتغير شيء: تبقى الحركات مستمرة ولا تقفز كل بضع ثوانٍ */
+    const key = html.replace('p-main fresh', 'p-main ');
+    if (key === lastKey) { fresh = false; return; }
+    lastKey = key;
+    app.innerHTML = html;
     if (!fresh) window.scrollTo(0, keepY);
     fresh = false;
     if (ae) { const el = app.querySelector(`[name="${ae}"]`); if (el) { el.focus(); try { el.setSelectionRange(caret, caret); } catch (e) { /* */ } } }
@@ -3108,17 +3139,44 @@ async function Join(rawCode) {
     return `<section class="p-card">${head}${multi ? '<p class="p-soft">اختر كل ما ينطبق</p>' : ""}<div class="p-opts">${opts.map((o, k) => `<button data-opt="${k}" class="${sel.includes(k) ? "on" : ""}"><span>${KEYS[k] ?? k + 1}</span>${esc(o)}</button>`).join("")}</div>
       <button class="m-btn" data-send="answer" ${!sel.length || sending ? "disabled" : ""}>إرسال الإجابة</button><p class="p-soft">تُرسل مرة واحدة.</p></section>`;
   }
-  /* بطاقة «تابع الشاشة»: في منتصف الشاشة، وألوانها تتبدل مع كل شريحة */
-  const WATCH = [["#e0115f", "#7c3aed"], ["#2563eb", "#7c3aed"], ["#0d9488", "#2563eb"], ["#ea580c", "#e0115f"], ["#7c3aed", "#0891b2"], ["#0891b2", "#16a34a"], ["#db2777", "#f59e0b"], ["#4f46e5", "#e0115f"]];
+  /* بطاقة «تابع الشاشة»: شخصية شاشة لطيفة في المنتصف، وألوان هادئة تتبدل مع كل شريحة */
+  const WATCH = [["#4f46e5", "#7c3aed"], ["#0f766e", "#0e7490"], ["#be185d", "#9d174d"], ["#1d4ed8", "#4338ca"], ["#7e22ce", "#a21caf"], ["#c2410c", "#be123c"], ["#0369a1", "#0f766e"], ["#6d28d9", "#be185d"]];
   const CUES = ["ارفع رأسك… الفكرة الآن على الشاشة", "تابع الشاشة، وسيتحرك جوالك عند النشاط", "الشرح الآن على الشاشة", "انظر إلى الشاشة… هذه الفكرة ستحتاجها اليوم"];
+  const BUBBLES = [["انتبه للمدرب 👂", "listen"], ["انتبه للشاشة 👆", "up"], ["لا تشاهدني… أنا أخجل 🙈", "shy"], ["أنا منصت مع المدرب 🎧", "listen"], ["ركّز… هذه الفكرة مهمة ✨", "happy"], ["جوالك يرتاح… وعقلك يشتغل 🧠", "happy"], ["المدرب يتكلم… وأنا ساكت 🤐", "shy"], ["ارفع رأسك… الشاشة أجمل مني 😄", "up"], ["سجّل الفكرة في ذهنك ✍️", "happy"], ["سأوقظك عند النشاط القادم ⏰", "listen"]];
+  let watchSince = Date.now(), bubbleN = 0, talkSlide = 0, nextTalk = 0;
+  const BOT = `<svg class="bot" viewBox="0 0 180 170" aria-hidden="true">
+    <g class="b-body">
+      <line x1="90" y1="30" x2="90" y2="12" class="b-ant"/><circle cx="90" cy="9" r="6" class="b-ball"/>
+      <g class="b-phones"><path d="M30 70 Q30 18 90 18 Q150 18 150 70" class="b-band"/><rect x="18" y="58" width="20" height="34" rx="10" class="b-cup"/><rect x="142" y="58" width="20" height="34" rx="10" class="b-cup"/></g>
+      <rect x="26" y="30" width="128" height="100" rx="30" class="b-shell"/>
+      <rect x="38" y="42" width="104" height="76" rx="20" class="b-screen"/>
+      <g class="b-eyes"><g class="b-eye"><ellipse cx="70" cy="74" rx="9" ry="11"/><circle cx="73" cy="70" r="3.2" class="b-glint"/></g><g class="b-eye"><ellipse cx="110" cy="74" rx="9" ry="11"/><circle cx="113" cy="70" r="3.2" class="b-glint"/></g></g>
+      <g class="b-happy"><path d="M61 76 Q70 66 79 76"/><path d="M101 76 Q110 66 119 76"/></g>
+      <ellipse cx="55" cy="92" rx="8" ry="5" class="b-cheek"/><ellipse cx="125" cy="92" rx="8" ry="5" class="b-cheek"/>
+      <path d="M80 94 Q90 103 100 94" class="b-mouth"/><path d="M76 92 Q90 109 104 92 Z" class="b-mouth2"/>
+      <g class="b-hands"><circle cx="20" cy="104" r="11" class="b-hand l"/><circle cx="160" cy="104" r="11" class="b-hand r"/></g>
+      <rect x="62" y="130" width="16" height="16" rx="6" class="b-leg"/><rect x="102" y="130" width="16" height="16" rx="6" class="b-leg"/>
+    </g><ellipse cx="90" cy="160" rx="42" ry="6" class="b-shadow"/></svg>`;
   function watch(s) {
     const i = s ? SL.indexOf(s) : 0, [a, b] = WATCH[i % WATCH.length];
     const head = s ? `<span class="w-mod">${esc(RD.mods[s.mod])}</span><h2>${esc(plain(s.title || s.q))}</h2>` : `<span class="w-mod">أنت داخل الجلسة ✓</span><h2>انتظر حتى يبدأ المدرب</h2>`;
-    return `<section class="p-watch" style="--a:${a};--b:${b}"><i class="w-o1"></i><i class="w-o2"></i><i class="w-o3"></i>
-      <div class="w-screen"><span class="w-eye"></span><span class="w-eye"></span></div>${head}
+    return `<section class="p-watch" style="--a:${a};--b:${b}"><span class="w-glow"></span>
+      <div class="w-bot"><p class="w-bubble" aria-live="polite"></p>${BOT}</div>${head}
       <p class="w-cue">${!s ? "سيتحرك جوالك تلقائيًا مع العرض" : SL[i + 1] && RD.ACT.has(SL[i + 1].type) ? "⚡ استعد… النشاط القادم على جوالك" : esc(CUES[i % CUES.length])}</p>
       ${s ? `<div class="w-prog"><i style="width:${Math.round(((i + 1) / SL.length) * 100)}%"></i></div><small class="w-n">الشريحة <b class="ltr">${i + 1}</b> من <b class="ltr">${SL.length}</b></small>` : ""}</section>`;
   }
+  /* إذا طال الشرح على الشريحة نفسها: الشخصية تتكلم بعبارات لطيفة وتغيّر تعابيرها */
+  setInterval(() => {
+    const w = app.querySelector(".p-watch"), bub = w?.querySelector(".w-bubble");
+    if (!w || !bub) return;
+    if (talkSlide !== watchSince) { talkSlide = watchSince; nextTalk = watchSince + 15000; }
+    if (!w.classList.contains("talk") && Date.now() >= nextTalk) {
+      nextTalk = Date.now() + 17000;
+      const [txt, mood] = BUBBLES[bubbleN++ % BUBBLES.length];
+      bub.textContent = txt; w.classList.remove("m-listen", "m-up", "m-shy", "m-happy"); w.classList.add("talk", `m-${mood}`);
+      setTimeout(() => { w.classList.remove("talk", `m-${mood}`); }, 5500);
+    }
+  }, 1000);
   function myTrack(s) {
     if (!s.tracks) return null;
     const id = s.tracks[role] ? role : "admin";
