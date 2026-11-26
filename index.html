@@ -1045,6 +1045,63 @@ h1{letter-spacing:0}h2{letter-spacing:-.2px}
 body.m::after{content:"© د. ياسر زمل — جميع الحقوق محفوظة";display:block;text-align:center;font-size:12px;color:#7a86a3;padding:10px 16px calc(14px + env(safe-area-inset-bottom));font-family:var(--f-txt)}
 body.m.remote::after{padding-top:4px;color:rgba(255,255,255,.55)}
 body.m #app{min-height:calc(100% - 40px)}
+
+/* ═══════ مختبرات Google: بطاقات داكنة كما في صفحة المختبرات ═══════ */
+.labs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px;height:560px}
+.lab{position:relative;border-radius:34px;overflow:hidden;background:radial-gradient(120% 60% at 50% 115%,color-mix(in srgb,var(--g) 38%,transparent),transparent 60%),radial-gradient(80% 50% at 0% 0%,color-mix(in srgb,var(--g) 30%,transparent),transparent 70%),#0b0d12;color:#fff;display:flex;flex-direction:column;box-shadow:0 24px 50px -26px rgba(0,0,0,.6)}
+.lab>.bxr{border-radius:34px}
+.lab-chips{position:absolute;top:22px;inset-inline:22px;display:flex;gap:8px;z-index:3;direction:ltr;justify-content:flex-start}
+.lab-chips span{background:rgba(255,255,255,.14);backdrop-filter:blur(6px);border-radius:999px;padding:6px 14px;font-size:17px;font-weight:700;font-family:var(--f-dis);white-space:nowrap}
+.lab-chips span:first-child{background:rgba(255,255,255,.08);color:#cbd5e1}
+.lab-vis{position:relative;flex:1;overflow:hidden}
+.lab-foot{position:relative;padding:0 26px 26px;z-index:2;background:linear-gradient(180deg,transparent,rgba(11,13,18,.85) 35%)}
+.lab-foot h3{display:block;margin:0 0 8px;font-family:"Segoe UI",system-ui,sans-serif;font-weight:500;font-size:36px;letter-spacing:-.5px;line-height:1.1;text-align:left;direction:ltr}
+.lab-foot p{margin:0;font-size:22px;line-height:1.5;color:#d6dbe6}
+/* Gemini */
+.gv-phone{position:absolute;top:80px;right:26px;left:-40px;bottom:10px;background:#000;border-radius:0 30px 30px 0;border:1px solid rgba(255,255,255,.08);padding:30px 26px}
+.gv-menu{display:block;width:26px;height:3px;background:#94a3b8;box-shadow:0 8px 0 #94a3b8,0 16px 0 #94a3b8;border-radius:2px}
+.gv-phone b{display:block;margin-top:56px;font-size:34px;font-family:var(--f-dis);background:linear-gradient(90deg,#4285f4,#9b72cb,#d96570);-webkit-background-clip:text;background-clip:text;color:transparent;text-align:right}
+.gv-ask{margin-top:34px;margin-inline-start:30px;margin-inline-end:-60px;background:#1e1f22;border-radius:26px;padding:22px;font-size:21px;color:#9aa0a6;display:flex;align-items:center;gap:12px}
+.gv-star{width:28px;height:28px;flex:none;background:conic-gradient(#4285f4,#9b72cb,#d96570,#f9ab00,#34a853,#4285f4);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);animation:gvSpin 9s linear infinite}
+@keyframes gvSpin{to{transform:rotate(360deg)}}
+/* Flow */
+.fv-tiles{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1.3fr 1fr;gap:6px;opacity:.85}
+.fv-tiles i{border-radius:18px}.fv-tiles .t1{background:linear-gradient(160deg,#3f6212,#1c1917 70%)}.fv-tiles .t2{grid-row:span 2;background:linear-gradient(180deg,#1f2937,#0b0d12)}.fv-tiles .t3{background:linear-gradient(200deg,#0e7490,#164e63)}
+.fv-chat{position:absolute;top:76px;right:12px;width:62%;background:rgba(28,28,30,.94);border-radius:18px;padding:14px;font-size:15px;line-height:1.5;color:#e5e7eb;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.fv-chat p{margin:0 0 10px;background:#2c2c2e;border-radius:12px;padding:10px}
+.fv-video{position:relative;height:110px;border-radius:12px;background:linear-gradient(180deg,#bae6fd 0%,#7dd3fc 45%,#92400e 46%,#78350f 100%);overflow:hidden}
+.fv-video i{position:absolute;bottom:22px;left:14%;width:46px;height:24px;border-radius:40% 50% 30% 30%;background:#3b2412;box-shadow:58px 4px 0 #4a2c14,108px -2px 0 #2d1a0c;animation:fvRun 3.5s ease-in-out infinite alternate}
+@keyframes fvRun{to{transform:translateX(26px)}}
+.fv-play{position:absolute;left:10px;bottom:8px;border-left:14px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent;z-index:1}
+/* Notebook */
+.nv-player{position:absolute;top:110px;right:30px;left:-30px;background:rgba(17,24,39,.92);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:22px;display:grid;grid-template-columns:auto 1fr;gap:10px 14px;align-items:center}
+.nv-pause{width:52px;height:52px;border-radius:50%;background:#4f46e5;display:flex;align-items:center;justify-content:center;gap:6px}.nv-pause i{width:6px;height:20px;background:#fff;border-radius:2px}
+.nv-player b{font-size:20px;font-family:"Segoe UI",var(--f-txt);font-weight:500}
+.nv-bar{grid-column:1/-1;height:6px;border-radius:3px;background:#374151;position:relative}
+.nv-bar i{position:absolute;inset-block:0;left:0;width:30%;background:#6366f1;border-radius:3px;animation:nvProg 8s linear infinite}
+.nv-bar i::after{content:"";position:absolute;right:-8px;top:-5px;width:16px;height:16px;border-radius:50%;background:#818cf8}
+@keyframes nvProg{to{width:85%}}
+.nv-player small{grid-column:1/-1;color:#9ca3af;font-size:15px;text-align:right}
+.nv-card{position:absolute;top:270px;right:22px;width:62%;background:rgba(31,41,55,.95);border-radius:20px;padding:20px;font-size:19px;color:#d1d5db;display:grid;gap:12px}
+.nv-wave{display:flex;gap:4px;align-items:center;height:30px}.nv-wave i{width:4px;border-radius:2px;background:#a5b4fc;animation:eq 1.2s ease-in-out infinite}
+.nv-wave i:nth-child(odd){animation-delay:.3s}.nv-wave i:nth-child(3n){animation-delay:.6s}
+/* Flow Music */
+.v-music{display:grid;place-items:center}
+.mv-play{width:120px;height:130px;margin-top:40px;background:linear-gradient(120deg,#e5e7eb 30%,#93c5fd 60%,#c084fc 80%,#fbbf24);clip-path:polygon(10% 0,100% 50%,10% 100%);border-radius:12px;filter:drop-shadow(0 0 30px rgba(129,140,248,.6));animation:mvPulse 2.6s ease-in-out infinite}
+@keyframes mvPulse{50%{transform:scale(1.07)}}
+.mv-eq{position:absolute;bottom:18px;display:flex;gap:6px;align-items:flex-end;height:46px}.mv-eq i{width:8px;border-radius:4px;background:linear-gradient(#a5b4fc,#6366f1);animation:eq 1s ease-in-out infinite}
+.mv-eq i:nth-child(2n){animation-delay:.25s}.mv-eq i:nth-child(3n){animation-delay:.5s}
+@keyframes eq{0%,100%{height:20%}50%{height:100%}}
+/* AI Studio */
+.sv-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(59,130,246,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.35) 1px,transparent 1px);background-size:120px 110px;background-position:30px 40px}
+.sv-dot{position:absolute;border-radius:50%;background:#e0f2fe;box-shadow:0 0 24px #7dd3fc}
+.sv-dot.d1{width:30px;height:30px;top:90px;right:40px;animation:svFloat 4s ease-in-out infinite alternate}
+.sv-dot.d2{width:22px;height:22px;top:220px;right:70px;background:#4ade80;box-shadow:0 0 20px #4ade80;animation:svFloat 5s ease-in-out infinite alternate-reverse}
+.sv-stick{position:absolute;top:150px;left:90px;width:26px;height:150px;border-radius:13px;background:linear-gradient(#4ade80,#16a34a);transform:rotate(-18deg);box-shadow:0 0 30px rgba(74,222,128,.6);animation:svTilt 5s ease-in-out infinite alternate}
+.sv-stick::before{content:"";position:absolute;top:-10px;left:-6px;width:38px;height:38px;border-radius:50%;background:#4ade80}
+@keyframes svFloat{to{transform:translate(-14px,20px)}}
+@keyframes svTilt{to{transform:rotate(-6deg)}}
+.building .lab.bx.shown{background-color:#0b0d12}
 </style>
 </head>
 <body class="m">
@@ -1859,6 +1916,24 @@ Object.assign(g("disc-trust"), {
   model: ["رقم أو نسبة ← ارجع إلى المصدر الأصلي", "مرجع أو رابط ← افتحه بنفسك", "نظام أو لائحة ← تأكد من رقمه وتاريخه من الموقع الرسمي", "معلومة عن جهتك أو منطقتك ← اسأل أهل الميدان"],
   notes: { goal: "تحويل «الأداة قد تخطئ» إلى عادة بسيطة: أرى رقمًا أو مرجعًا… فأتحقق.", say: "الأداة تكتب بثقة حتى حين تخطئ. السؤال ليس: هل أثق بها؟ بل: متى أتوقف وأتحقق؟", how: "افتح المشاركة وشغّل مؤقت 3 دقائق. اقرأ ثلاث مشاركات بصوت مسموع، ثم اضغط «إظهار خلاصة المدرب».", manage: "إذا تكررت الإجابة نفسها فهذا جيد؛ معناه أن القاعة وصلت للفكرة. أخفِ أي مشاركة خارج الموضوع من جهازك.", answer: "الأرقام، المراجع، الأنظمة، والمعلومات المحلية: تحقق منها دائمًا من مصدرها.", time: "3 دقائق", next: "سؤال سريع يثبّت الفكرة." } });
 
+/* ───────── مختبرات Google: من تجربة إلى منتج (كما تعرضها صفحة المختبرات) ───────── */
+Object.assign(g("labs"), {
+  type: "labs", kicker: "مختبرات Google (Google Labs)", title: "من تجربة في المختبر… إلى أداة يستخدمها الملايين",
+  lead: "كل أداة هنا بدأت تجربة باسم آخر، ثم نضجت وصارت منتجًا. الدرس: الأسماء تتغير… والفكرة تبقى.",
+  items: [
+    { name: "Google Gemini", was: "Bard", vis: "gemini", glow: "#1a73e8", p: "المساعد الذكي: اسأل، اكتب، لخّص، وحلّل." },
+    { name: "Google Flow", was: "VideoFX", vis: "flow", glow: "#f59e0b", p: "اكتب وصف مشهد… فيصنع لك مقطع فيديو." },
+    { name: "Gemini Notebook", was: "NotebookLM", vis: "notebook", glow: "#14b8a6", p: "ارفع مصادرك… فيجيبك منها، ويحوّلها إلى ملخص صوتي." },
+    { name: "Google Flow Music", was: "ProducerAI", vis: "music", glow: "#6366f1", p: "صِف الأغنية أو اللحن… فيصنعه لك." },
+    { name: "Google AI Studio", was: "MakerSuite", vis: "studio", glow: "#22c55e", p: "للمطوّرين: جرّب نماذج Gemini وابنِ تطبيقاتك." }],
+  banner: "قاعدة الاعتماد: <b>استخدم المستقر في عملك اليومي، وجرّب الجديد بفضول</b> — وتوقّع أن يتغير الاسم.",
+  notes: { goal: "أن يفهم المتدرب أن المختبرات مصنع أفكار: بعضها ينضج ويصبح منتجًا، وبعضها يتغير أو يُغلق.", say: "هذه ليست قائمة يجب حفظها. لاحظوا الشارة الصغيرة أعلى كل بطاقة: هذا هو الاسم القديم. Bard صار Gemini، وNotebookLM صار Gemini Notebook في يوليو 2026.", how: "أظهر البطاقات واحدة واحدة، وقل عن كل واحدة جملة: ماذا كانت تسمى، وماذا تفعل الآن.", example: "للمعلم والطالب: Gemini Notebook هو الأقرب لعملكم؛ ارفع ملف المقرر أو الدليل واسأله، فيجيب منه ويشير إلى موضع الإجابة.", question: "من سمع باسم Bard أو NotebookLM من قبل؟ هل كنت تعرف أنها الأدوات نفسها؟", answer: "Bard ← Gemini، VideoFX ← Flow، NotebookLM ← Gemini Notebook، ProducerAI ← Flow Music، MakerSuite ← AI Studio.", time: "3 دقائق", next: "سؤال سريع: هل كل أداة في المختبرات تصلح أداة عمل أساسية؟" } });
+Object.assign(g("q-labs"), {
+  q: "كل أداة تظهر في مختبرات Google تصلح أن تكون أداة عملك الأساسية فور ظهورها.",
+  explain: "بعض التجارب تنضج وتصبح منتجات مستقرة مثل Gemini Notebook، وبعضها يتغير أو يُغلق؛ اعتمد على المستقر وجرّب الجديد." });
+g("tool-choice").cards[2].p = "Gmail • Docs • Sheets • بحث عميق • Gemini Notebook";
+g("map").steps[3].p = "منظومة Google + البحث العميق + Gemini Notebook";
+
 /* ───────── الغلاف والفلسفة: الدورة للفئات الثلاث ───────── */
 Object.assign(g("cover"), { tag: "دورة تطبيقية: طلاب • معلمون • إداريون", sub: "يوم عملي ينتهي بمخرجات حقيقية لكل فئة: مذاكرة وبحث، تدريس وتقويم، تقارير وقرارات" });
 before("philosophy", {
@@ -2151,11 +2226,20 @@ function mockScreen(s) {
   return "";
 }
 
+/* ───── رسوم بطاقات مختبرات Google (رسوم توضيحية مبسطة، لا صور ولا شعارات رسمية) ───── */
+const LABVIS = {
+  gemini: `<div class="gv-phone"><i class="gv-menu"></i><b>مرحبًا، ياسر</b><div class="gv-ask"><span class="gv-star"></span>اسأل Gemini</div></div>`,
+  flow: `<div class="fv-tiles"><i class="t1"></i><i class="t2"></i><i class="t3"></i></div><div class="fv-chat"><p>مشهد: خيول تجري على الشاطئ وقت الغروب، إضاءة ذهبية</p><div class="fv-video"><span class="fv-play"></span><i></i></div></div>`,
+  notebook: `<div class="nv-player"><span class="nv-pause"><i></i><i></i></span><b>ملخص صوتي ١</b><div class="nv-bar"><i></i></div><small class="ltr">5:12</small></div><div class="nv-card"><span class="nv-wave">${"<i></i>".repeat(7)}</span>ملخص صوتي</div>`,
+  music: `<div class="mv-play"></div><div class="mv-eq">${"<i></i>".repeat(9)}</div>`,
+  studio: `<div class="sv-grid"></div><i class="sv-dot d1"></i><i class="sv-dot d2"></i><i class="sv-stick"></i>`,
+};
+
 /* ───── الكشف التدريجي للمربعات: كل مربع يظهر بضغطة من المدرب، وله لونه ───── */
 const PAL = ["#e0115f", "#2563eb", "#7c3aed", "#0d9488", "#ea580c", "#0891b2"];
 const bx = (k) => ` data-b="${k}" style="--c:${PAL[k % PAL.length]}"`;
 const ring = '<i class="bxr" aria-hidden="true"></i>';
-const buildCount = (s) => (s.type === "steps" ? s.steps.length : s.type === "weeks" ? s.weeks.length : s.type === "cards" && !s.live ? s.cards.length : s.type === "examples" ? s.ex.length : s.type === "compare" ? 2 : s.type === "roles" ? s.cols.length : 0);
+const buildCount = (s) => (s.type === "steps" ? s.steps.length : s.type === "weeks" ? s.weeks.length : s.type === "cards" && !s.live ? s.cards.length : s.type === "examples" ? s.ex.length : s.type === "compare" ? 2 : s.type === "roles" ? s.cols.length : s.type === "labs" ? s.items.length : 0);
 const roleOf = (id) => (D.roles || []).find((r) => r.id === id) || { id, label: id, icon: "", color: "#0b1f4b" };
 const rbx = (k, r) => ` data-b="${k}" style="--c:${r.color}"`;
 
@@ -2188,6 +2272,10 @@ const R = {
       <span class="sm">نسبة المشاركة لكل فصل</span><div class="minibars">${s.bars.map((h, k) => `<div><i style="height:${h}%"></i><span>فصل ${k + 1}</span></div>`).join("")}</div>
       <p class="sm" style="margin-top:auto">أرقام المثال كما وردت في المادة الأصلية؛ أطوال الأعمدة توضيحية.</p></div></div></div>${banner(s)}`,
   roles: (s) => `${head(s)}<div class="body"><div class="rcols">${s.cols.map((c, k) => { const r = roleOf(c.role); return `<div class="rcol bx"${rbx(k, r)}>${ring}<div class="rhead"><span class="ricon">${r.icon}</span><h3>${esc(c.h)}</h3></div><ul>${c.items.map((t) => `<li>${esc(t)}</li>`).join("")}</ul></div>`; }).join("")}</div></div>${banner(s)}`,
+  labs: (s) => `${head(s)}<div class="body"><div class="labs">${s.items.map((x, k) => `<div class="lab bx" data-b="${k}" style="--c:${x.glow};--g:${x.glow}">${ring}
+      <div class="lab-chips"><span class="ltr">${esc(x.was)} →</span><span class="ltr">${esc(x.name)}</span></div>
+      <div class="lab-vis v-${x.vis}">${LABVIS[x.vis] || ""}</div>
+      <div class="lab-foot"><h3 class="ltr">${esc(x.name)}</h3><p>${esc(x.p)}</p></div></div>`).join("")}</div></div>${banner(s)}`,
   kit: (s) => `${head(s)}<div class="body"><div class="rcols kitcols">${(D.roles || []).map((r, k) => `<div class="rcol bx"${rbx(k, r)}>${ring}<div class="rhead"><span class="ricon">${r.icon}</span><h3>حقيبة ${esc(r.label)}</h3><b class="ltr rn">${s.kits[r.id].length}</b></div><div class="kchips">${s.kits[r.id].map((p) => `<span>${esc(p[0])}</span>`).join("")}</div></div>`).join("")}</div>
     <div class="kit-foot"><span class="kf-ic">📱</span><b>افتح جوالك:</b> طلبات فئتك كاملة، وزر نسخ بجانب كل طلب.</div></div>`,
   "survey-detail": (s) => `${head(s)}<div class="body" id="sv">${surveyDetail(s, null)}</div>`,
