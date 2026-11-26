@@ -1,0 +1,30 @@
+# يبقي قاعدة البيانات نشطة: Supabase يوقف المشاريع المجانية بعد أسبوع بلا نشاط.
+name: keep-database-awake
+on:
+  schedule:
+    - cron: "17 5 */3 * *"   # كل 3 أيام
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query the database
+        run: |
+          for i in 1 2 3; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" \
+              "https://gkwnqvzgadgoeevetndd.supabase.co/rest/v1/courses?select=id&limit=1" \
+              -H "apikey: sb_publishable_tLMT413QiGkdB00qWb5CIQ_yO8GOZrb")
+            echo "HTTP $code"; [ "$code" -lt 500 ] && exit 0; sleep 20
+          done
+          exit 1
+      # GitHub يعطّل المهام المجدولة في المستودعات الخاملة 60 يومًا؛ هذا السجل يبقيه نشطًا.
+      - uses: actions/checkout@v4
+      - name: Heartbeat
+        run: |
+          date -u +"%Y-%m-%dT%H:%MZ" > heartbeat.txt
+          git config user.name "keepalive-bot"
+          git config user.email "keepalive-bot@users.noreply.github.com"
+          git add heartbeat.txt
+          git commit -m "heartbeat" && git push || true
