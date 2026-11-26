@@ -1102,6 +1102,35 @@ body.m #app{min-height:calc(100% - 40px)}
 @keyframes svFloat{to{transform:translate(-14px,20px)}}
 @keyframes svTilt{to{transform:rotate(-6deg)}}
 .building .lab.bx.shown{background-color:#0b0d12}
+
+/* ═══════ شريحة تعريف اللعبة ═══════ */
+.game{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:start}
+.gm-col{display:grid;gap:16px}
+.gm-h{font-family:var(--f-dis);font-size:30px;color:var(--mag)}
+.gm-step{display:flex;align-items:center;gap:22px;background:rgba(255,255,255,.8);border:1px solid var(--line);border-radius:24px;padding:20px 26px;box-shadow:0 14px 30px -24px rgba(11,31,75,.4);animation:rise .5s var(--d) both}
+.gm-ic{width:74px;height:74px;flex:none;border-radius:22px;display:grid;place-items:center;font-size:40px;background:linear-gradient(135deg,#fde7ef,#ede9fe)}
+.gm-step b{display:block;font-family:var(--f-dis);font-size:34px;color:var(--navy)}
+.gm-step small{font-size:24px;color:var(--soft)}
+.gm-score{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gm-pt{position:relative;border-radius:24px;padding:20px 18px 22px;display:grid;justify-items:center;gap:4px;text-align:center;color:#fff;overflow:hidden}
+.gm-pt span{font-size:34px;line-height:1}
+.gm-pt small{font-size:21px;opacity:.95}
+.gm-pt b{font-family:var(--f-dis);font-size:46px;line-height:1.1}
+.gm-pt.ok{background:linear-gradient(150deg,#10b981,#047857)}
+.gm-pt.fast{background:linear-gradient(150deg,#f59e0b,#ea580c);animation:gmGlow 2s ease-in-out infinite}
+.gm-pt.no{background:linear-gradient(150deg,#94a3b8,#64748b)}
+@keyframes gmGlow{50%{box-shadow:0 0 0 6px rgba(245,158,11,.25)}}
+.gm-timer{position:absolute;inset-inline:0;bottom:0;height:7px;background:rgba(255,255,255,.3)}
+.gm-timer i{display:block;height:100%;background:#fff;animation:gmT 3s linear infinite}
+@keyframes gmT{from{width:100%}to{width:0}}
+.gm-tools{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:6px}
+.gm-tools small{font-size:22px;color:var(--soft);margin-inline-end:6px}
+.gt{font-size:24px;font-weight:700;color:#fff;border-radius:16px;padding:10px 20px;direction:ltr}
+.gt.t0{background:#c96442}.gt.t1{background:#10a37f}.gt.t2{background:linear-gradient(90deg,#4285f4,#9b72cb)}.gt.t3{background:linear-gradient(90deg,#0078d4,#7c3aed)}
+.gm-ex{margin:4px 0 0;background:#fff7ed;border:2px dashed #fdba74;border-radius:18px;padding:14px 20px;font-size:25px;color:#9a3412}
+/* إصلاح تباين البطاقة المميزة الداكنة في الكشف التدريجي */
+.building .card.hl.bx.shown h3,.building .card.hl.bx.shown p{color:#fff}
+.building .card.hl.bx .num,.building .card.hl.bx .ic{background:rgba(255,255,255,.22)}
 </style>
 </head>
 <body class="m">
@@ -1934,6 +1963,16 @@ Object.assign(g("q-labs"), {
 g("tool-choice").cards[2].p = "Gmail • Docs • Sheets • بحث عميق • Gemini Notebook";
 g("map").steps[3].p = "منظومة Google + البحث العميق + Gemini Notebook";
 
+/* ───────── جولة السرعة: شريحة تعريف واضحة باللعبة ───────── */
+Object.assign(g("speed-intro"), {
+  type: "game", kicker: "لعبة تنافسية • 4 أسئلة • 15 ثانية لكل سؤال", title: "⚡ جولة السرعة: أي أداة تختار؟",
+  lead: "سنعرض عليك موقف عمل قصيرًا، وأنت تختار من جوالك الأداة الأنسب له… قبل أن ينتهي الوقت.",
+  how: [["👀", "اقرأ الموقف", "يظهر على الشاشة"], ["📱", "اختر الأداة", "من جوالك خلال 15 ثانية"], ["🏆", "شاهد الترتيب", "بعد السؤال الرابع"]],
+  score: [["✓", "إجابة صحيحة", "+100", "ok"], ["⚡", "مكافأة السرعة حتى", "+50", "fast"], ["✗", "إجابة خاطئة", "0", "no"]],
+  example: "مثال: «ملف PDF من 60 صفحة وتريد ملخصًا متماسكًا» ← أي أداة؟",
+  banner: "<span>للفرق:</span> نقاط كل عضو تُجمع لفريقه — الدقة أولًا، ثم السرعة.",
+  notes: { goal: "تنشيط القاعة واسترجاع خريطة اختيار الأداة بطريقة ممتعة.", say: "أربعة أسئلة سريعة. كل سؤال موقف من العمل، وأمامكم أربع أدوات. الإجابة الصحيحة 100 نقطة، ومن يجيب أسرع يأخذ حتى 50 نقطة إضافية. الإجابة الخاطئة لا تأخذ شيئًا، فلا تتسرعوا.", how: "إن لم تقسّم الفرق بعد، قسّمها الآن من جهازك (تقسيم عشوائي). اقرأ المثال بصوت مسموع واسأل القاعة: من يعرف الجواب؟ (Claude) ثم ابدأ.", answer: "مثال الشريحة: Claude — مستند طويل وكتابة متماسكة.", time: "دقيقة", next: "السؤال الأول…" } });
+
 /* ───────── الغلاف والفلسفة: الدورة للفئات الثلاث ───────── */
 Object.assign(g("cover"), { tag: "دورة تطبيقية: طلاب • معلمون • إداريون", sub: "يوم عملي ينتهي بمخرجات حقيقية لكل فئة: مذاكرة وبحث، تدريس وتقويم، تقارير وقرارات" });
 before("philosophy", {
@@ -2276,6 +2315,11 @@ const R = {
       <div class="lab-chips"><span class="ltr">${esc(x.was)} →</span><span class="ltr">${esc(x.name)}</span></div>
       <div class="lab-vis v-${x.vis}">${LABVIS[x.vis] || ""}</div>
       <div class="lab-foot"><h3 class="ltr">${esc(x.name)}</h3><p>${esc(x.p)}</p></div></div>`).join("")}</div></div>${banner(s)}`,
+  game: (s) => `${head(s)}<div class="body"><div class="game">
+      <div class="gm-col"><b class="gm-h">كيف تلعب؟</b>${s.how.map((h, k) => `<div class="gm-step" style="--d:${0.15 + k * 0.15}s"><span class="gm-ic">${h[0]}</span><div><b>${esc(h[1])}</b><small>${esc(h[2])}</small></div></div>`).join("")}</div>
+      <div class="gm-col"><b class="gm-h">كيف تُحسب النقاط؟</b><div class="gm-score">${s.score.map((x) => `<div class="gm-pt ${x[3]}"><span>${x[0]}</span><small>${esc(x[1])}</small><b class="ltr">${esc(x[2])}</b>${x[3] === "fast" ? '<i class="gm-timer"><i></i></i>' : ""}</div>`).join("")}</div>
+        <div class="gm-tools"><small>الخيارات على جوالك:</small>${["Claude", "ChatGPT", "Gemini", "Copilot"].map((t, k) => `<span class="gt t${k}">${t}</span>`).join("")}</div>
+        <p class="gm-ex">${esc(s.example)}</p></div></div></div>${banner(s)}`,
   kit: (s) => `${head(s)}<div class="body"><div class="rcols kitcols">${(D.roles || []).map((r, k) => `<div class="rcol bx"${rbx(k, r)}>${ring}<div class="rhead"><span class="ricon">${r.icon}</span><h3>حقيبة ${esc(r.label)}</h3><b class="ltr rn">${s.kits[r.id].length}</b></div><div class="kchips">${s.kits[r.id].map((p) => `<span>${esc(p[0])}</span>`).join("")}</div></div>`).join("")}</div>
     <div class="kit-foot"><span class="kf-ic">📱</span><b>افتح جوالك:</b> طلبات فئتك كاملة، وزر نسخ بجانب كل طلب.</div></div>`,
   "survey-detail": (s) => `${head(s)}<div class="body" id="sv">${surveyDetail(s, null)}</div>`,
