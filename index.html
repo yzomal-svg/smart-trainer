@@ -1804,6 +1804,16 @@ g("cover").outTitle = "ماذا ستخرج به اليوم؟";
 g("cover").outputs = ["أمر تشغيلي باسمك", "تقرير من ملف", "مهمة حقيقية منجزة", "عرض ورسالة", "حقيبة طلبات وخطة 30 يومًا"];
 g("cover").notes.say = "اليوم لن نتحدث عن الذكاء الاصطناعي فقط؛ سننجز به خمسة مخرجات حقيقية قبل نهاية اليوم، كل واحد منها على جهازك.";
 
+/* ───────── نقاش التحقق: صياغة أبسط بأمثلة جاهزة ───────── */
+Object.assign(g("disc-trust"), {
+  time: 3, title: "نقاش سريع: متى لا تصدّق الأداة فورًا؟",
+  q: "أكمل الجملة: «إذا رأيت … في إجابة الأداة، أتحقق أولًا»",
+  phases: [["فكّر", "دقيقة", "تذكّر موقفًا مرّ بك أو تتوقعه"], ["اكتب من جوالك", "دقيقتان", "جملة قصيرة تظهر على الشاشة"]],
+  guideTitle: "أمثلة تساعدك تبدأ", guide: ["رقمًا أو نسبة", "اسم كتاب أو دراسة أو رابطًا", "إجابة واثقة جدًا بلا مصدر"],
+  placeholder: "إذا رأيت … أتحقق أولًا",
+  model: ["رقم أو نسبة ← ارجع إلى المصدر الأصلي", "مرجع أو رابط ← افتحه بنفسك", "نظام أو لائحة ← تأكد من رقمه وتاريخه من الموقع الرسمي", "معلومة عن جهتك أو منطقتك ← اسأل أهل الميدان"],
+  notes: { goal: "تحويل «الأداة قد تخطئ» إلى عادة بسيطة: أرى رقمًا أو مرجعًا… فأتحقق.", say: "الأداة تكتب بثقة حتى حين تخطئ. السؤال ليس: هل أثق بها؟ بل: متى أتوقف وأتحقق؟", how: "افتح المشاركة وشغّل مؤقت 3 دقائق. اقرأ ثلاث مشاركات بصوت مسموع، ثم اضغط «إظهار خلاصة المدرب».", manage: "إذا تكررت الإجابة نفسها فهذا جيد؛ معناه أن القاعة وصلت للفكرة. أخفِ أي مشاركة خارج الموضوع من جهازك.", answer: "الأرقام، المراجع، الأنظمة، والمعلومات المحلية: تحقق منها دائمًا من مصدرها.", time: "3 دقائق", next: "سؤال سريع يثبّت الفكرة." } });
+
 /* ───────── الغلاف والفلسفة: الدورة للفئات الثلاث ───────── */
 Object.assign(g("cover"), { tag: "دورة تطبيقية: طلاب • معلمون • إداريون", sub: "يوم عملي ينتهي بمخرجات حقيقية لكل فئة: مذاكرة وبحث، تدريس وتقويم، تقارير وقرارات" });
 before("philosophy", {
@@ -2255,7 +2265,7 @@ function activity(s, d, ui) {
   if (s.type === "discuss") {
     return `<div class="act-head"><span class="badge talk">💬 نقاش موجّه</span><span class="badge" style="background:var(--navy)">⏱ ${esc(s.time)} دقائق</span></div><h2 style="margin-bottom:14px">${esc(s.title)}</h2><p class="q dq">${esc(s.q)}</p>
       <div class="disc"><aside class="proto"><ol class="phases">${s.phases.map((x) => `<li><b>${esc(x[0])}</b><span class="ltr-n">${esc(x[1])}</span><small>${esc(x[2])}</small></li>`).join("")}</ol>
-        ${ui.model ? `<div class="model pop-in"><b>خلاصة المدرب</b><ul>${s.model.map((m) => `<li>${esc(m)}</li>`).join("")}</ul></div>` : `<div class="guide"><b>أسئلة توجّه النقاش</b><ul>${s.guide.map((g) => `<li>${esc(g)}</li>`).join("")}</ul></div>`}</aside>
+        ${ui.model ? `<div class="model pop-in"><b>خلاصة المدرب</b><ul>${s.model.map((m) => `<li>${esc(m)}</li>`).join("")}</ul></div>` : `<div class="guide"><b>${esc(s.guideTitle || "أسئلة توجّه النقاش")}</b><ul>${s.guide.map((g) => `<li>${esc(g)}</li>`).join("")}</ul></div>`}</aside>
         <div class="stickies" data-live="cloud"><p class="empty">${st === "open" ? "بانتظار مشاركاتكم…" : "تُفتح المشاركة بعد التفكير الفردي"}</p></div></div>${statusBar(d)}`;
   }
   return "";
@@ -3032,7 +3042,7 @@ async function Join(rawCode) {
     }
     const head = `${mod}${s.phase === "pre" ? '<span class="p-tag">اختبار قبلي</span>' : s.phase === "post" ? '<span class="p-tag">اختبار بعدي</span>' : ""}<h2>${esc(s.q || s.title)}</h2>${open && g.session.deadline ? `<p class="p-cd" data-deadline="${g.session.deadline}" data-now="${g.server_now}"></p>` : ""}`;
     if (s.type === "cloud" || s.type === "discuss") {
-      return `<section class="p-card">${head}${s.type === "discuss" ? `<ul class="p-guide">${s.guide.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}${open && g.my_contributions < 5 ? `${s.mode === "board" || s.type === "discuss" ? `<textarea name="tx" rows="3" maxlength="280" placeholder="فكرتك">${esc(text)}</textarea>` : `<input name="tx" maxlength="40" placeholder="كلمة أو عبارة قصيرة" value="${esc(text)}">`}<button class="m-btn" data-send="contrib" ${sending ? "disabled" : ""}>إرسال</button>` : ""}
+      return `<section class="p-card">${head}${s.type === "discuss" ? `${s.guideTitle ? `<p class="p-lbl">${esc(s.guideTitle)}:</p>` : ""}<ul class="p-guide">${s.guide.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}${open && g.my_contributions < 5 ? `${s.mode === "board" || s.type === "discuss" ? `<textarea name="tx" rows="3" maxlength="280" placeholder="${esc(s.placeholder || "فكرتك")}">${esc(text)}</textarea>` : `<input name="tx" maxlength="40" placeholder="كلمة أو عبارة قصيرة" value="${esc(text)}">`}<button class="m-btn" data-send="contrib" ${sending ? "disabled" : ""}>إرسال</button>` : ""}
         ${g.my_contributions ? `<p class="p-ok">أرسلت ${g.my_contributions} من 5 — شاهد الشاشة ✨</p>` : open ? "" : `<p class="p-soft">المشاركة مغلقة الآن.</p>`}</section>`;
     }
     if (s.type === "exercise" && s.builder) return builderCard(s, mod, mine, open);
