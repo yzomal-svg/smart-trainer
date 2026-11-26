@@ -942,6 +942,11 @@ h1{letter-spacing:0}h2{letter-spacing:-.2px}
 .p-bf label{font-weight:700;color:var(--navy);font-size:15px}
 .p-bf input,.p-bf textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;padding:10px;font:inherit;font-size:15px}
 .p-chips.sm button{padding:7px 11px;font-size:13px}
+.pw{position:relative;display:block}.pw input{padding-inline-end:52px}
+.pw-eye{position:absolute;inset-inline-end:6px;top:50%;transform:translateY(-50%);border:0;background:transparent;font-size:20px;padding:8px;cursor:pointer}
+.m-pass{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+.m-pass summary{cursor:pointer;color:var(--navy);font-weight:700}
+.m-pass form{display:grid;gap:10px;margin-top:10px}
 </style>
 </head>
 <body class="m">
@@ -2427,16 +2432,18 @@ async function gate(where) {
   if (data.session && data.session.user && !data.session.user.is_anonymous) return;
   await new Promise((resolve) => {
     app.innerHTML = isolate(`<main class="m-wrap"><div class="m-card"><p class="m-kick">${esc(where)}</p><h1>دخول المدرب</h1>
-      <form id="lg"><label>البريد الإلكتروني<input name="e" type="email" autocomplete="email" dir="ltr" required></label>
-      <label>كلمة المرور<input name="p" type="password" autocomplete="current-password" dir="ltr" required></label><p class="m-err" id="lge"></p>
-      <button class="m-btn">دخول</button></form></div></main>`);
+      <form id="lg"><label>البريد الإلكتروني<input name="e" type="email" autocomplete="username" dir="ltr" required value="${esc(store.get("st-trainer-email") || "")}"></label>
+      <label>كلمة المرور<span class="pw"><input name="p" type="password" autocomplete="current-password" dir="ltr" required><button type="button" class="pw-eye" aria-label="إظهار كلمة المرور">👁</button></span></label><p class="m-err" id="lge"></p>
+      <button class="m-btn">دخول</button><p class="m-soft">تدخل مرة واحدة فقط على كل جهاز، ويبقى الدخول محفوظًا.</p></form></div></main>`);
+    $(".pw-eye").addEventListener("click", () => { const i = $("#lg").p; i.type = i.type === "password" ? "text" : "password"; });
+    if ($("#lg").e.value) $("#lg").p.focus();
     $("#lg").addEventListener("submit", async (e) => {
       e.preventDefault();
       const f = e.target; f.querySelector("button").disabled = true;
       const { error } = await sb.auth.signInWithPassword({ email: f.e.value.trim(), password: f.p.value });
       f.querySelector("button").disabled = false;
-      if (error) $("#lge").textContent = msg(error);
-      else resolve();
+      if (error) $("#lge").textContent = /invalid login/i.test(error.message) ? "البريد أو كلمة المرور غير صحيحة." : msg(error);
+      else { store.set("st-trainer-email", f.e.value.trim()); resolve(); }
     });
   });
 }
@@ -2449,7 +2456,17 @@ async function pickSession(where, storeKey) {
   return new Promise((resolve) => {
     app.innerHTML = isolate(`<main class="m-wrap"><div class="m-card"><p class="m-kick">${esc(where)}</p><h1>اختر الجلسة</h1>
       ${open.length ? `<div class="m-list">${open.map((r) => `<button class="m-row" data-sid="${r.id}"><b class="ltr">${esc(r.join_code)}</b><span>${new Date(r.created_at).toLocaleString("ar-SA", { dateStyle: "medium", timeStyle: "short" })}</span><span class="m-pill">${r.status === "lobby" ? "لم تبدأ" : "جارية"}</span></button>`).join("")}</div>` : `<p class="m-soft">لا توجد جلسة مفتوحة.</p>`}
-      <button class="m-btn" id="newS">＋ جلسة جديدة</button><p class="m-err" id="pe"></p></div></main>`);
+      <button class="m-btn" id="newS">＋ جلسة جديدة</button><p class="m-err" id="pe"></p>
+      <details class="m-pass"><summary>تغيير كلمة المرور</summary><form id="cp"><label>كلمة المرور الجديدة<input name="a" type="password" autocomplete="new-password" dir="ltr" minlength="8" required></label><label>أعد كتابتها<input name="b" type="password" autocomplete="new-password" dir="ltr" minlength="8" required></label><p class="m-err" id="cpe"></p><button class="m-btn alt">حفظ كلمة المرور</button><p class="m-soft">8 خانات على الأقل. تُطبَّق على كل أجهزتك.</p></form></details></div></main>`);
+    $("#cp").addEventListener("submit", async (e) => {
+      e.preventDefault(); const f = e.target, out = $("#cpe");
+      if (f.a.value !== f.b.value) { out.textContent = "الكلمتان غير متطابقتين."; return; }
+      f.querySelector("button").disabled = true;
+      const { error } = await sb.auth.updateUser({ password: f.a.value });
+      f.querySelector("button").disabled = false;
+      if (error) out.textContent = /different from the old/i.test(error.message) ? "هذه هي كلمة المرور الحالية نفسها." : /weak|short|at least/i.test(error.message) ? "كلمة المرور ضعيفة؛ اجعلها 8 خانات أو أكثر." : msg(error);
+      else { f.reset(); out.className = "p-ok"; out.textContent = "تم حفظ كلمة المرور الجديدة ✓"; }
+    });
     app.querySelectorAll("[data-sid]").forEach((b) => b.addEventListener("click", () => { store.set(storeKey, b.dataset.sid); resolve(b.dataset.sid); }));
     $("#newS").addEventListener("click", async (e) => {
       e.target.disabled = true;
