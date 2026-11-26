@@ -350,17 +350,24 @@ body.display{background:#050b1c;overflow:hidden}
 body.display #frame{inset:0}
 #slide-host,#pop{position:absolute;inset:0}
 #pop{pointer-events:none;z-index:5}
-#pop.open{pointer-events:auto;background:rgba(5,11,28,.35);display:grid;place-items:center;animation:fade .25s ease both}
+#pop.open{pointer-events:none;animation:fade .25s ease both}
+#pop .popcard{pointer-events:auto}
 @keyframes fade{from{opacity:0}}
-.popcard{position:relative;width:1100px;background:#fff;border-radius:36px;padding:64px 72px 52px;box-shadow:0 40px 120px rgba(0,0,0,.45);animation:popin .45s cubic-bezier(.2,1.4,.4,1) both;border-top:14px solid var(--mag)}
+.popcard{position:absolute;width:700px;background:#fff;border-radius:30px;padding:46px 44px 36px;box-shadow:0 30px 90px rgba(11,31,75,.35),0 0 0 1px rgba(11,31,75,.06);animation:popside .45s cubic-bezier(.2,1.3,.4,1) both;border-top:12px solid var(--mag)}
+@keyframes popside{from{opacity:0;transform:translateX(40px) scale(.96)}}
+.popcard.from-left{animation-name:popsideL}@keyframes popsideL{from{opacity:0;transform:translateX(-40px) scale(.96)}}
+.poplink{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.poplink path{fill:none;stroke:var(--mag);stroke-width:4;stroke-dasharray:10 8;animation:dash 1s linear infinite}
+.poplink circle{fill:var(--mag)}
+@keyframes dash{to{stroke-dashoffset:-18}}
 @keyframes popin{from{opacity:0;transform:scale(.7) translateY(40px)}}
-.popcard h3{margin:0 0 10px;font-size:64px;color:var(--navy)}
-.popcard .lead2{font-size:38px;color:var(--ink);margin:0 0 18px;font-weight:500}
-.popcard p{font-size:32px;color:var(--soft);margin:0 0 22px;line-height:1.6}
-.popcard .tip{background:var(--mag-soft);border-radius:22px;padding:22px 28px;font-size:30px;color:#7a0b35}
+.popcard h3{margin:0 0 8px;font-size:46px;color:var(--navy)}
+.popcard .lead2{font-size:30px;color:var(--ink);margin:0 0 14px;font-weight:500}
+.popcard p{font-size:25px;color:var(--soft);margin:0 0 18px;line-height:1.6}
+.popcard .tip{background:var(--mag-soft);border-radius:18px;padding:16px 22px;font-size:24px;color:#7a0b35}
 .popcard .tip b{color:var(--mag)}
-.popcard .pin.big{position:absolute;top:-46px;inset-inline-start:60px;width:92px;height:92px;font-size:46px}
-.popcard button{position:absolute;top:24px;inset-inline-end:28px;border:0;background:var(--wash);border-radius:14px;padding:10px 22px;font-size:22px}
+.popcard .pin.big{position:absolute;top:-38px;inset-inline-start:40px;width:72px;height:72px;font-size:36px}
+.popcard button{position:absolute;top:20px;inset-inline-end:22px;border:0;background:#f1f4fa;border-radius:12px;padding:8px 18px;font-size:20px}
 .hot{cursor:pointer;transition:box-shadow .2s,transform .2s}
 .hot:hover{box-shadow:0 0 0 4px rgba(224,17,95,.35)}
 .hot.lit{box-shadow:0 0 0 6px var(--mag),0 0 40px rgba(224,17,95,.55)!important;animation:litp 1.2s ease-in-out infinite;position:relative;z-index:1}
@@ -1000,6 +1007,11 @@ h1{letter-spacing:0}h2{letter-spacing:-.2px}
 .p-main.fresh .p-watch{animation:wGrad 9s ease-in-out infinite,wIn .5s cubic-bezier(.2,1.2,.4,1) both}
 @keyframes wIn{from{opacity:0;transform:scale(.94)}}
 @media (prefers-reduced-motion:reduce){.p-watch,.p-watch *{animation:none!important}}
+
+#slide-host.popping .legend{opacity:.18;transition:opacity .3s}
+#slide-host .legend{transition:opacity .3s}
+.poplink path.tipa{stroke-dasharray:none;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;animation:none}
+#pop .tagpin{position:absolute;width:48px;height:48px;font-size:24px;z-index:3;animation:popin .4s .15s cubic-bezier(.2,1.4,.4,1) both;box-shadow:0 0 0 6px rgba(224,17,95,.22),0 8px 20px rgba(224,17,95,.4)}
 </style>
 </head>
 <body class="m">
@@ -2733,11 +2745,40 @@ async function Display() {
   function drawPop(s) {
     const pop = $("#pop");
     host.querySelectorAll(".hot.lit").forEach((e) => e.classList.remove("lit"));
+    host.classList.remove("popping");
     if (!s || s.type !== "mock" || ui.pin === null || !s.legend[ui.pin]) { pop.innerHTML = ""; pop.className = ""; return; }
     host.querySelectorAll(`[data-pin="${ui.pin}"]`).forEach((e) => e.classList.add("lit"));
     const [h, p] = s.legend[ui.pin], tip = s.tips?.[ui.pin];
     const html = isolate(`<div class="popcard" role="dialog"><span class="pin big ltr">${ui.pin + 1}</span><h3>${esc(h)}</h3><p class="lead2">${esc(p)}</p>${tip ? `<p>${esc(tip.more)}</p><div class="tip"><b>جرّبها:</b> ${esc(tip.tip)}</div>` : ""}<button data-close>إغلاق</button></div>`);
-    if (pop.dataset.k !== `${s.id}:${ui.pin}`) { pop.innerHTML = html; pop.className = "open"; pop.dataset.k = `${s.id}:${ui.pin}`; SFX.play("popup"); }
+    if (pop.dataset.k !== `${s.id}:${ui.pin}`) { pop.innerHTML = html; pop.className = "open"; pop.dataset.k = `${s.id}:${ui.pin}`; SFX.play("popup"); placePop(); }
+  }
+  /* بطاقة الشرح تقف بجانب العنصر المشروح لا فوقه، ويصلها به خط يدل عليه */
+  function placePop() {
+    const pop = $("#pop"), card = pop.querySelector(".popcard"); if (!card) return;
+    const target = [...host.querySelectorAll(".hot.lit")].find((e) => !e.closest(".legend"));
+    const st = stage.getBoundingClientRect(), k = st.width / 1920;
+    const W = 700, M = 96;
+    if (!target) { card.style.cssText = `left:${(1920 - W) / 2}px;top:300px;width:${W}px`; return; }
+    const r = target.getBoundingClientRect();
+    const t = { x: (r.left - st.left) / k, y: (r.top - st.top) / k, w: r.width / k, h: r.height / k };
+    const cx = t.x + t.w / 2, cy = t.y + t.h / 2;
+    /* البطاقة خارج الواجهة المحاكية كلها، في عمود الشرح المقابل، فلا تغطي العنصر ولا ما حوله */
+    const box = (target.closest(".am") || target).getBoundingClientRect();
+    const m = { l: (box.left - st.left) / k, r: (box.right - st.left) / k };
+    const spaceL = m.l - 50 - M, spaceR = 1920 - M - (m.r + 50), onLeft = spaceL >= spaceR;
+    let w = Math.min(W, Math.max(spaceL, spaceR)), left;
+    if (w >= 460) left = onLeft ? m.l - 50 - w : m.r + 50;
+    else { w = W; left = cx > 960 ? Math.max(M, t.x - W - 70) : Math.min(1920 - M - W, t.x + t.w + 70); }
+    card.style.cssText = `left:${left}px;width:${w}px;top:0`;
+    host.classList.add("popping");
+    const H = card.offsetHeight, top = Math.max(70, Math.min(cy - H / 2, 1080 - 70 - H));
+    card.style.top = `${top}px`;
+    card.classList.toggle("from-left", onLeft);
+    const ax = left + w <= t.x + 1 ? left + w : left, ay = Math.max(top + 40, Math.min(cy, top + H - 40));
+    /* الخط يقف عند حافة الواجهة، ورقم مطابق يُلصق على العنصر نفسه */
+    const toLeftEdge = ax <= m.l, bx = w >= 460 ? (toLeftEdge ? m.l - 10 : m.r + 10) : (ax <= t.x ? t.x - 6 : t.x + t.w + 6);
+    pop.insertAdjacentHTML("afterbegin", `<svg class="poplink" viewBox="0 0 1920 1080"><path d="M${ax} ${ay} C ${(ax + bx) / 2} ${ay}, ${(ax + bx) / 2} ${cy}, ${bx} ${cy}"/><path class="tipa" d="M${bx + (toLeftEdge ? -14 : 14)} ${cy - 11} L${bx} ${cy} L${bx + (toLeftEdge ? -14 : 14)} ${cy + 11}"/><circle cx="${ax}" cy="${ay}" r="6"/></svg>
+      <span class="pin tagpin ltr" style="left:${Math.min(1920 - 60, Math.max(10, t.x + t.w - 22))}px;top:${Math.max(10, t.y - 26)}px">${ui.pin + 1}</span>`);
   }
   /* الكشف التدريجي: المربع الحالي يتحرك وينبض، والسابق يثبت */
   function applyBuild(s, play) {
