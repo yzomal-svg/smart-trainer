@@ -947,6 +947,59 @@ h1{letter-spacing:0}h2{letter-spacing:-.2px}
 .m-pass{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
 .m-pass summary{cursor:pointer;color:var(--navy);font-weight:700}
 .m-pass form{display:grid;gap:10px;margin-top:10px}
+
+/* ═══════ خلفية حية هادئة للشرائح الفاتحة ═══════ */
+@property --bc{syntax:"<color>";inherits:false;initial-value:#e0115f}
+#stage{background:#f7f8fe}
+#bgfx{position:absolute;inset:0;overflow:hidden;background:linear-gradient(130deg,#f6f8ff 0%,#faf6ff 45%,#fff5f9 100%);pointer-events:none}
+#bgfx i{position:absolute;width:1100px;height:1100px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--bc) 30%,transparent) 0%,color-mix(in srgb,var(--bc) 12%,transparent) 38%,transparent 68%);transition:--bc 1.8s ease;will-change:transform}
+#bgfx i:nth-child(1){top:-420px;right:-300px;animation:bgA 34s ease-in-out infinite alternate}
+#bgfx i:nth-child(2){bottom:-520px;left:-360px;animation:bgB 41s ease-in-out infinite alternate}
+#bgfx i:nth-child(3){top:180px;left:520px;width:820px;height:820px;opacity:.75;animation:bgC 47s ease-in-out infinite alternate}
+#bgfx i:nth-child(4){bottom:-380px;right:260px;width:760px;height:760px;opacity:.7;animation:bgD 38s ease-in-out infinite alternate}
+@keyframes bgA{to{transform:translate(-260px,180px) scale(1.12)}}
+@keyframes bgB{to{transform:translate(300px,-200px) scale(1.08)}}
+@keyframes bgC{to{transform:translate(-340px,120px) scale(.88)}}
+@keyframes bgD{to{transform:translate(-220px,-160px) scale(1.15)}}
+#bgfx b{position:absolute;inset:-40px;background-image:radial-gradient(rgba(11,31,75,.075) 1.6px,transparent 1.8px);background-size:38px 38px;-webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 45%,#000 20%,transparent 80%);mask-image:radial-gradient(ellipse 75% 70% at 50% 45%,#000 20%,transparent 80%);animation:bgGrid 60s linear infinite}
+@keyframes bgGrid{to{transform:translate(38px,38px)}}
+#bgfx s{position:absolute;top:-30%;bottom:-30%;width:280px;left:-320px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:rotate(16deg);animation:bgSweep 14s ease-in-out infinite}
+@keyframes bgSweep{0%,62%{left:-320px}100%{left:2240px}}
+#slide-host{position:absolute;inset:0}
+.slide:not(.dark){background:transparent}
+.slide:not(.dark){--wash:rgba(255,255,255,.74);--line:rgba(11,31,75,.1)}
+.slide:not(.dark) :is(.card,.step,.exm,.week,.side,.stat,.ex-steps li,.opt,.pcol,.legend li){box-shadow:0 14px 34px -24px rgba(11,31,75,.35)}
+@media (prefers-reduced-motion:reduce){#bgfx *{animation:none!important;transition:none!important}}
+
+/* ═══════ الجوال: بطاقة «تابع الشاشة» الحية ═══════ */
+.p-main:has(.p-watch){padding:12px}
+.p-watch{position:relative;overflow:hidden;min-height:calc(100dvh - 92px);border-radius:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;padding:32px 24px;color:#fff;
+  background:linear-gradient(140deg,var(--a),var(--b),var(--a));background-size:220% 220%;animation:wGrad 9s ease-in-out infinite;box-shadow:0 22px 50px -24px var(--a)}
+@keyframes wGrad{0%,100%{background-position:0% 30%}50%{background-position:100% 70%}}
+.p-watch>*{position:relative;z-index:1}
+.p-watch>i{position:absolute;z-index:0;border-radius:50%;background:rgba(255,255,255,.16)}
+.w-o1{width:240px;height:240px;top:-70px;inset-inline-end:-70px;animation:wFloat 7s ease-in-out infinite alternate}
+.w-o2{width:160px;height:160px;bottom:-40px;inset-inline-start:-40px;animation:wFloat 9s ease-in-out infinite alternate-reverse}
+.w-o3{width:70px;height:70px;top:22%;inset-inline-start:12%;background:rgba(255,255,255,.22)!important;animation:wFloat 6s ease-in-out infinite alternate}
+@keyframes wFloat{to{transform:translate(18px,26px) scale(1.12)}}
+.w-screen{width:120px;height:80px;border-radius:18px;background:rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;gap:16px;box-shadow:0 0 0 0 rgba(255,255,255,.55);animation:wPulse 2.2s ease-out infinite;margin-bottom:6px}
+.w-screen::after{content:"";position:absolute;bottom:-14px;width:44px;height:8px;border-radius:4px;background:rgba(255,255,255,.85)}
+.w-screen{position:relative}
+@keyframes wPulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.55)}100%{box-shadow:0 0 0 26px rgba(255,255,255,0)}}
+.w-eye{width:20px;height:20px;border-radius:50%;background:var(--a);position:relative;animation:wBlink 4s infinite}
+.w-eye::after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:#fff;top:4px;inset-inline-end:4px;animation:wLook 4s ease-in-out infinite}
+@keyframes wBlink{0%,46%,54%,100%{transform:scaleY(1)}50%{transform:scaleY(.1)}}
+@keyframes wLook{0%,100%{transform:translate(0,0)}30%{transform:translate(-6px,1px)}65%{transform:translate(2px,5px)}}
+.w-mod{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:5px 14px;font-size:13px;font-weight:700;letter-spacing:.2px}
+.p-watch h2{margin:0;font-family:var(--f-dis);font-size:27px;line-height:1.4;color:#fff;text-wrap:balance;text-shadow:0 2px 14px rgba(0,0,0,.15)}
+.w-cue{margin:0;font-size:16px;opacity:.92;animation:wCue 3s ease-in-out infinite}
+@keyframes wCue{0%,100%{opacity:.92;transform:none}50%{opacity:.7;transform:translateY(-3px)}}
+.w-prog{width:72%;height:7px;border-radius:999px;background:rgba(255,255,255,.25);overflow:hidden;margin-top:8px}
+.w-prog i{display:block;height:100%;border-radius:999px;background:#fff;transition:width .6s}
+.w-n{font-size:13px;opacity:.85}.w-n b{font-family:var(--f-dis)}
+.p-main.fresh .p-watch{animation:wGrad 9s ease-in-out infinite,wIn .5s cubic-bezier(.2,1.2,.4,1) both}
+@keyframes wIn{from{opacity:0;transform:scale(.94)}}
+@media (prefers-reduced-motion:reduce){.p-watch,.p-watch *{animation:none!important}}
 </style>
 </head>
 <body class="m">
@@ -1737,6 +1790,20 @@ D.roles = [
   { id: "admin", label: "إداري", plural: "إداريون وموظفون", icon: "💼", color: "#7c3aed" },
 ];
 
+/* ───────── الأهداف: خمسة مخرجات تتحقق فعلًا داخل القاعة، كل منها مرتبط بتمرين ───────── */
+Object.assign(g("outputs"), {
+  title: "في نهاية اليوم: خمسة مخرجات تخرج بها فعلًا", lead: "كل مخرج تصنعه بيدك في تمرين داخل القاعة، وتحفظه على جهازك قبل أن تغادر.",
+  cards: [
+    { icon: "wand", h: "أمر تشغيلي باسمك", p: "طلب كامل العناصر الخمسة، تبنيه في «باني الطلب» وتستخدمه غدًا." },
+    { icon: "doc", h: "تقرير من ملف", p: "خلاصة ومؤشرات وتوصيات من ملف حقيقي، وكل رقم فيه مطابق لمصدره." },
+    { icon: "check", h: "مهمة حقيقية منجزة", p: "من عملك أو دراستك، تُنجزها في القاعة بجولة تحسين واحدة." },
+    { icon: "slides", h: "عرض ورسالة", p: "مستند يتحول إلى شرائح، ثم بريد أو رسالة جاهزة للإرسال." },
+    { icon: "folder", h: "حقيبتك وخطتك", p: "8 طلبات جاهزة لفئتك، وخطة 30 يومًا، وقواعد الاستخدام الآمن." }],
+  notes: { goal: "إعلان مخرجات واقعية يمكن قياسها قبل المغادرة.", say: "لن أعدكم بأنكم ستصبحون خبراء في يوم؛ أعدكم بخمسة أشياء ستخرجون بها من هذه القاعة وتستطيعون فتحها على أجهزتكم.", how: "أظهر المربعات واحدًا واحدًا، واذكر التمرين الذي يحقق كل مخرج: باني الطلب، تمرين Claude، تمرين ChatGPT، تمرينا Gemini وCopilot، ثم الحقيبة وخطة 30 يومًا.", question: "أي مخرج تحتاجه أكثر هذا الأسبوع؟", manage: "عد إلى هذه الشريحة في الختام واطلب من كل متدرب أن يرفع يده عند كل مخرج أنجزه.", time: "دقيقتان", next: "قبل أن نبدأ: خمسة أسئلة سريعة تقيس نقطة البداية، وسنعيدها في آخر اليوم." } });
+g("cover").outTitle = "ماذا ستخرج به اليوم؟";
+g("cover").outputs = ["أمر تشغيلي باسمك", "تقرير من ملف", "مهمة حقيقية منجزة", "عرض ورسالة", "حقيبة طلبات وخطة 30 يومًا"];
+g("cover").notes.say = "اليوم لن نتحدث عن الذكاء الاصطناعي فقط؛ سننجز به خمسة مخرجات حقيقية قبل نهاية اليوم، كل واحد منها على جهازك.";
+
 /* ───────── الغلاف والفلسفة: الدورة للفئات الثلاث ───────── */
 Object.assign(g("cover"), { tag: "دورة تطبيقية: طلاب • معلمون • إداريون", sub: "يوم عملي ينتهي بمخرجات حقيقية لكل فئة: مذاكرة وبحث، تدريس وتقويم، تقارير وقرارات" });
 before("philosophy", {
@@ -1848,7 +1915,7 @@ after("governance", {
 );
 
 /* ───────── حقيبتك الشخصية: طلبات جاهزة لكل فئة على الجوال ───────── */
-before("cloud-close", {
+before("exit", {
   id: "kit", type: "kit", mod: 7, kicker: "تأخذها معك", title: "حقيبتك: 8 طلبات جاهزة لفئتك على جوالك",
   lead: "انسخ أي طلب واستخدمه غدًا — كل طلب مبني بالعناصر الخمسة.",
   kits: {
@@ -1879,7 +1946,11 @@ before("cloud-close", {
       ["تحليل جدول", "في الجدول المرفق: ما الفروع أو الأقسام التي انخفض أداؤها أكثر من 10% مقارنة بالشهر الماضي؟ اعرض النتيجة في جدول ورسم يجيب عن السؤال."],
       ["التحضير لاجتماع", "هذه أجندة الاجتماع وأرقامنا: ما أصعب خمسة أسئلة متوقعة؟ وكيف أرد على كل منها في جملتين؟ [الأجندة]"],
       ["تبسيط إجراء", "حوّل هذا الإجراء الإداري إلى خطوات مرقّمة واضحة لموظف جديد، مع جدول بالمستندات المطلوبة ومدة كل خطوة: [الإجراء]"]] },
-  notes: { goal: "أن يخرج كل متدرب بأداة يستخدمها غدًا، مهما كانت فئته.", say: "افتحوا جوالاتكم الآن: كل واحد يرى طلبات فئته، جاهزة للنسخ.", how: "اطلب من كل متدرب نسخ طلب واحد وحفظه في ملاحظات جواله الآن.", question: "أي طلب ستستخدمه أولًا؟", time: "3 دقائق", next: "بكلمة واحدة: ما أول مهمة ستنجزها؟" } });
+  notes: { goal: "أن يخرج كل متدرب بأداة يستخدمها غدًا، مهما كانت فئته.", say: "افتحوا جوالاتكم الآن: كل واحد يرى طلبات فئته، جاهزة للنسخ.", how: "اطلب من كل متدرب نسخ طلب واحد وحفظه في ملاحظات جواله الآن.", question: "أي طلب ستستخدمه أولًا؟", time: "3 دقائق", next: "الآن نقيس: ماذا أنجزت فعلًا اليوم؟" } });
+Object.assign(g("exit"), {
+  lead: "هذه هي أهداف اليوم نفسها. ضع علامة على ما أنجزته فعلًا — النتيجة تظهر للقاعة بلا أسماء.",
+  items: ["بنيت أمرًا تشغيليًا كاملًا بالعناصر الخمسة.", "أنشأت تقريرًا من ملف وطابقت أرقامه مع المصدر.", "أنجزت مهمة حقيقية من عملي أو دراستي.", "حوّلت مستندًا إلى عرض ورسالة جاهزة.", "حفظت حقيبتي وحددت أول خطوة في خطة 30 يومًا.", "راجعت الخصوصية والدقة قبل التسليم."],
+  notes: { goal: "قياس تحقق أهداف اليوم الخمسة، لا الانطباع عنها.", say: "في البداية وعدتكم بخمسة مخرجات؛ الآن نرى كم منها تحقق فعلًا.", how: "افتح الإجابة، ثم أغلق وأظهر النتائج. كل عمود يمثل نسبة القاعة التي أنجزت المخرج.", manage: "أقل بند نسبةً هو أول ما تراجعه في الدقائق الأخيرة، أو ترسل عنه مادة بعد الدورة.", time: "3 دقائق", next: "بكلمة واحدة: ما أول مهمة ستنجزها؟" } });
 
 /* ───────── استبيان البداية: الفئة أولًا ───────── */
 for (const id of ["intake", "survey", "survey-detail"]) {
@@ -2498,7 +2569,7 @@ async function Display() {
   let key;
   try { key = await call("get_display_key", { p_session: sid }); } catch (e) { store.set("st-display-sid", null); app.innerHTML = `<main class="m-wrap"><p class="m-err">${esc(msg(e))}</p></main>`; return; }
   document.body.className = "display";
-  app.innerHTML = `<div id="frame"><div id="stage"><div id="slide-host"></div><div id="pop"></div><div id="bigtimer" hidden></div><canvas id="confetti"></canvas></div></div>
+  app.innerHTML = `<div id="frame"><div id="stage"><div id="bgfx" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b><s></s></div><div id="slide-host"></div><div id="pop"></div><div id="bigtimer" hidden></div><canvas id="confetti"></canvas></div></div>
     <div id="dctl"><button data-c="mute" title="الصوت">🔊</button><button data-c="fs" title="ملء الشاشة">⛶</button><button data-c="exit" title="تغيير الجلسة">⎋</button></div>
     <div id="starter"><div><h1>جاهز للعرض</h1><p>اضغط للبدء — يفعّل المؤثرات الصوتية وملء الشاشة</p><button id="go">ابدأ العرض</button></div></div>`;
   const stage = $("#stage"), host = $("#slide-host");
@@ -2523,6 +2594,11 @@ async function Display() {
   });
 
   function slideOf(d) { return d.item ? byId[d.item.payload?.slide] : null; }
+  /* خلفية حية هادئة: ألوانها تتبع الوحدة الحالية وتتبدل بانسيابية */
+  const BG = [["#e0115f", "#7c3aed", "#2563eb", "#f59e0b"], ["#2563eb", "#0891b2", "#7c3aed", "#e0115f"], ["#ea580c", "#e0115f", "#7c3aed", "#0d9488"], ["#0d9488", "#2563eb", "#16a34a", "#7c3aed"],
+    ["#2563eb", "#7c3aed", "#e0115f", "#0891b2"], ["#0078d4", "#7c3aed", "#0d9488", "#e0115f"], ["#7c3aed", "#e0115f", "#2563eb", "#ea580c"], ["#e0115f", "#f59e0b", "#7c3aed", "#0d9488"]];
+  let bgMod = -1;
+  function paintBg(m) { if (m === bgMod) return; bgMod = m; const c = BG[m % BG.length]; $("#bgfx").querySelectorAll("i").forEach((el, k) => el.style.setProperty("--bc", c[k])); }
   function modeOf(d, s) {
     if (d.session.status === "ended") return "end";
     if (d.session.display_mode === "leaderboard" || (s && s.type === "teams" && d.leaderboard)) return "lb";
@@ -2538,6 +2614,7 @@ async function Display() {
       mode === "lb" || mode === "teams" ? JSON.stringify([d.leaderboard, d.teams]) : "", mode === "item" && s?.type === "exercise" && (d.session.item_state === "closed" || d.session.item_state === "revealed")].join("|");
     if (skey !== last.skey) {
       host.innerHTML = isolate(`<section class="slide in ${["cover", "section", "closing", "join", "lb", "teams", "end"].includes(mode === "item" ? s.type : mode) ? "dark" : ""}" data-type="${mode === "item" ? s.type : mode}">${body(mode, s, d)}<div class="meta"><span>${esc(s ? RD.mods[s.mod] : d.session.title)}</span><span>${s ? `${SL.indexOf(s) + 1} من ${SL.length}` : ""}</span></div></section>`);
+      paintBg(mode === "item" && s ? s.mod : 0);
       if (mode === "join" || (mode === "item" && s.type === "survey")) qr(d);
       if (mode === "item" && s.type === "prepost") summary();
       if (mode === "item" && s.live) { svKey = ""; svAt = 0; }
@@ -2928,7 +3005,7 @@ async function Join(rawCode) {
         <textarea name="fc" rows="3" maxlength="1000" placeholder="ملاحظة (اختياري)">${esc(text)}</textarea><button class="m-btn" data-send="fb" ${!feedback || sending ? "disabled" : ""}>إرسال التقييم</button>`}</section>`;
     }
     if (rolePick) return `<section class="p-card"><h2>اختر فئتك</h2><p class="p-soft">تظهر لك الحالات والطلبات الجاهزة على مقاس دورك.</p>${rolePicker(role)}${role ? `<button class="m-btn alt" data-rolecancel>رجوع</button>` : ""}</section>`;
-    if (!it || !s) return `<section class="p-card center"><div class="pulse"></div><h2>أنت داخل الجلسة</h2><p>انتظر حتى يبدأ المدرب.</p></section>`;
+    if (!it || !s) return watch(null);
     const mod = `<p class="p-mod">${esc(RD.mods[s.mod])}</p>`;
     if (it.kind === "content" && s.type === "kit") {
       const list = myKit(s);
@@ -2940,6 +3017,7 @@ async function Join(rawCode) {
       const mine = s.cols.find((c) => c.role === role);
       return `<section class="p-card">${mod}<h2>${esc(plain(s.title))}</h2>${mine ? `<div class="p-mine" style="--c:${RD.roleOf(role).color}"><b>${RD.roleOf(role).icon} ${esc(mine.h)}</b><ul>${mine.items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>` : ""}<p class="p-soft">👀 تابع الشاشة للفئات الأخرى</p></section>`;
     }
+    if (it.kind === "content" && s.type !== "prompt" && !s.prompt) return watch(s);
     if (it.kind === "content") {
       return `<section class="p-card">${mod}<h2>${esc(plain(s.title))}</h2>${s.type === "prompt" ? `<p>البرومبت الكامل جاهز للنسخ:</p><button class="m-btn" data-copy="full">نسخ البرومبت</button>` : s.prompt ? `<div class="p-prompt">${esc(s.prompt)}</div><button class="m-btn alt" data-copy="p">نسخ</button>` : `<p class="p-soft">👀 تابع الشاشة</p>`}</section>`;
     }
@@ -2978,6 +3056,17 @@ async function Join(rawCode) {
     if (!open) return `<section class="p-card">${head}<p class="p-soft">${st === "showing" ? "اقرأ السؤال… سيفتح المدرب الإجابة بعد لحظات." : "انتهى وقت الإجابة."}</p></section>`;
     return `<section class="p-card">${head}${multi ? '<p class="p-soft">اختر كل ما ينطبق</p>' : ""}<div class="p-opts">${opts.map((o, k) => `<button data-opt="${k}" class="${sel.includes(k) ? "on" : ""}"><span>${KEYS[k] ?? k + 1}</span>${esc(o)}</button>`).join("")}</div>
       <button class="m-btn" data-send="answer" ${!sel.length || sending ? "disabled" : ""}>إرسال الإجابة</button><p class="p-soft">تُرسل مرة واحدة.</p></section>`;
+  }
+  /* بطاقة «تابع الشاشة»: في منتصف الشاشة، وألوانها تتبدل مع كل شريحة */
+  const WATCH = [["#e0115f", "#7c3aed"], ["#2563eb", "#7c3aed"], ["#0d9488", "#2563eb"], ["#ea580c", "#e0115f"], ["#7c3aed", "#0891b2"], ["#0891b2", "#16a34a"], ["#db2777", "#f59e0b"], ["#4f46e5", "#e0115f"]];
+  const CUES = ["ارفع رأسك… الفكرة الآن على الشاشة", "تابع الشاشة، وسيتحرك جوالك عند النشاط", "الشرح الآن على الشاشة", "انظر إلى الشاشة… هذه الفكرة ستحتاجها اليوم"];
+  function watch(s) {
+    const i = s ? SL.indexOf(s) : 0, [a, b] = WATCH[i % WATCH.length];
+    const head = s ? `<span class="w-mod">${esc(RD.mods[s.mod])}</span><h2>${esc(plain(s.title || s.q))}</h2>` : `<span class="w-mod">أنت داخل الجلسة ✓</span><h2>انتظر حتى يبدأ المدرب</h2>`;
+    return `<section class="p-watch" style="--a:${a};--b:${b}"><i class="w-o1"></i><i class="w-o2"></i><i class="w-o3"></i>
+      <div class="w-screen"><span class="w-eye"></span><span class="w-eye"></span></div>${head}
+      <p class="w-cue">${!s ? "سيتحرك جوالك تلقائيًا مع العرض" : SL[i + 1] && RD.ACT.has(SL[i + 1].type) ? "⚡ استعد… النشاط القادم على جوالك" : esc(CUES[i % CUES.length])}</p>
+      ${s ? `<div class="w-prog"><i style="width:${Math.round(((i + 1) / SL.length) * 100)}%"></i></div><small class="w-n">الشريحة <b class="ltr">${i + 1}</b> من <b class="ltr">${SL.length}</b></small>` : ""}</section>`;
   }
   function myTrack(s) {
     if (!s.tracks) return null;
