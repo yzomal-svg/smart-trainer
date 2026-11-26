@@ -1131,6 +1131,124 @@ body.m #app{min-height:calc(100% - 40px)}
 /* إصلاح تباين البطاقة المميزة الداكنة في الكشف التدريجي */
 .building .card.hl.bx.shown h3,.building .card.hl.bx.shown p{color:#fff}
 .building .card.hl.bx .num,.building .card.hl.bx .ic{background:rgba(255,255,255,.22)}
+
+/* ═══════ شاشة العرض: التقييم ═══════ */
+.slide[data-type="eval"]{background:radial-gradient(900px 600px at 85% 10%,#5b21b6 0%,transparent 60%),radial-gradient(800px 600px at 10% 100%,#be185d 0%,transparent 55%),linear-gradient(160deg,#0b1f4b,#1e1b4b)}
+.ev-stars{position:absolute;inset:0;pointer-events:none}
+.ev-stars i{position:absolute;width:6px;height:6px;border-radius:50%;background:#fff;opacity:.5;animation:evTw 3s ease-in-out infinite}
+.ev-stars i:nth-child(4n){width:4px;height:4px}.ev-stars i:nth-child(5n){background:#fde68a}
+.ev-stars i:nth-child(1){left:43%;top:22%;animation-delay:1.18s}
+.ev-stars i:nth-child(2){left:8%;top:12%;animation-delay:2.46s}
+.ev-stars i:nth-child(3){left:14%;top:49%;animation-delay:1.75s}
+.ev-stars i:nth-child(4){left:66%;top:30%;animation-delay:0.11s}
+.ev-stars i:nth-child(5){left:57%;top:56%;animation-delay:0.21s}
+.ev-stars i:nth-child(6){left:13%;top:73%;animation-delay:1.27s}
+.ev-stars i:nth-child(7){left:74%;top:18%;animation-delay:2.84s}
+.ev-stars i:nth-child(8){left:82%;top:83%;animation-delay:1.75s}
+.ev-stars i:nth-child(9){left:9%;top:76%;animation-delay:1.76s}
+.ev-stars i:nth-child(10){left:8%;top:31%;animation-delay:0.14s}
+.ev-stars i:nth-child(11){left:19%;top:40%;animation-delay:1.26s}
+.ev-stars i:nth-child(12){left:71%;top:18%;animation-delay:1.71s}
+.ev-stars i:nth-child(13){left:73%;top:90%;animation-delay:0.54s}
+.ev-stars i:nth-child(14){left:76%;top:76%;animation-delay:1.92s}
+.ev-stars i:nth-child(15){left:49%;top:15%;animation-delay:1.64s}
+.ev-stars i:nth-child(16){left:10%;top:75%;animation-delay:0.18s}
+.ev-stars i:nth-child(17){left:28%;top:66%;animation-delay:2.04s}
+.ev-stars i:nth-child(18){left:56%;top:43%;animation-delay:1.40s}
+.ev-stars i:nth-child(19){left:60%;top:49%;animation-delay:0.90s}
+.ev-stars i:nth-child(20){left:25%;top:92%;animation-delay:2.34s}
+.ev-stars i:nth-child(21){left:12%;top:76%;animation-delay:0.90s}
+.ev-stars i:nth-child(22){left:65%;top:46%;animation-delay:2.19s}
+.ev-stars i:nth-child(23){left:38%;top:80%;animation-delay:2.94s}
+.ev-stars i:nth-child(24){left:17%;top:68%;animation-delay:1.25s}
+@keyframes evTw{50%{opacity:1;transform:scale(1.6)}}
+.ev{position:relative;z-index:1;flex:1;display:grid;grid-template-columns:1.25fr 1fr;align-items:center;gap:70px}
+.ev-text .kicker{color:#f9a8d4}
+.ev-text h1{font-size:92px;line-height:1.15;margin:8px 0 18px;color:#fff}
+.ev-lead{font-size:32px;color:#dbe4ff;margin:0 0 28px;line-height:1.6}
+.ev-chips{display:flex;flex-wrap:wrap;gap:14px}
+.ev-chips span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:18px;padding:12px 22px;font-size:26px;color:#fff}
+.ev-state{margin:30px 0 0;font-family:var(--f-dis);font-size:30px;color:#fde68a;animation:evPulse 2s ease-in-out infinite}
+@keyframes evPulse{50%{opacity:.6}}
+.ev-ring{position:relative;width:560px;height:560px;justify-self:center}
+.ev-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ev-track{fill:none;stroke:rgba(255,255,255,.12);stroke-width:22}
+.ev-prog{fill:none;stroke:url(#evg);stroke:#f472b6;stroke-width:22;stroke-linecap:round;transition:stroke-dashoffset 1s cubic-bezier(.3,1.2,.4,1);filter:drop-shadow(0 0 18px rgba(244,114,182,.7))}
+.ev-num{position:absolute;inset:0;display:grid;place-content:center;text-align:center;color:#fff}
+.ev-num>b{font-family:var(--f-dis);font-size:190px;line-height:1}
+.ev-num span{font-size:36px;font-weight:700}
+.ev-num small{font-size:26px;color:#c7d2fe;margin-top:6px}
+.ev-num small b{font-family:var(--f-dis)}
+.ev-num>b.bump{animation:evBump .6s cubic-bezier(.2,1.6,.4,1)}
+@keyframes evBump{40%{transform:scale(1.25);color:#fde68a}}
+
+/* ═══════ الجوال: نموذج التقييم ═══════ */
+.ev-card h2{margin-bottom:0}
+.ev-sec{display:grid;gap:12px;border-top:1px solid var(--line);padding-top:14px}
+.ev-sec h3{margin:0;font-family:var(--f-dis);font-size:19px;color:var(--mag)}
+.ev-q{display:grid;gap:10px;border-radius:16px;padding:12px;background:#f8fafc;border:1.5px solid transparent;transition:border-color .2s,background .2s}
+.ev-q.ok{border-color:#a7f3d0;background:#f0fdf8}
+.ev-q p{margin:0;font-weight:700;color:var(--navy);line-height:1.55;font-size:15px}
+.ev-q p b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:12px;margin-inline-end:6px;font-family:var(--f-dis)}
+.ev-lik{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.ev-lik button{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:8px 2px;display:grid;justify-items:center;gap:3px;font:inherit;transition:transform .15s}
+.ev-lik button b{font-size:22px;line-height:1}
+.ev-lik button small{font-size:10px;color:var(--soft);line-height:1.3;text-align:center}
+.ev-lik button.on{border-color:var(--mag);background:#fff0f6;transform:translateY(-2px)}
+.ev-lik button.on small{color:var(--mag);font-weight:700}
+.ev-nps{display:grid;grid-template-columns:repeat(11,1fr);gap:4px;direction:ltr}
+.ev-nps button{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:9px 0;font:inherit;font-weight:700;font-size:14px;font-family:var(--f-dis)}
+.ev-nps button.nd.on{background:#ef4444;border-color:#ef4444;color:#fff}.ev-nps button.np.on{background:#f59e0b;border-color:#f59e0b;color:#fff}.ev-nps button.ng.on{background:#10b981;border-color:#10b981;color:#fff}
+.ev-npsl{display:flex;justify-content:space-between;font-size:11px;color:var(--soft);direction:ltr}
+.ev-npsl span:first-child{order:0}
+.ev-st button{font-size:34px}
+.ev-sec textarea{width:100%;box-sizing:border-box;border:1.5px solid var(--line);border-radius:14px;padding:12px;font:inherit;font-size:15px}
+.ev-wait .ev-ic{font-size:54px}
+
+/* ═══════ الجوال: شاشة الشكر ═══════ */
+.p-main:has(.p-thanks){padding:12px}
+.p-thanks{position:relative;overflow:hidden;min-height:calc(100dvh - 140px);border-radius:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:34px 22px;text-align:center;color:#fff;
+  background:radial-gradient(120% 70% at 85% 0%,#a78bfa 0%,transparent 55%),radial-gradient(90% 60% at 0% 100%,#be185d 0%,transparent 60%),linear-gradient(165deg,#4f46e5,#7e22ce);animation:wIn .6s cubic-bezier(.2,1.2,.4,1) both}
+.p-thanks h2{margin:0;font-family:var(--f-dis);font-size:32px;color:#fff}
+.ty-sub{margin:0;font-size:16px;opacity:.92;line-height:1.6}
+.ty-bot{margin-top:44px}
+.ty-msg{width:100%;box-sizing:border-box;background:#fff;color:var(--ink);border-radius:24px;padding:20px 18px;display:grid;gap:10px;box-shadow:0 20px 40px -20px rgba(0,0,0,.45)}
+.ty-msg>b{font-family:var(--f-dis);font-size:15px;color:var(--mag)}
+.ty-msg p{margin:0;font-size:17px;line-height:1.7;font-weight:600;color:var(--navy)}
+.ty-msg>small{font-family:var(--f-dis);color:var(--soft)}
+.wa{display:flex;align-items:center;gap:12px;justify-content:center;background:#25d366;color:#fff;text-decoration:none;border-radius:18px;padding:13px 16px;box-shadow:0 10px 24px -10px #25d366;animation:waPulse 2.4s ease-in-out infinite}
+.wa-ic svg{width:34px;height:34px;fill:#fff;display:block}
+.wa span:last-child{display:grid;text-align:start}.wa b{font-family:var(--f-dis);font-size:17px}.wa small{font-size:16px;font-weight:700;letter-spacing:1px}
+@keyframes waPulse{50%{transform:scale(1.03);box-shadow:0 14px 30px -10px #25d366}}
+.p-main>.wa{margin-bottom:12px}
+.cf{position:absolute;inset:0;pointer-events:none}
+.cf i{position:absolute;top:-20px;width:9px;height:14px;border-radius:2px;animation:cfFall 4.5s linear infinite}
+/* التلويح بالوداع */
+.m-wave .b-eyes{opacity:0}.m-wave .b-happy{opacity:1}.m-wave .b-mouth{opacity:0}.m-wave .b-mouth2{opacity:1}
+.m-wave .b-hand.r{animation:bHi .55s ease-in-out infinite alternate}
+@keyframes bHi{from{transform:translate(-2px,-46px)}to{transform:translate(14px,-62px)}}
+.m-wave .b-body{animation:bBob 2.4s ease-in-out infinite}
+@keyframes cfFall{to{transform:translateY(110vh) rotate(540deg)}}
+.cf i:nth-child(1){left:46%;background:#f9a8d4;animation-delay:0.68s;animation-duration:4.7s}
+.cf i:nth-child(2){left:8%;background:#a7f3d0;animation-delay:4.33s;animation-duration:3.7s}
+.cf i:nth-child(3){left:74%;background:#93c5fd;animation-delay:2.58s;animation-duration:5.7s}
+.cf i:nth-child(4){left:43%;background:#fff;animation-delay:1.53s;animation-duration:4.4s}
+.cf i:nth-child(5){left:66%;background:#fca5a5;animation-delay:2.61s;animation-duration:4.6s}
+.cf i:nth-child(6){left:14%;background:#c4b5fd;animation-delay:4.25s;animation-duration:4.7s}
+.cf i:nth-child(7){left:88%;background:#fde68a;animation-delay:0.29s;animation-duration:5.3s}
+.cf i:nth-child(8){left:42%;background:#f9a8d4;animation-delay:2.91s;animation-duration:6.0s}
+.cf i:nth-child(9){left:60%;background:#a7f3d0;animation-delay:1.28s;animation-duration:4.5s}
+.cf i:nth-child(10){left:88%;background:#93c5fd;animation-delay:1.56s;animation-duration:5.9s}
+.cf i:nth-child(11){left:48%;background:#fff;animation-delay:0.76s;animation-duration:3.8s}
+.cf i:nth-child(12){left:10%;background:#fca5a5;animation-delay:0.98s;animation-duration:4.2s}
+.cf i:nth-child(13){left:34%;background:#c4b5fd;animation-delay:1.79s;animation-duration:5.8s}
+.cf i:nth-child(14){left:66%;background:#fde68a;animation-delay:0.36s;animation-duration:4.6s}
+.slide.dark>.ev-stars{position:absolute;inset:0;z-index:0}
+.p-thanks{--a:#4f46e5;--b:#7e22ce}
+.ev-q p{display:flex;gap:8px;align-items:flex-start}
+.ev-q p b{flex:none;margin:1px 0 0!important}
+.ev-prog{filter:none}
+.ev-ring::before{content:"";position:absolute;inset:40px;border-radius:50%;box-shadow:0 0 60px 8px rgba(244,114,182,.35);pointer-events:none}
 </style>
 </head>
 <body class="m">
@@ -1973,6 +2091,29 @@ Object.assign(g("speed-intro"), {
   banner: "<span>للفرق:</span> نقاط كل عضو تُجمع لفريقه — الدقة أولًا، ثم السرعة.",
   notes: { goal: "تنشيط القاعة واسترجاع خريطة اختيار الأداة بطريقة ممتعة.", say: "أربعة أسئلة سريعة. كل سؤال موقف من العمل، وأمامكم أربع أدوات. الإجابة الصحيحة 100 نقطة، ومن يجيب أسرع يأخذ حتى 50 نقطة إضافية. الإجابة الخاطئة لا تأخذ شيئًا، فلا تتسرعوا.", how: "إن لم تقسّم الفرق بعد، قسّمها الآن من جهازك (تقسيم عشوائي). اقرأ المثال بصوت مسموع واسأل القاعة: من يعرف الجواب؟ (Claude) ثم ابدأ.", answer: "مثال الشريحة: Claude — مستند طويل وكتابة متماسكة.", time: "دقيقة", next: "السؤال الأول…" } });
 
+/* ───────── تقييم الدورة والمدرب (مستوى «رد الفعل» في نموذج كيركباتريك + مؤشر صافي التوصية) ───────── */
+const LIK = ["لا أوافق بشدة", "لا أوافق", "محايد", "أوافق", "أوافق بشدة"];
+after("closing", {
+  id: "eval", type: "eval", mod: 7, kicker: "دقيقتان من جوالك", title: "رأيك يصنع النسخة القادمة",
+  lead: "قيّم المادة التدريبية والمدرب بصدق — التقييم مجهول الهوية، ويُستخدم للتحسين والتطوير.",
+  likert: LIK,
+  sections: [
+    { h: "المادة التدريبية", icon: "📚", qs: [
+      { id: "m1", kind: "likert", q: "أهداف الدورة كانت واضحة، وتحققت فعلًا." },
+      { id: "m2", kind: "likert", q: "المحتوى مرتبط بعملي أو دراستي، وأستطيع تطبيقه مباشرة." },
+      { id: "m3", kind: "likert", q: "التمارين والأنشطة ساعدتني على الفهم والتطبيق." },
+      { id: "m4", kind: "level", q: "مستوى المحتوى بالنسبة لي كان:", opts: ["أسهل مما توقعت", "مناسبًا تمامًا", "أصعب مما توقعت"] },
+      { id: "m5", kind: "nps", q: "ما احتمال أن توصي بهذه الدورة لزميل أو صديق؟" }] },
+    { h: "المدرب", icon: "🎤", qs: [
+      { id: "t1", kind: "likert", q: "المدرب متمكن من الموضوع، ويجيب عن الأسئلة بثقة." },
+      { id: "t2", kind: "likert", q: "أسلوب الشرح كان واضحًا ومنظمًا وسهل المتابعة." },
+      { id: "t3", kind: "likert", q: "شجّع المدرب المشاركة، وأدار الوقت والنقاش بفعالية." },
+      { id: "t4", kind: "likert", q: "ربط المدرب المحتوى بأمثلة واقعية من بيئتنا." },
+      { id: "t5", kind: "stars", q: "تقييمك العام للمدرب:" }] }],
+  wish: { id: "wish", q: "ماذا تتمنى من المدرب أن يضيف أو يطوّر؟" },
+  notes: { goal: "قياس رضا المتدربين عن المادة والمدرب (المستوى الأول في نموذج كيركباتريك)، ومؤشر صافي التوصية.", say: "قبل أن نفترق: دقيقتان من جوالكم لتقييم المادة وتقييمي أنا. التقييم مجهول الهوية، وأقرأ كل ملاحظة لأطوّر الدورة القادمة.", how: "اضغط «افتح الإجابة»، وراقب العداد على الشاشة. انتظر حتى يكمل أغلب القاعة، ثم أغلق.", manage: "النتائج المفصلة في «تقرير الجلسة» بعد إنهاء الجلسة: متوسط كل سؤال، ومؤشر التوصية، وما يتمناه المتدربون.", time: "3 دقائق", next: "إنهاء الجلسة وشكر الحضور." } });
+Object.assign(g("closing").notes || (g("closing").notes = {}), { next: "التقييم: دقيقتان من جوالكم." });
+
 /* ───────── الغلاف والفلسفة: الدورة للفئات الثلاث ───────── */
 Object.assign(g("cover"), { tag: "دورة تطبيقية: طلاب • معلمون • إداريون", sub: "يوم عملي ينتهي بمخرجات حقيقية لكل فئة: مذاكرة وبحث، تدريس وتقويم، تقارير وقرارات" });
 before("philosophy", {
@@ -2364,7 +2505,7 @@ function surveyDetail(s, res) {
 }
 
 /* ───── الأنشطة الحية ───── */
-const ACT = new Set(["quiz", "poll", "cloud", "exercise", "scenario", "checklist", "order", "discuss", "survey"]);
+const ACT = new Set(["quiz", "poll", "cloud", "exercise", "scenario", "checklist", "order", "discuss", "survey", "eval"]);
 const optionsOf = (s) => (s.type === "order" ? s.shuffle.map((i) => s.items[i]) : s.type === "quiz" ? (s.qtype === "tf" ? ["صح", "خطأ"] : s.options) : s.type === "scenario" ? s.choices.map((c) => c.t) : s.type === "checklist" ? s.items : s.options);
 /** مفتاح العدّ في item_counts لكل خيار */
 const countKey = (s, k) => (s.type === "quiz" && s.qtype === "tf" ? String(k === 0) : String(k));
@@ -2435,6 +2576,15 @@ function activity(s, d, ui) {
     return `<div class="act-head"><span class="badge game">🧩 لعبة الترتيب</span><span class="hint">رتّبها من جوالك بالضغط على الخطوات بالتسلسل</span></div><p class="q">${esc(s.q)}</p>
       <div class="ord-pool">${shown.map((t, k) => `<div class="ochip" style="--r:${(k % 2 ? 1 : -1) * (0.5 + (k % 3) * 0.4)}deg;animation-delay:${0.1 + k * 0.12}s"><span class="k">${KEYS[k]}</span>${esc(t)}</div>`).join("")}</div>${statusBar(d)}`;
   }
+  if (s.type === "eval") {
+    const n = d.answered ?? 0, tot = Math.max(1, d.participants || 0), C = 2 * Math.PI * 150;
+    return `<div class="ev-stars" aria-hidden="true">${"<i></i>".repeat(24)}</div><div class="ev">
+      <div class="ev-ring"><svg viewBox="0 0 340 340"><circle cx="170" cy="170" r="150" class="ev-track"/><circle cx="170" cy="170" r="150" class="ev-prog" data-live="ring" style="stroke-dasharray:${C};stroke-dashoffset:${C * (1 - Math.min(1, n / tot))}"/></svg>
+        <div class="ev-num"><b class="ltr" data-live="answered">${n}</b><span>أكملوا التقييم</span><small>من <b class="ltr" data-live="participants">${d.participants}</b> متدربًا</small></div></div>
+      <div class="ev-text"><p class="kicker">${esc(s.kicker)}</p><h1>${esc(s.title)}</h1><p class="ev-lead">${esc(s.lead)}</p>
+        <div class="ev-chips">${s.sections.map((x) => `<span>${x.icon} ${x.qs.length} أسئلة عن ${esc(x.h)}</span>`).join("")}<span>💭 ${esc(s.wish.q)}</span></div>
+        <p class="ev-state">${d.session.item_state === "open" ? "📱 التقييم مفتوح الآن على جوالاتكم" : "سيفتح المدرب التقييم بعد لحظات"}</p></div></div>`;
+  }
   if (s.type === "survey") {
     return `${head(s)}<div class="sv-qs">${s.qs.map((q, k) => `<div class="sv-q" style="animation-delay:${0.1 + k * 0.1}s"><span class="ltr">${k + 1}</span>${esc(q.q)}</div>`).join("")}</div>
       <div class="sv-live"><div class="qrbox qrmini" id="qr"></div><b class="ltr" data-live="answered">${d.answered ?? 0}</b><span>أكملوا الاستبيان من <b class="ltr" data-live="participants">${d.participants}</b></span><small>${st === "open" ? "امسح الرمز وأجب من جوالك الآن" : "امسح الرمز وانضم — يفتح المدرب الاستبيان بعد لحظات"}</small></div>${statusBar(d)}`;
@@ -2468,6 +2618,8 @@ function patch(root, s, d) {
       if (c) c.textContent = n === null ? "" : `${n} • ${Math.round((n / base) * 100)}%`;
     });
   }
+  const ring = root.querySelector('[data-live="ring"]');
+  if (ring) { const C = 2 * Math.PI * 150; ring.style.strokeDashoffset = C * (1 - Math.min(1, (d.answered || 0) / Math.max(1, d.participants || 0))); }
   const cloud = root.querySelector('[data-live="cloud"]');
   if (cloud && d.contributions) {
     const board = cloud.classList.contains("stickies");
@@ -2574,7 +2726,7 @@ const sb = (window.__SB_FACTORY__ || window.supabase.createClient)(CFG.url, CFG.
 const { esc, isolate, plain, KEYS } = RD;
 const SL = DECK.slides;
 const byId = Object.fromEntries(SL.map((s) => [s.id, s]));
-const MARK = "deck:ai-zero-to-done:v6";
+const MARK = "deck:ai-zero-to-done:v7";
 const app = document.getElementById("app");
 /* خط STC لا يضبط مواضع الحركات؛ تُحذف الحركات من النصوص المعروضة به فقط */
 const MARKS = /[\u064B-\u0652]/g;
@@ -2660,6 +2812,7 @@ function itemOf(s) {
     case "order": return A("ordering", { prompt: s.q, options: RD.optionsOf(s) }, { time_limit_seconds: s.time || null, points: 100, is_scored: true, key_answer: RD.orderKey(s), explanation: s.explain || "" });
     case "discuss": return A("brainstorm", { prompt: s.q });
     case "survey": return A("poll", { prompt: s.title, survey: true });
+    case "eval": return A("poll", { prompt: s.title, survey: true });
     case "poll": return A("poll", { prompt: s.q, options: s.options });
     case "cloud": return A(s.mode === "board" ? "brainstorm" : "word_cloud", { prompt: s.q });
     case "exercise": return A("open_text", { prompt: s.title });
@@ -2800,7 +2953,7 @@ async function Display() {
     const skey = [mode, s?.id, d.session.item_state, !!d.reveal, ui.model, JSON.stringify(ui.flip), d.session.joins_locked,
       mode === "lb" || mode === "teams" ? JSON.stringify([d.leaderboard, d.teams]) : "", mode === "item" && s?.type === "exercise" && (d.session.item_state === "closed" || d.session.item_state === "revealed")].join("|");
     if (skey !== last.skey) {
-      host.innerHTML = isolate(`<section class="slide in ${["cover", "section", "closing", "join", "lb", "teams", "end"].includes(mode === "item" ? s.type : mode) ? "dark" : ""}" data-type="${mode === "item" ? s.type : mode}">${body(mode, s, d)}<div class="meta"><span>${esc(s ? RD.mods[s.mod] : d.session.title)}</span><span class="rights">© د. ياسر زمل — جميع الحقوق محفوظة</span><span>${s ? `${SL.indexOf(s) + 1} من ${SL.length}` : ""}</span></div></section>`);
+      host.innerHTML = isolate(`<section class="slide in ${["cover", "section", "closing", "eval", "join", "lb", "teams", "end"].includes(mode === "item" ? s.type : mode) ? "dark" : ""}" data-type="${mode === "item" ? s.type : mode}">${body(mode, s, d)}<div class="meta"><span>${esc(s ? RD.mods[s.mod] : d.session.title)}</span><span class="rights">© د. ياسر زمل — جميع الحقوق محفوظة</span><span>${s ? `${SL.indexOf(s) + 1} من ${SL.length}` : ""}</span></div></section>`);
       paintBg(mode === "item" && s ? s.mod : 0);
       if (mode === "join" || (mode === "item" && s.type === "survey")) qr(d);
       if (mode === "item" && s.type === "prepost") summary();
@@ -3125,8 +3278,23 @@ async function Remote() {
     view = "report"; report = null; paint();
     const q = (v) => sb.from(v).select("*").eq("session_id", sid);
     const [stats, mastery, pp, scores, fb] = await Promise.all([q("item_stats"), q("module_mastery"), q("pre_post_comparison"), q("member_scores"), sb.from("session_feedback").select("rating,comment").eq("session_id", sid)]);
-    report = { stats: stats.data || [], mastery: mastery.data || [], pp: (pp.data || [])[0] || {}, scores: (scores.data || []).sort((a, b) => b.points - a.points), fb: fb.data || [] };
+    let evr = null;
+    try { const key = await call("get_display_key", { p_session: sid }); evr = await call("survey_results", { p_session: sid, p_key: key, p_slide: "eval" }); } catch (e) { evr = null; }
+    report = { stats: stats.data || [], mastery: mastery.data || [], pp: (pp.data || [])[0] || {}, scores: (scores.data || []).sort((a, b) => b.points - a.points), fb: fb.data || [], ev: evalSummary(evr) };
     paint();
+  }
+  /* ملخص تقييم المادة والمدرب: متوسط كل سؤال، ومؤشر صافي التوصية، وما يتمناه المتدربون */
+  function evalSummary(r) {
+    const E = byId.eval; if (!E || !r || !r.n) return null;
+    const q = r.q || {}, rows = [];
+    for (const sec of E.sections) for (const x of sec.qs) {
+      const c = q[x.id] || {}, ent = Object.entries(c).map(([v, n]) => [Number(v), n]), tot = ent.reduce((a, [, n]) => a + n, 0);
+      if (x.kind === "nps") { const pro = ent.filter(([v]) => v >= 9).reduce((a, [, n]) => a + n, 0), det = ent.filter(([v]) => v <= 6).reduce((a, [, n]) => a + n, 0); rows.push({ sec: sec.h, q: x.q, val: tot ? Math.round(((pro - det) / tot) * 100) : null, unit: "NPS" }); }
+      else if (x.kind === "level") rows.push({ sec: sec.h, q: x.q, val: x.opts.map((o, k) => `${o}: ${tot ? Math.round(((c[k + 1] || 0) / tot) * 100) : 0}%`).join(" • "), unit: "" });
+      else rows.push({ sec: sec.h, q: x.q, val: tot ? (ent.reduce((a, [v, n]) => a + v * n, 0) / tot).toFixed(1) : null, unit: "/5" });
+    }
+    const avg = (h) => { const v = rows.filter((x) => x.sec === h && x.unit === "/5" && x.val !== null).map((x) => Number(x.val)); return v.length ? (v.reduce((a, b) => a + b, 0) / v.length).toFixed(1) : "—"; };
+    return { n: r.n, rows, mat: avg(E.sections[0].h), tr: avg(E.sections[1].h), nps: rows.find((x) => x.unit === "NPS")?.val ?? "—", wishes: Object.keys(q.wish || {}) };
   }
   function paintReport() {
     if (!report) { app.innerHTML = `<main class="m-wrap"><p class="m-soft">جارٍ إعداد التقرير…</p></main>`; return; }
@@ -3134,6 +3302,9 @@ async function Remote() {
     const avg = r.fb.length ? (r.fb.reduce((a, f) => a + f.rating, 0) / r.fb.length).toFixed(1) : "—";
     app.innerHTML = isolate(`<header class="r-top"><button class="r-btn ghost" data-a="back">→ رجوع</button><b>تقرير الجلسة</b></header>
       <section class="r-card r-kpis"><div><b class="ltr">${r.scores.length}</b><span>متدرب</span></div><div><b class="ltr">${r.pp.pre_pct ?? "—"}%</b><span>قبلي</span></div><div><b class="ltr">${r.pp.post_pct ?? "—"}%</b><span>بعدي</span></div><div><b class="ltr">${avg}</b><span>التقييم /5</span></div></section>
+      ${r.ev ? `<section class="r-card"><p class="r-lbl">تقييم الدورة (${r.ev.n} مقيّم)</p><div class="r-kpis"><div><b class="ltr">${r.ev.mat}</b><span>المادة /5</span></div><div><b class="ltr">${r.ev.tr}</b><span>المدرب /5</span></div><div><b class="ltr">${r.ev.nps}</b><span>صافي التوصية</span></div></div>
+        <ul class="r-res">${r.ev.rows.map((x) => `<li><span>${esc(x.q)}</span><b class="${x.unit ? "ltr" : ""}">${x.val ?? "—"}${x.unit === "/5" ? "" : ""}</b></li>`).join("")}</ul>
+        ${r.ev.wishes.length ? `<p class="r-lbl">ماذا يتمنى المتدربون؟</p><ul class="r-open">${r.ev.wishes.map((w) => `<li>${esc(w)}</li>`).join("")}</ul>` : ""}</section>` : ""}
       <section class="r-card"><p class="r-lbl">الاستيعاب لكل محور</p><ul class="r-res">${r.mastery.map((m) => `<li><span>${esc(m.module_title)}</span><b class="ltr">${m.mastery_pct ?? "—"}%</b></li>`).join("") || "<li>—</li>"}</ul></section>
       <section class="r-card"><p class="r-lbl">أصعب الأسئلة</p><ul class="r-res">${graded.slice(0, 5).map((x) => `<li><span>${esc(x.title.slice(0, 60))}</span><b class="ltr">${x.correct_pct}%</b></li>`).join("") || "<li>—</li>"}</ul></section>
       <section class="r-card"><p class="r-lbl">المتدربون</p><ol class="r-res">${r.scores.map((m) => `<li><span>${esc(m.display_name)}</span><b class="ltr">${m.points}</b></li>`).join("")}</ol></section>
@@ -3143,7 +3314,8 @@ async function Remote() {
   }
   function csv() {
     const r = report; const e = (v) => { const s = String(v ?? ""); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
-    const rows = [["النشاط", "المحور", "المرحلة", "الإجابات", "الصحيحة", "نسبة الصحة %"], ...r.stats.map((x) => [x.title, x.module_title, x.phase, x.answered, x.correct, x.correct_pct]), [], ["المتدرب", "النقاط", "عدد الإجابات"], ...r.scores.map((m) => [m.display_name, m.points, m.answered])];
+    const rows = [["النشاط", "المحور", "المرحلة", "الإجابات", "الصحيحة", "نسبة الصحة %"], ...r.stats.map((x) => [x.title, x.module_title, x.phase, x.answered, x.correct, x.correct_pct]), [], ["المتدرب", "النقاط", "عدد الإجابات"], ...r.scores.map((m) => [m.display_name, m.points, m.answered]),
+      ...(r.ev ? [[], ["تقييم الدورة", "عدد المقيّمين", r.ev.n], ["متوسط المادة /5", r.ev.mat], ["متوسط المدرب /5", r.ev.tr], ["صافي التوصية NPS", r.ev.nps], ["المحور", "السؤال", "النتيجة"], ...r.ev.rows.map((x) => [x.sec, x.q, x.val]), [], ["ماذا يتمنى المتدربون؟"], ...r.ev.wishes.map((w) => [w])] : [])];
     const blob = new Blob(["﻿" + rows.map((x) => x.map(e).join(",")).join("\r\n")], { type: "text/csv;charset=utf-8" });
     const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: `تقرير-${t.session.join_code}.csv` });
     a.click();
@@ -3222,7 +3394,7 @@ async function Join(rawCode) {
   }
   function body(it, s, st) {
     if (g.session.status === "ended") {
-      return `<section class="p-card center"><h2>انتهت الجلسة 🎉</h2><p class="p-big">مجموعك <b class="ltr">${g.me.points}</b> نقطة — ترتيبك <b class="ltr">${g.me.rank}</b></p>
+      return `${waBlock()}<section class="p-card center"><h2>انتهت الجلسة 🎉</h2><p class="p-big">مجموعك <b class="ltr">${g.me.points}</b> نقطة — ترتيبك <b class="ltr">${g.me.rank}</b></p>
         ${g.feedback_given ? `<p class="p-ok">وصل تقييمك. شكرًا لك.</p>` : `<p>كيف تقيّم التجربة؟</p><div class="stars">${[1, 2, 3, 4, 5].map((n) => `<button data-star="${n}" class="${n <= feedback ? "on" : ""}" aria-label="${n} من 5">★</button>`).join("")}</div>
         <textarea name="fc" rows="3" maxlength="1000" placeholder="ملاحظة (اختياري)">${esc(text)}</textarea><button class="m-btn" data-send="fb" ${!feedback || sending ? "disabled" : ""}>إرسال التقييم</button>`}</section>`;
     }
@@ -3244,6 +3416,7 @@ async function Join(rawCode) {
       return `<section class="p-card">${mod}<h2>${esc(plain(s.title))}</h2>${s.type === "prompt" ? `<p>البرومبت الكامل جاهز للنسخ:</p><button class="m-btn" data-copy="full">نسخ البرومبت</button>` : s.prompt ? `<div class="p-prompt">${esc(s.prompt)}</div><button class="m-btn alt" data-copy="p">نسخ</button>` : `<p class="p-soft">👀 تابع الشاشة</p>`}</section>`;
     }
     const mine = g.my_answer, open = st === "open";
+    if (s.type === "eval") return mine ? thanks() : evalCard(s, mod, open);
     if (s.type === "survey") {
       if (mine) return `<section class="p-card center"><h2>شكرًا لك ✓</h2><p class="p-soft">وصلت إجاباتك. تظهر النتائج على الشاشة مجمّعة بلا أسماء.</p></section>`;
       if (!open) return `<section class="p-card">${mod}<h2>${esc(s.title)}</h2><p class="p-soft">سيفتح المدرب الاستبيان بعد لحظات.</p></section>`;
@@ -3283,6 +3456,7 @@ async function Join(rawCode) {
   const WATCH = [["#4f46e5", "#7c3aed"], ["#0f766e", "#0e7490"], ["#be185d", "#9d174d"], ["#1d4ed8", "#4338ca"], ["#7e22ce", "#a21caf"], ["#c2410c", "#be123c"], ["#0369a1", "#0f766e"], ["#6d28d9", "#be185d"]];
   const CUES = ["ارفع رأسك… الفكرة الآن على الشاشة", "تابع الشاشة، وسيتحرك جوالك عند النشاط", "الشرح الآن على الشاشة", "انظر إلى الشاشة… هذه الفكرة ستحتاجها اليوم"];
   const BUBBLES = [["انتبه للمدرب 👂", "listen"], ["انتبه للشاشة 👆", "up"], ["لا تشاهدني… أنا أخجل 🙈", "shy"], ["أنا منصت مع المدرب 🎧", "listen"], ["ركّز… هذه الفكرة مهمة ✨", "happy"], ["جوالك يرتاح… وعقلك يشتغل 🧠", "happy"], ["المدرب يتكلم… وأنا ساكت 🤐", "shy"], ["ارفع رأسك… الشاشة أجمل مني 😄", "up"], ["سجّل الفكرة في ذهنك ✍️", "happy"], ["سأوقظك عند النشاط القادم ⏰", "listen"]];
+  const BYE = ["لا تنسَ تقييم المدرب 💙", "تقييمك للمادة والمدرب يسعدني 🌟", "رأيك يساعدني على التطوير والتحسين", "إلى اللقاء… كان يومًا جميلًا معكم 👋"];
   let watchSince = Date.now(), bubbleN = 0, talkSlide = 0, nextTalk = 0;
   const BOT = `<svg class="bot" viewBox="0 0 180 170" aria-hidden="true">
     <g class="b-body">
@@ -3300,15 +3474,25 @@ async function Join(rawCode) {
   function watch(s) {
     const i = s ? SL.indexOf(s) : 0, [a, b] = WATCH[i % WATCH.length];
     const head = s ? `<span class="w-mod">${esc(RD.mods[s.mod])}</span><h2>${esc(plain(s.title || s.q))}</h2>` : `<span class="w-mod">أنت داخل الجلسة ✓</span><h2>انتظر حتى يبدأ المدرب</h2>`;
-    return `<section class="p-watch" style="--a:${a};--b:${b}"><span class="w-glow"></span>
+    const bye = s && SL[i + 1]?.type === "eval";
+    return `<section class="p-watch ${bye ? "bye m-wave" : ""}" style="--a:${a};--b:${b}"><span class="w-glow"></span>
       <div class="w-bot"><p class="w-bubble" aria-live="polite"></p>${BOT}</div>${head}
-      <p class="w-cue">${!s ? "سيتحرك جوالك تلقائيًا مع العرض" : SL[i + 1] && RD.ACT.has(SL[i + 1].type) ? "⚡ استعد… النشاط القادم على جوالك" : esc(CUES[i % CUES.length])}</p>
+      <p class="w-cue">${!s ? "سيتحرك جوالك تلقائيًا مع العرض" : bye ? "👋 بعد قليل: تقييم الدورة من جوالك" : SL[i + 1] && RD.ACT.has(SL[i + 1].type) ? "⚡ استعد… النشاط القادم على جوالك" : esc(CUES[i % CUES.length])}</p>
       ${s ? `<div class="w-prog"><i style="width:${Math.round(((i + 1) / SL.length) * 100)}%"></i></div><small class="w-n">الشريحة <b class="ltr">${i + 1}</b> من <b class="ltr">${SL.length}</b></small>` : ""}</section>`;
   }
   /* إذا طال الشرح على الشريحة نفسها: الشخصية تتكلم بعبارات لطيفة وتغيّر تعابيرها */
   setInterval(() => {
     const w = app.querySelector(".p-watch"), bub = w?.querySelector(".w-bubble");
     if (!w || !bub) return;
+    if (w.classList.contains("bye")) {
+      if (talkSlide !== watchSince) { talkSlide = watchSince; nextTalk = Date.now() + 2500; }
+      if (!w.classList.contains("talk") && Date.now() >= nextTalk) {
+        nextTalk = Date.now() + 7000;
+        bub.textContent = BYE[bubbleN++ % BYE.length]; w.classList.add("talk");
+        setTimeout(() => w.classList.remove("talk"), 4800);
+      }
+      return;
+    }
     if (talkSlide !== watchSince) { talkSlide = watchSince; nextTalk = watchSince + 15000; }
     if (!w.classList.contains("talk") && Date.now() >= nextTalk) {
       nextTalk = Date.now() + 17000;
@@ -3317,6 +3501,39 @@ async function Join(rawCode) {
       setTimeout(() => { w.classList.remove("talk", `m-${mood}`); }, 5500);
     }
   }, 1000);
+  /* ───── تقييم المادة والمدرب ───── */
+  let ev = {};
+  const evQs = (s) => s.sections.flatMap((x) => x.qs);
+  function evalCard(s, mod, open) {
+    if (!open) return `<section class="p-card center ev-wait">${mod}<div class="ev-ic">📝</div><h2>${esc(s.title)}</h2><p class="p-soft">سيفتح المدرب التقييم بعد لحظات.</p></section>`;
+    const all = evQs(s), done = all.filter((q) => ev[q.id] !== undefined).length;
+    const q1 = (q, n) => {
+      const on = (v) => (ev[q.id] === v ? "on" : "");
+      let ctl = "";
+      if (q.kind === "likert") ctl = `<div class="ev-lik">${s.likert.map((l, k) => `<button data-ev="${q.id}" data-v="${k + 1}" class="${on(k + 1)}"><b>${["😞", "🙁", "😐", "🙂", "😍"][k]}</b><small>${esc(l)}</small></button>`).join("")}</div>`;
+      else if (q.kind === "level") ctl = `<div class="p-chips">${q.opts.map((o, k) => `<button data-ev="${q.id}" data-v="${k + 1}" class="${on(k + 1)}">${esc(o)}</button>`).join("")}</div>`;
+      else if (q.kind === "nps") ctl = `<div class="ev-nps">${Array.from({ length: 11 }, (_, k) => `<button data-ev="${q.id}" data-v="${k}" class="n${k <= 6 ? "d" : k <= 8 ? "p" : "g"} ${on(k)}">${k}</button>`).join("")}</div><div class="ev-npsl"><span>غير محتمل</span><span>محتمل جدًا</span></div>`;
+      else if (q.kind === "stars") ctl = `<div class="stars ev-st">${[1, 2, 3, 4, 5].map((k) => `<button data-ev="${q.id}" data-v="${k}" class="${ev[q.id] >= k ? "on" : ""}" aria-label="${k} من 5">★</button>`).join("")}</div>`;
+      return `<div class="ev-q ${ev[q.id] !== undefined ? "ok" : ""}"><p><b class="ltr">${n}</b>${esc(q.q)}</p>${ctl}</div>`;
+    };
+    let n = 0;
+    return `<section class="p-card ev-card">${mod}<h2>${esc(s.title)}</h2><p class="p-soft">${esc(s.lead)}</p>
+      <div class="p-meter"><i style="width:${Math.round((done / all.length) * 100)}%"></i><span><b class="ltr">${done}</b>/${all.length} أسئلة</span></div>
+      ${s.sections.map((x) => `<div class="ev-sec"><h3>${x.icon} ${esc(x.h)}</h3>${x.qs.map((q) => q1(q, ++n)).join("")}</div>`).join("")}
+      <div class="ev-sec"><h3>💭 ${esc(s.wish.q)}</h3><textarea name="ew" rows="4" maxlength="1000" placeholder="اكتب بحرية… (اختياري)">${esc(ev.wish || "")}</textarea></div>
+      <button class="m-btn" data-send="eval" ${done < all.length || sending ? "disabled" : ""}>إرسال التقييم</button><p class="p-soft">${done < all.length ? `بقي ${all.length - done} — أجب عن الأسئلة العشرة لتفعيل الإرسال.` : "يُرسل مرة واحدة، دون اسمك."}</p></section>`;
+  }
+  const WA = "966557798618";
+  function waBlock() {
+    const msg = encodeURIComponent("السلام عليكم د. ياسر، حضرت دورة «الذكاء الاصطناعي… من الصفر إلى الإنجاز» وأود مناقشة…");
+    return `<a class="wa" href="https://wa.me/${WA}?text=${msg}" target="_blank" rel="noopener"><span class="wa-ic"><svg viewBox="0 0 32 32"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.7 8.7 0 0 1-4.3-3.8c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.4 6.4 0 0 0 1.3 3.4 14.6 14.6 0 0 0 5.6 4.9c2.1.9 2.9 1 4 .8a3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c-.1-.2-.3-.3-.6-.5z"/></svg></span><span><b>تواصل عبر واتساب</b><small class="ltr">0557798618</small></span></a>`;
+  }
+  function thanks() {
+    return `<section class="p-thanks"><i class="cf">${"<i></i>".repeat(14)}</i>
+      <div class="w-bot ty-bot m-wave talk"><p class="w-bubble">مع السلامة 👋</p>${BOT}</div>
+      <h2>شكرًا لحضورك 💙</h2><p class="ty-sub">وصل تقييمك، وسأقرؤه بعناية لأطوّر الدورة القادمة.</p>
+      <div class="ty-msg"><b>رسالة من المدرب</b><p>أسعد بملاحظاتكم واستفساراتكم، ومناقشة مشاريعكم على الواتساب.</p>${waBlock()}<small>د. ياسر زمل</small></div></section>`;
+  }
   function myTrack(s) {
     if (!s.tracks) return null;
     const id = s.tracks[role] ? role : "admin";
@@ -3358,6 +3575,7 @@ async function Join(rawCode) {
     const c = app.querySelector(".p-cd");
     if (c) { const off = new Date(c.dataset.now).getTime() - Date.now(), end = new Date(c.dataset.deadline).getTime(); const tick = () => { const l = Math.max(0, Math.ceil((end - Date.now() - off) / 1000)); c.textContent = `⏱ ${l} ث`; c.classList.toggle("low", l <= 5); }; tick(); cd = setInterval(tick, 300); }
     app.querySelectorAll("[name=tx],[name=fc]").forEach((el) => el.addEventListener("input", () => { text = el.value; }));
+    app.querySelector("[name=ew]")?.addEventListener("input", (e) => { ev.wish = e.target.value; });
     app.querySelectorAll("[name^=b_]").forEach((el) => el.addEventListener("input", () => {
       const k = el.name.slice(2), before = filled(); bd[k] = el.value;
       const pv = $("#bprev"); if (pv) pv.textContent = compose() || "…";
@@ -3371,6 +3589,7 @@ async function Join(rawCode) {
         sel = s.type === "order" ? (sel.includes(k) ? sel.slice(0, sel.indexOf(k)) : [...sel, k]) : multi ? (sel.includes(k) ? sel.filter((x) => x !== k) : [...sel, k]) : [k]; vibrate(8); paint(); return;
       }
       if (b.dataset.clear !== undefined) { sel = []; paint(); return; }
+      if (b.dataset.ev) { ev[b.dataset.ev] = Number(b.dataset.v); vibrate(8); const y = window.scrollY; paint(); window.scrollTo(0, y); return; }
       if (b.dataset.rolechip !== undefined) { rolePick = true; paint(); window.scrollTo(0, 0); return; }
       if (b.dataset.rolecancel !== undefined) { rolePick = false; paint(); return; }
       if (b.dataset.role) { setRole(b.dataset.role); vibrate(15); paint(); return; }
@@ -3408,6 +3627,7 @@ async function Join(rawCode) {
         const ans = s.type === "order" ? [...sel] : s.type === "quiz" && s.qtype === "tf" ? sel[0] === 0 : (s.type === "quiz" && s.qtype === "multi") || s.type === "checklist" ? [...sel].sort((a, c) => a - c) : sel[0];
         send(() => call("guest_submit", { p_token: token, p_item: it.id, p_answer: ans }));
       } else if (k === "survey") { const ans = Object.fromEntries(s.qs.map((q) => [q.id, q.multi ? [...(sv[q.id] || [])].sort((a, c) => a - c) : sv[q.id]])); send(() => call("guest_submit", { p_token: token, p_item: it.id, p_answer: ans }));
+      } else if (k === "eval") { const ans = {}; evQs(s).forEach((q) => { ans[q.id] = ev[q.id]; }); if ((ev.wish || "").trim()) ans.wish = ev.wish.trim(); send(() => call("guest_submit", { p_token: token, p_item: it.id, p_answer: ans }));
       } else if (k === "build") { const v = compose(); if (v) send(() => call("guest_submit", { p_token: token, p_item: it.id, p_answer: v }));
       } else if (k === "open") { if (text.trim()) send(() => call("guest_submit", { p_token: token, p_item: it.id, p_answer: text.trim() }).then(() => { text = ""; })); }
       else if (k === "contrib") { if (text.trim()) send(() => call("guest_contribute", { p_token: token, p_item: it.id, p_text: text.trim() }).then(() => { text = ""; })); }
