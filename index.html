@@ -1249,6 +1249,39 @@ body.m #app{min-height:calc(100% - 40px)}
 .ev-q p b{flex:none;margin:1px 0 0!important}
 .ev-prog{filter:none}
 .ev-ring::before{content:"";position:absolute;inset:40px;border-radius:50%;box-shadow:0 0 60px 8px rgba(244,114,182,.35);pointer-events:none}
+
+/* ═══════ جهاز المدرب: التنقل المباشر ═══════ */
+.r-jumprow{display:flex;align-items:center;gap:10px;margin:8px 0}
+.r-jumprow .r-pos{margin:0 auto 0 0;white-space:nowrap}
+.r-jumpbtn{flex:1;display:grid;text-align:start;gap:2px;border:0;border-radius:16px;padding:12px 16px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font:inherit;font-family:var(--f-dis);font-size:18px;box-shadow:0 10px 24px -12px #7c3aed}
+.r-jumpbtn small{font-family:var(--f-txt);font-size:12px;opacity:.85}
+.r-now select{opacity:.6;font-size:13px;padding:7px 10px}
+.r-sheet{position:fixed;inset:0;z-index:50;background:rgba(3,8,24,.72);backdrop-filter:blur(4px);display:flex;align-items:flex-end;animation:fade .2s ease both}
+.r-sheet-in{width:100%;max-height:92dvh;overflow:auto;background:#0f1a3d;border-radius:26px 26px 0 0;padding:14px 14px calc(20px + env(safe-area-inset-bottom));box-shadow:0 -20px 50px rgba(0,0,0,.5);animation:nvUp .3s cubic-bezier(.2,1,.3,1) both}
+@keyframes nvUp{from{transform:translateY(40px);opacity:0}}
+.nv-head{position:sticky;top:-14px;z-index:2;display:flex;align-items:center;justify-content:space-between;background:#0f1a3d;padding:6px 4px 10px;margin:-14px -4px 0}
+.nv-head b{font-family:var(--f-dis);font-size:20px;color:#fff}
+.nv-x{border:0;background:#1d2b5c;color:#fff;width:40px;height:40px;border-radius:50%;font-size:18px}
+.nv-search{width:100%;box-sizing:border-box;margin:4px 0 6px;border:1px solid #2a3a6e;background:#16224a;color:#fff;border-radius:14px;padding:12px 14px;font:inherit;font-size:16px}
+.nv-lbl{margin:12px 4px 8px;color:#9fb0d6;font-size:13px;font-weight:700}
+.nv-quick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.nv-quick button{display:flex;align-items:center;gap:8px;border:1px solid #2a3a6e;background:#16224a;color:#e8eeff;border-radius:14px;padding:12px;font:inherit;font-size:14px;font-weight:700;text-align:start}
+.nv-quick button span{font-size:20px}
+.nv-quick button.cur{border-color:var(--mag);background:#3b1030}
+.nv-mod{border:1px solid #22305e;border-radius:16px;margin-bottom:8px;background:#111d44;overflow:hidden}
+.nv-mod summary{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px;cursor:pointer;font-family:var(--f-dis);font-size:16px;color:#fff;list-style:none}
+.nv-mod summary::-webkit-details-marker{display:none}
+.nv-mod summary::after{content:"‹";font-size:22px;color:#9fb0d6;transition:transform .2s}
+.nv-mod[open] summary::after{transform:rotate(-90deg)}
+.nv-mod summary small{margin-inline-start:auto;color:#9fb0d6;font-size:12px}
+.nv-row{display:flex;align-items:center;gap:10px;width:100%;border:0;border-top:1px solid #1c2a57;background:transparent;color:#dbe4ff;padding:11px 14px;font:inherit;font-size:14px;text-align:start}
+.nv-row:active{background:#1a2a5c}
+.nv-row.cur{background:#3b1030;color:#fff}
+.nv-n{min-width:26px;color:#9fb0d6;font-size:12px;font-family:var(--f-dis)}
+.nv-i{font-size:16px}
+.nv-t{flex:1;line-height:1.45}
+.nv-row em{font-style:normal;font-size:11px;background:var(--mag);color:#fff;border-radius:999px;padding:2px 8px}
+.nv-empty{color:#9fb0d6;text-align:center;padding:20px}
 </style>
 </head>
 <body class="m">
@@ -3187,7 +3220,46 @@ async function Remote() {
   const setMode = (m) => act(async () => { await sb.from("sessions").update({ display_mode: m }).eq("id", sid); });
   const ui = (payload) => { L.send("ui", payload); vibrate(10); };
 
+  /* ───── التنقل المباشر: اختصارات + وحدات + بحث، دون التالي والسابق ───── */
+  let navOpen = false;
+  const QUICK = [["🏁", "البداية", "cover"], ["📊", "استبيان البداية", "intake"], ["🎯", "الأهداف", "outputs"], ["✍️", "التوجيه الذكي", "ex-warm"], ["⚡", "جولة السرعة", "speed-intro"], ["🧩", "المشروع الختامي", "ex-final"], ["🎒", "الحقيبة", "kit"], ["✅", "اختبار الخروج", "exit"], ["🏆", "نتائج الفرق", "teams-board"], ["⭐", "تقييم الدورة", "eval"]];
+  const TICON = { quiz: "❓", poll: "🗳️", scenario: "🧭", checklist: "✅", order: "🧩", discuss: "💬", exercise: "🛠️", cloud: "☁️", survey: "📊", eval: "⭐", section: "📂", cover: "🏁", closing: "👋", mock: "🖥️", teams: "🏆", kit: "🎒", game: "⚡", labs: "🧪" };
+  function navHtml() {
+    const items = t.items, cur = t.session.current_item_id;
+    const byIdItem = Object.fromEntries(items.map((x) => [slideOfItem(x)?.id, x]));
+    const curMod = slideOfItem(items.find((x) => x.id === cur))?.mod ?? 0;
+    const row = (x, i) => { const sl = slideOfItem(x); return `<button class="nv-row ${x.id === cur ? "cur" : ""}" data-go="${x.id}" data-q="${esc((x.title + " " + (sl ? RD.mods[sl.mod] : "")).toLowerCase())}"><span class="nv-n ltr">${i + 1}</span><span class="nv-i">${TICON[sl?.type] || "📄"}</span><span class="nv-t">${esc(plain(sl?.title || sl?.q || x.title).slice(0, 70))}</span>${x.id === cur ? '<em>الآن</em>' : ""}</button>`; };
+    const mods = RD.mods.map((m, mi) => ({ m, mi, rows: items.map((x, i) => [x, i]).filter(([x]) => slideOfItem(x)?.mod === mi) })).filter((g) => g.rows.length);
+    return isolate(`<div class="r-sheet" role="dialog" aria-label="انتقل مباشرة"><div class="r-sheet-in">
+      <div class="nv-head"><b>🧭 انتقل مباشرة</b><button class="nv-x" data-navclose aria-label="إغلاق">✕</button></div>
+      <input class="nv-search" type="search" placeholder="ابحث عن شريحة أو نشاط…" autocomplete="off">
+      <p class="nv-lbl">اختصارات</p><div class="nv-quick">${QUICK.filter(([, , id]) => byIdItem[id]).map(([ic, l, id]) => `<button data-go="${byIdItem[id].id}" class="${byIdItem[id].id === cur ? "cur" : ""}"><span>${ic}</span>${l}</button>`).join("")}</div>
+      <p class="nv-lbl">الوحدات</p>${mods.map((g) => `<details class="nv-mod" ${g.mi === curMod ? "open" : ""}><summary><span>${esc(g.m)}</span><small class="ltr">${g.rows[0][1] + 1}–${g.rows[g.rows.length - 1][1] + 1}</small></summary>${g.rows.map(([x, i]) => row(x, i)).join("")}</details>`).join("")}
+      <p class="nv-empty" hidden>لا توجد نتائج.</p></div></div>`);
+  }
+  function openNav() {
+    if (!t) return; navOpen = true; app.insertAdjacentHTML("beforeend", navHtml());
+    const sh = app.querySelector(".r-sheet");
+    sh.querySelector(".nv-search").addEventListener("input", (e) => {
+      const v = e.target.value.trim().toLowerCase();
+      let any = false;
+      sh.querySelectorAll(".nv-row").forEach((r) => { const hit = !v || r.dataset.q.includes(v); r.hidden = !hit; any = any || hit; });
+      sh.querySelectorAll(".nv-mod").forEach((d) => { const has = [...d.querySelectorAll(".nv-row")].some((r) => !r.hidden); d.hidden = !has; if (v) d.open = has; });
+      sh.querySelector(".nv-quick").hidden = !!v; sh.querySelectorAll(".nv-lbl").forEach((l) => { l.hidden = !!v; });
+      sh.querySelector(".nv-empty").hidden = any;
+    });
+    sh.addEventListener("click", (e) => {
+      if (e.target === sh || e.target.closest("[data-navclose]")) { closeNav(); return; }
+      const b = e.target.closest("[data-go]"); if (!b) return;
+      const it = t.items.find((x) => x.id === b.dataset.go), sl = slideOfItem(it);
+      if (sl) { builds[sl.id] = 0; ui({ a: "build", slide: sl.id, n: 0 }); }
+      closeNav(); if (it && it.id !== t.session.current_item_id) go(it);
+    });
+  }
+  function closeNav() { navOpen = false; app.querySelector(".r-sheet")?.remove(); paint(); }
+
   function paint() {
+    if (navOpen && app.querySelector(".r-sheet")) return;
     if (!t) { app.innerHTML = `<main class="m-wrap"><p class="m-soft">جارٍ الاتصال…</p>${err ? `<p class="m-err">${esc(err)}</p>` : ""}</main>`; return; }
     if (view === "report") return paintReport();
     const S = t.session, items = t.items, idx = items.findIndex((i) => i.id === S.current_item_id);
@@ -3203,7 +3275,7 @@ async function Remote() {
     app.innerHTML = isolate(`<header class="r-top"><div><span class="r-code ltr">${esc(S.join_code)}</span><span class="r-dot ${L.status.connected ? "on" : ""}"></span></div><div class="r-ppl">👥 <b class="ltr">${online}</b>/<span class="ltr">${t.participants.length}</span></div></header>
       ${err ? `<p class="m-err">${esc(err)}</p>` : ""}
       <section class="r-now"><p class="r-mod">${esc(s ? RD.mods[s.mod] : "لم يبدأ العرض")}</p><h2>${esc(s ? plain(s.title || s.q) : "المتدربون في غرفة الانتظار")}</h2>
-        <p class="r-pos ltr">${idx >= 0 ? `${idx + 1} / ${items.length}` : `${items.length}`}</p>
+        <div class="r-jumprow"><button class="r-jumpbtn" data-a="nav">🧭 انتقل مباشرة<small>الوحدات • التقييم • أي شريحة</small></button><p class="r-pos ltr">${idx >= 0 ? `${idx + 1} / ${items.length}` : `${items.length}`}</p></div>
         <select id="jump" aria-label="انتقل إلى شريحة">${items.map((x, i) => `<option value="${x.id}" ${x.id === S.current_item_id ? "selected" : ""}>${i + 1}. ${esc(x.title.slice(0, 60))}</option>`).join("")}</select></section>
       ${(() => { const bn = s ? RD.buildCount(s) : 0, bc = s ? builds[s.id] || 0 : 0, more = bn && bc < bn;
         return `<div class="r-nav"><button class="r-big alt" data-a="prev" ${(idx <= 0 && !bc) || busy ? "disabled" : ""}>→ السابق</button><button class="r-big ${more ? "build" : ""}" data-a="next" ${(idx >= items.length - 1 && !more) || busy ? "disabled" : ""}>${idx < 0 ? "ابدأ العرض" : more ? `أظهر المربع ${bc + 1} من ${bn} ←` : "التالي ←"}</button></div>
@@ -3248,6 +3320,7 @@ async function Remote() {
       const a = b.dataset.a;
       const bn = s ? RD.buildCount(s) : 0, bc = s ? builds[s.id] || 0 : 0;
       const setB = (id, n) => { builds[id] = n; ui({ a: "build", slide: id, n }); };
+      if (a === "nav") { openNav(); return; }
       if (a === "next") { if (bn && bc < bn) { setB(s.id, bc + 1); paint(); } else { const nx = items[idx + 1] || items[0], ns = slideOfItem(nx); if (ns) setB(ns.id, 0); go(nx); } }
       else if (a === "prev") { if (bc > 0) { setB(s.id, bc - 1); paint(); } else { const pv = items[idx - 1], ps = slideOfItem(pv); if (ps) setB(ps.id, RD.buildCount(ps)); go(pv); } }
       else if (a === "buildall") { setB(s.id, bn); paint(); }
