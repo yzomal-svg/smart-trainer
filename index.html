@@ -1282,6 +1282,91 @@ body.m #app{min-height:calc(100% - 40px)}
 .nv-t{flex:1;line-height:1.45}
 .nv-row em{font-style:normal;font-size:11px;background:var(--mag);color:#fff;border-radius:999px;padding:2px 8px}
 .nv-empty{color:#9fb0d6;text-align:center;padding:20px}
+
+/* ═══════ تقارير الدفعات: لوحة قرار ═══════ */
+body.rep{background:#0a1230}
+.m-lbl{display:grid;gap:6px;font-size:14px;color:var(--soft);text-align:start}
+.m-lbl input{border:1.5px solid var(--line);border-radius:12px;padding:12px;font:inherit;font-size:16px}
+.m-link{display:block;text-align:center;margin-top:12px;color:#4f46e5;font-weight:700;text-decoration:none}
+.m-tt{flex:1;text-align:start;font-weight:700;color:var(--navy);margin-inline-start:8px}
+.rp-top{position:sticky;top:0;z-index:5}
+.rp{max-width:1280px;margin:0 auto;padding:16px;display:grid;gap:16px;color:#e8eeff}
+.rp-load{color:#c7d2fe;text-align:center;padding:60px}
+.rp-hero{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;background:radial-gradient(120% 140% at 100% 0%,#4338ca 0%,transparent 55%),linear-gradient(135deg,#131c46,#1b1450);border:1px solid #27336a;border-radius:24px;padding:22px 24px}
+.rp-kick{margin:0;color:#f9a8d4;font-weight:700;font-size:13px}
+.rp-id h1{margin:4px 0;font-family:var(--f-dis);font-size:30px;color:#fff}
+.rp-id p{margin:0;color:#c7d2fe;font-size:14px}
+.rp-id .live{color:#fde68a}
+.rp-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.rp-acts button,.co-a button,.cp{border:1px solid #33427e;background:#18234f;color:#e8eeff;border-radius:12px;padding:9px 14px;font:inherit;font-size:14px;font-weight:700;cursor:pointer}
+.rp-acts button:hover,.co-a button:hover{background:#22306a}
+.hr{position:relative;width:150px;height:150px;flex:none}
+.hr svg{width:100%;height:100%;transform:rotate(-90deg)}
+.hr .t{fill:none;stroke:rgba(255,255,255,.1);stroke-width:11}
+.hr .p{fill:none;stroke-width:11;stroke-linecap:round;transition:stroke-dashoffset 1s}
+.hr div{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.hr b{font-family:var(--f-dis);font-size:42px;color:#fff;line-height:1}.hr span{font-size:12px;color:#c7d2fe}
+.hr.good .p{stroke:#34d399}.hr.warn .p{stroke:#fbbf24}.hr.bad .p{stroke:#f87171}.hr.na .p{stroke:#64748b}
+.kps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.kp{position:relative;border-radius:20px;padding:16px;display:grid;gap:2px;color:#fff;overflow:hidden;border:1px solid transparent}
+.kp b{font-family:var(--f-dis);font-size:36px;line-height:1.1}
+.kp-l{font-weight:700;font-size:15px}.kp small{font-size:12px;opacity:.85}
+.kp-lv{position:absolute;top:12px;inset-inline-end:12px;font-size:11px;font-weight:700;border-radius:999px;padding:3px 9px;background:rgba(255,255,255,.22)}
+.kp.good{background:linear-gradient(150deg,#059669,#065f46)}.kp.warn{background:linear-gradient(150deg,#d97706,#92400e)}.kp.bad{background:linear-gradient(150deg,#dc2626,#7f1d1d)}.kp.na{background:#1f2a52;border-color:#2b3a72}
+.dl{font-style:normal;font-size:12px;font-weight:700;margin-top:4px;display:inline-block;border-radius:999px;padding:2px 8px;background:rgba(0,0,0,.22);width:max-content}
+.dl.up{color:#bbf7d0}.dl.down{color:#fecaca}.dl.eq{color:#e2e8f0}
+.rp-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;align-items:start}
+.rp-grid.two{grid-template-columns:1fr 1fr}
+@media (max-width:820px){.rp-grid,.rp-grid.two{grid-template-columns:1fr}}
+.rp-col{display:grid;gap:16px}
+.rp-card{background:#111a42;border:1px solid #24306a;border-radius:22px;padding:18px}
+.rp-card h2{margin:0 0 12px;font-family:var(--f-dis);font-size:19px;color:#fff;display:flex;align-items:center;gap:8px}
+.rp-card h2 small{background:#2a3672;border-radius:999px;padding:2px 10px;font-size:12px;color:#c7d2fe}
+.rp-card h3{margin:16px 0 8px;font-size:14px;color:#a5b4fc}
+.muted{color:#93a0c8;font-size:13px;margin:4px 0}
+.al{border-radius:16px;padding:12px 14px;margin-bottom:10px;border-inline-start:6px solid}
+.al b{display:block;font-size:15px;color:#fff}.al p{margin:4px 0 0;font-size:14px;color:#dbe4ff;line-height:1.6}
+.al .act{background:rgba(255,255,255,.06);border-radius:10px;padding:8px 10px;margin-top:8px;color:#fef3c7}
+.al.bad{background:rgba(220,38,38,.14);border-color:#ef4444}.al.warn{background:rgba(217,119,6,.14);border-color:#f59e0b}
+.ok-all{color:#86efac;font-weight:700}
+.strong ul{margin:0;padding-inline-start:20px;display:grid;gap:6px;color:#bbf7d0;font-size:14px;line-height:1.6}
+.ai textarea{width:100%;box-sizing:border-box;background:#0b1233;color:#dbe4ff;border:1px solid #2b3a72;border-radius:14px;padding:12px;font:inherit;font-size:13px;line-height:1.7;resize:vertical}
+.ai .cp{margin-top:10px;width:100%;background:linear-gradient(135deg,#c96442,#a34a2e);border:0;padding:12px;font-size:15px}
+.hb{display:grid;grid-template-columns:minmax(110px,1.3fr) 2fr 48px;align-items:center;gap:10px;margin-bottom:8px;font-size:13px;color:#dbe4ff}
+.hb>i{height:12px;border-radius:999px;background:#1d2858;overflow:hidden}.hb>i i{display:block;height:100%;border-radius:999px}
+.hb.good>i i{background:#34d399}.hb.warn>i i{background:#fbbf24}.hb.bad>i i{background:#f87171}.hb.na>i i{background:#64748b}
+.hb b{font-family:var(--f-dis);text-align:left}
+.lvl{display:grid;gap:6px;margin:10px 0;font-size:13px;color:#dbe4ff}
+.stack{display:flex;height:22px;border-radius:999px;overflow:hidden;background:#1d2858}
+.stack i{display:grid;place-items:center;font-style:normal;font-size:11px;font-weight:700;color:#0b1233}
+.stack .s0{background:#93c5fd}.stack .s1{background:#34d399}.stack .s2{background:#fbbf24}
+.lvl small{color:#93a0c8}
+.wish{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.wish li{background:#0b1233;border:1px solid #24306a;border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.6}
+.top{margin:0;padding-inline-start:22px;display:grid;gap:6px}.top li{font-size:14px}.top li span{display:inline-block;min-width:60%}.top b{font-family:var(--f-dis);color:#fde68a}
+/* الاتجاهات بين الدفعات */
+.trs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.tr{background:#111a42;border:1px solid #24306a;border-radius:20px;padding:14px}
+.tr-h{display:flex;align-items:center;justify-content:space-between}.tr-h b{font-size:14px;color:#fff}
+.tr svg{width:100%;height:90px;margin:8px 0;overflow:visible;direction:ltr;transform:scaleX(-1)}
+.tr .ln{fill:none;stroke-width:2.2;vector-effect:non-scaling-stroke}
+.ln.a,.dt.a{stroke:#f472b6}.ln.b,.dt.b{stroke:#a78bfa}.ln.c,.dt.c{stroke:#34d399}.ln.d,.dt.d{stroke:#fbbf24}.ln.e,.dt.e{stroke:#60a5fa}.ln.f,.dt.f{stroke:#22d3ee}
+.tr .dt{fill:#0b1233;stroke-width:1.5}
+.tr-x{display:flex;justify-content:space-between;gap:6px;font-size:11px;color:#93a0c8}
+.tr-x span{display:grid;text-align:center;flex:1}.tr-x b{font-family:var(--f-dis);color:#fff;font-size:13px}
+.tr .dl{background:#0b1233}
+/* قائمة الجلسات */
+.cl{display:grid;gap:10px}
+.co{border:1px solid #2b3a72;border-radius:18px;padding:14px;background:#0f1840;display:grid;gap:10px}
+.co.off{opacity:.55;border-style:dashed}
+.co-h b{display:block;font-size:17px;color:#fff;font-family:var(--f-dis)}.co-h span{font-size:13px;color:#93a0c8}
+.co-m{display:flex;flex-wrap:wrap;gap:6px}
+.co-m span{font-size:12px;font-weight:700;border-radius:999px;padding:4px 10px;background:#1f2a52}
+.co-m .good{background:#065f46;color:#bbf7d0}.co-m .warn{background:#78350f;color:#fde68a}.co-m .bad{background:#7f1d1d;color:#fecaca}
+.co-a{display:flex;flex-wrap:wrap;gap:6px}
+.co-a .on{border-color:#34d399;color:#bbf7d0}.co-a .del{color:#fca5a5}.co-a .danger{background:#dc2626;border-color:#dc2626;color:#fff}
+.kp>b{justify-self:start;margin-top:14px}
+.kp-lv{inset-inline-end:auto;inset-inline-start:auto;left:12px}
 </style>
 </head>
 <body class="m">
@@ -2896,11 +2981,15 @@ async function pickSession(where, storeKey) {
   const saved = store.get(storeKey);
   const { data: rows } = await sb.from("sessions").select("id,title,join_code,status,created_at").eq("course_id", courseId).neq("status", "ended").order("created_at", { ascending: false }).limit(8);
   const open = rows || [];
+  const { data: allRows } = await sb.from("sessions").select("id").eq("course_id", courseId);
+  const allN = (allRows || []).length;
   if (saved && open.some((r) => r.id === saved)) return saved;
   return new Promise((resolve) => {
     app.innerHTML = isolate(`<main class="m-wrap"><div class="m-card"><p class="m-kick">${esc(where)}</p><h1>اختر الجلسة</h1>
-      ${open.length ? `<div class="m-list">${open.map((r) => `<button class="m-row" data-sid="${r.id}"><b class="ltr">${esc(r.join_code)}</b><span>${new Date(r.created_at).toLocaleString("ar-SA", { dateStyle: "medium", timeStyle: "short" })}</span><span class="m-pill">${r.status === "lobby" ? "لم تبدأ" : "جارية"}</span></button>`).join("")}</div>` : `<p class="m-soft">لا توجد جلسة مفتوحة.</p>`}
+      ${open.length ? `<div class="m-list">${open.map((r) => `<button class="m-row" data-sid="${r.id}"><b class="ltr">${esc(r.join_code)}</b><span class="m-tt">${esc(r.title || "")}</span><span>${new Date(r.created_at).toLocaleString("ar-SA", { dateStyle: "medium", timeStyle: "short" })}</span><span class="m-pill">${r.status === "lobby" ? "لم تبدأ" : "جارية"}</span></button>`).join("")}</div>` : `<p class="m-soft">لا توجد جلسة مفتوحة.</p>`}
+      <label class="m-lbl">اسم الدفعة الجديدة<input id="sname" maxlength="60" value="الدفعة ${allN + 1}"></label>
       <button class="m-btn" id="newS">＋ جلسة جديدة</button><p class="m-err" id="pe"></p>
+      <a class="m-link" href="#/reports">📚 تقارير الدفعات والمقارنة بينها</a>
       <details class="m-pass"><summary>تغيير كلمة المرور</summary><form id="cp"><label>كلمة المرور الجديدة<input name="a" type="password" autocomplete="new-password" dir="ltr" minlength="8" required></label><label>أعد كتابتها<input name="b" type="password" autocomplete="new-password" dir="ltr" minlength="8" required></label><p class="m-err" id="cpe"></p><button class="m-btn alt">حفظ كلمة المرور</button><p class="m-soft">8 خانات على الأقل. تُطبَّق على كل أجهزتك.</p></form></details></div></main>`);
     $("#cp").addEventListener("submit", async (e) => {
       e.preventDefault(); const f = e.target, out = $("#cpe");
@@ -2915,7 +3004,7 @@ async function pickSession(where, storeKey) {
     $("#newS").addEventListener("click", async (e) => {
       e.target.disabled = true;
       try {
-        const r = await call("create_session", { p_course_id: courseId, p_title: null });
+        const r = await call("create_session", { p_course_id: courseId, p_title: ($("#sname")?.value || "").trim() || null });
         const sid = (Array.isArray(r) ? r[0] : r).session_id;
         store.set(storeKey, sid); resolve(sid);
       } catch (err) { $("#pe").textContent = msg(err); e.target.disabled = false; }
@@ -3261,7 +3350,6 @@ async function Remote() {
   function paint() {
     if (navOpen && app.querySelector(".r-sheet")) return;
     if (!t) { app.innerHTML = `<main class="m-wrap"><p class="m-soft">جارٍ الاتصال…</p>${err ? `<p class="m-err">${esc(err)}</p>` : ""}</main>`; return; }
-    if (view === "report") return paintReport();
     const S = t.session, items = t.items, idx = items.findIndex((i) => i.id === S.current_item_id);
     const it = items[idx], s = t.item ? byId[t.item.payload?.slide] : null;
     const st = S.item_state, isAct = t.item?.kind === "activity";
@@ -3332,7 +3420,7 @@ async function Remote() {
       else if (a === "askend") { confirmEnd = true; paint(); }
       else if (a === "noend") { confirmEnd = false; paint(); }
       else if (a === "end") act(() => call("end_session", { p_session: sid }), () => { confirmEnd = false; });
-      else if (a === "report") loadReport();
+      else if (a === "report") location.hash = `#/reports/${sid}`;
       else if (a === "newsession") { store.set("st-remote-sid", null); location.reload(); }
       else if (b.dataset.mode) setMode(b.dataset.mode);
       else if (b.dataset.pin !== undefined) ui({ a: "pin", k: Number(b.dataset.pin) < 0 ? null : Number(b.dataset.pin) });
@@ -3341,58 +3429,10 @@ async function Remote() {
       else if (b.dataset.model !== undefined) ui({ a: "model", v: b.dataset.model === "1" });
       else if (b.dataset.confetti !== undefined) ui({ a: "confetti" });
       else if (b.dataset.hide) act(() => sb.from("contributions").update({ is_hidden: b.dataset.h === "1" }).eq("id", b.dataset.hide).then(chk));
-      else if (a === "back") { view = "main"; paint(); }
-      else if (a === "csv") csv();
     };
   }
   const chk = (r) => { if (r.error) throw new Error(r.error.message); return r; };
 
-  async function loadReport() {
-    view = "report"; report = null; paint();
-    const q = (v) => sb.from(v).select("*").eq("session_id", sid);
-    const [stats, mastery, pp, scores, fb] = await Promise.all([q("item_stats"), q("module_mastery"), q("pre_post_comparison"), q("member_scores"), sb.from("session_feedback").select("rating,comment").eq("session_id", sid)]);
-    let evr = null;
-    try { const key = await call("get_display_key", { p_session: sid }); evr = await call("survey_results", { p_session: sid, p_key: key, p_slide: "eval" }); } catch (e) { evr = null; }
-    report = { stats: stats.data || [], mastery: mastery.data || [], pp: (pp.data || [])[0] || {}, scores: (scores.data || []).sort((a, b) => b.points - a.points), fb: fb.data || [], ev: evalSummary(evr) };
-    paint();
-  }
-  /* ملخص تقييم المادة والمدرب: متوسط كل سؤال، ومؤشر صافي التوصية، وما يتمناه المتدربون */
-  function evalSummary(r) {
-    const E = byId.eval; if (!E || !r || !r.n) return null;
-    const q = r.q || {}, rows = [];
-    for (const sec of E.sections) for (const x of sec.qs) {
-      const c = q[x.id] || {}, ent = Object.entries(c).map(([v, n]) => [Number(v), n]), tot = ent.reduce((a, [, n]) => a + n, 0);
-      if (x.kind === "nps") { const pro = ent.filter(([v]) => v >= 9).reduce((a, [, n]) => a + n, 0), det = ent.filter(([v]) => v <= 6).reduce((a, [, n]) => a + n, 0); rows.push({ sec: sec.h, q: x.q, val: tot ? Math.round(((pro - det) / tot) * 100) : null, unit: "NPS" }); }
-      else if (x.kind === "level") rows.push({ sec: sec.h, q: x.q, val: x.opts.map((o, k) => `${o}: ${tot ? Math.round(((c[k + 1] || 0) / tot) * 100) : 0}%`).join(" • "), unit: "" });
-      else rows.push({ sec: sec.h, q: x.q, val: tot ? (ent.reduce((a, [v, n]) => a + v * n, 0) / tot).toFixed(1) : null, unit: "/5" });
-    }
-    const avg = (h) => { const v = rows.filter((x) => x.sec === h && x.unit === "/5" && x.val !== null).map((x) => Number(x.val)); return v.length ? (v.reduce((a, b) => a + b, 0) / v.length).toFixed(1) : "—"; };
-    return { n: r.n, rows, mat: avg(E.sections[0].h), tr: avg(E.sections[1].h), nps: rows.find((x) => x.unit === "NPS")?.val ?? "—", wishes: Object.keys(q.wish || {}) };
-  }
-  function paintReport() {
-    if (!report) { app.innerHTML = `<main class="m-wrap"><p class="m-soft">جارٍ إعداد التقرير…</p></main>`; return; }
-    const r = report, graded = r.stats.filter((x) => x.correct_pct !== null && x.answered > 0).sort((a, b) => a.correct_pct - b.correct_pct);
-    const avg = r.fb.length ? (r.fb.reduce((a, f) => a + f.rating, 0) / r.fb.length).toFixed(1) : "—";
-    app.innerHTML = isolate(`<header class="r-top"><button class="r-btn ghost" data-a="back">→ رجوع</button><b>تقرير الجلسة</b></header>
-      <section class="r-card r-kpis"><div><b class="ltr">${r.scores.length}</b><span>متدرب</span></div><div><b class="ltr">${r.pp.pre_pct ?? "—"}%</b><span>قبلي</span></div><div><b class="ltr">${r.pp.post_pct ?? "—"}%</b><span>بعدي</span></div><div><b class="ltr">${avg}</b><span>التقييم /5</span></div></section>
-      ${r.ev ? `<section class="r-card"><p class="r-lbl">تقييم الدورة (${r.ev.n} مقيّم)</p><div class="r-kpis"><div><b class="ltr">${r.ev.mat}</b><span>المادة /5</span></div><div><b class="ltr">${r.ev.tr}</b><span>المدرب /5</span></div><div><b class="ltr">${r.ev.nps}</b><span>صافي التوصية</span></div></div>
-        <ul class="r-res">${r.ev.rows.map((x) => `<li><span>${esc(x.q)}</span><b class="${x.unit ? "ltr" : ""}">${x.val ?? "—"}${x.unit === "/5" ? "" : ""}</b></li>`).join("")}</ul>
-        ${r.ev.wishes.length ? `<p class="r-lbl">ماذا يتمنى المتدربون؟</p><ul class="r-open">${r.ev.wishes.map((w) => `<li>${esc(w)}</li>`).join("")}</ul>` : ""}</section>` : ""}
-      <section class="r-card"><p class="r-lbl">الاستيعاب لكل محور</p><ul class="r-res">${r.mastery.map((m) => `<li><span>${esc(m.module_title)}</span><b class="ltr">${m.mastery_pct ?? "—"}%</b></li>`).join("") || "<li>—</li>"}</ul></section>
-      <section class="r-card"><p class="r-lbl">أصعب الأسئلة</p><ul class="r-res">${graded.slice(0, 5).map((x) => `<li><span>${esc(x.title.slice(0, 60))}</span><b class="ltr">${x.correct_pct}%</b></li>`).join("") || "<li>—</li>"}</ul></section>
-      <section class="r-card"><p class="r-lbl">المتدربون</p><ol class="r-res">${r.scores.map((m) => `<li><span>${esc(m.display_name)}</span><b class="ltr">${m.points}</b></li>`).join("")}</ol></section>
-      ${r.fb.some((f) => f.comment) ? `<section class="r-card"><p class="r-lbl">ملاحظات المتدربين</p><ul class="r-open">${r.fb.filter((f) => f.comment).map((f) => `<li>${"★".repeat(f.rating)} ${esc(f.comment)}</li>`).join("")}</ul></section>` : ""}
-      <div class="r-end"><button class="r-btn" data-a="csv">تنزيل التقرير (Excel)</button></div>`);
-    bind(null, -1, [], null, false);
-  }
-  function csv() {
-    const r = report; const e = (v) => { const s = String(v ?? ""); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
-    const rows = [["النشاط", "المحور", "المرحلة", "الإجابات", "الصحيحة", "نسبة الصحة %"], ...r.stats.map((x) => [x.title, x.module_title, x.phase, x.answered, x.correct, x.correct_pct]), [], ["المتدرب", "النقاط", "عدد الإجابات"], ...r.scores.map((m) => [m.display_name, m.points, m.answered]),
-      ...(r.ev ? [[], ["تقييم الدورة", "عدد المقيّمين", r.ev.n], ["متوسط المادة /5", r.ev.mat], ["متوسط المدرب /5", r.ev.tr], ["صافي التوصية NPS", r.ev.nps], ["المحور", "السؤال", "النتيجة"], ...r.ev.rows.map((x) => [x.sec, x.q, x.val]), [], ["ماذا يتمنى المتدربون؟"], ...r.ev.wishes.map((w) => [w])] : [])];
-    const blob = new Blob(["﻿" + rows.map((x) => x.map(e).join(",")).join("\r\n")], { type: "text/csv;charset=utf-8" });
-    const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: `تقرير-${t.session.join_code}.csv` });
-    a.click();
-  }
 }
 
 /* ═══════════ المتدرب (الجوال) ═══════════ */
@@ -3710,8 +3750,306 @@ async function Join(rawCode) {
 }
 
 /* ═══════════ التوجيه ═══════════ */
+/* ═══════════ تقارير الدفعات: لوحة قرار لكل دفعة + أرشيف ومقارنة بين الدفعات ═══════════
+   تُحفظ لقطة كل تقرير في قاعدة البيانات (session_reports)، فتبقى المقارنة ممكنة في أي وقت. */
+const RPT = (() => {
+  const E = byId.eval;
+  const ADVICE = {
+    m1: ["وضوح الأهداف", "اعرض الأهداف بصيغة مخرجات ملموسة في البداية، وارجع إليها في ختام كل وحدة: «أنجزنا الهدف 2»."],
+    m2: ["ارتباط المحتوى بالعمل", "اربط الأمثلة بفئات القاعة كما ظهرت في استبيان البداية، واستبدل الأمثلة العامة بأمثلة من الجامعة والمدرسة والإدارة."],
+    m3: ["فاعلية التمارين", "اختصر الشرح النظري وزد وقت التطبيق، وتأكد أن لكل تمرين نموذج إجابة ووقتًا كافيًا ومتابعة منك."],
+    t1: ["تمكّن المدرب", "حضّر إجابات للأسئلة المتكررة، ووثّق المعلومات الحساسة بمصادرها الرسمية قبل الدورة."],
+    t2: ["وضوح الشرح", "قسّم الشرح إلى خطوات قصيرة، واستخدم الكشف التدريجي للمربعات، ولخّص كل شريحة في جملة."],
+    t3: ["إدارة المشاركة والوقت", "افتح المشاركة مبكرًا، والتزم بالمؤقت، ووزّع الأسئلة على كل الفئات لا على المتحدثين فقط."],
+    t4: ["واقعية الأمثلة", "استبدل الأمثلة العامة بحالات من بيئة المتدربين نفسها، واطلب منهم مثالًا من عملهم قبل الشرح."],
+    t5: ["التقييم العام للمدرب", "راجع البنود الأقل في تقييم المدرب أعلاه؛ فهي أقصر طريق لرفع التقييم العام."],
+  };
+  const pct = (a, b) => (b ? Math.round((a / b) * 100) : null);
+  const num = (v) => (v === null || v === undefined || v === "—" || Number.isNaN(Number(v)) ? null : Number(v));
+  const avg = (xs) => { const v = xs.map(num).filter((x) => x !== null); return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null; };
+  const f1 = (v) => (v === null ? "—" : (Math.round(v * 10) / 10).toFixed(1));
+  const date = (d) => (d ? new Date(d).toLocaleDateString("ar-SA-u-ca-gregory", { year: "numeric", month: "short", day: "numeric" }) : "—");
+
+  /* ───── الحدود: أخضر جيد • أصفر انتبه • أحمر عالجه ───── */
+  const LV = {
+    score: (v) => (v === null ? "na" : v >= 4.3 ? "good" : v >= 3.8 ? "warn" : "bad"),
+    pct: (v) => (v === null ? "na" : v >= 75 ? "good" : v >= 60 ? "warn" : "bad"),
+    gain: (v) => (v === null ? "na" : v >= 20 ? "good" : v >= 10 ? "warn" : "bad"),
+    nps: (v) => (v === null ? "na" : v >= 50 ? "good" : v >= 0 ? "warn" : "bad"),
+    part: (v) => (v === null ? "na" : v >= 80 ? "good" : v >= 60 ? "warn" : "bad"),
+  };
+
+  function evalPart(r) {
+    if (!E || !r || !r.n) return null;
+    const q = r.q || {}, rows = [];
+    for (const sec of E.sections) for (const x of sec.qs) {
+      const c = q[x.id] || {}, ent = Object.entries(c).map(([v, n]) => [Number(v), n]), tot = ent.reduce((a, [, n]) => a + n, 0);
+      if (x.kind === "nps") { const pro = ent.filter(([v]) => v >= 9).reduce((a, [, n]) => a + n, 0), det = ent.filter(([v]) => v <= 6).reduce((a, [, n]) => a + n, 0); rows.push({ id: x.id, sec: sec.h, q: x.q, kind: "nps", val: tot ? Math.round(((pro - det) / tot) * 100) : null }); }
+      else if (x.kind === "level") rows.push({ id: x.id, sec: sec.h, q: x.q, kind: "level", dist: x.opts.map((o, k) => [o, tot ? Math.round(((c[k + 1] || 0) / tot) * 100) : 0]) });
+      else rows.push({ id: x.id, sec: sec.h, q: x.q, kind: "score", val: tot ? Math.round((ent.reduce((a, [v, n]) => a + v * n, 0) / tot) * 10) / 10 : null });
+    }
+    const secAvg = (h) => avg(rows.filter((x) => x.sec === h && x.kind === "score").map((x) => x.val));
+    return { n: r.n, rows, mat: secAvg(E.sections[0].h), tr: secAvg(E.sections[1].h), nps: rows.find((x) => x.kind === "nps")?.val ?? null, wishes: Object.keys(q.wish || {}) };
+  }
+
+  /* ───── بناء لقطة التقرير من بيانات الجلسة ───── */
+  async function build(sid) {
+    const q = (v) => sb.from(v).select("*").eq("session_id", sid);
+    const [sess, stats, mastery, pp, scores, fb] = await Promise.all([sb.from("sessions").select("id,title,join_code,created_at,ended_at,status").eq("id", sid), q("item_stats"), q("module_mastery"), q("pre_post_comparison"), q("member_scores"), sb.from("session_feedback").select("rating,comment").eq("session_id", sid)]);
+    const s = (sess.data || [])[0];
+    if (!s) throw new Error("الجلسة غير موجودة أو حُذفت.");
+    let evr = null;
+    try { const key = await call("get_display_key", { p_session: sid }); evr = await call("survey_results", { p_session: sid, p_key: key, p_slide: "eval" }); } catch (e) { evr = null; }
+    const st = stats.data || [], members = (scores.data || []).sort((a, b) => b.points - a.points), n = members.length;
+    const opened = st.filter((x) => x.answered > 0), answers = opened.reduce((a, x) => a + x.answered, 0);
+    const ppr = (pp.data || [])[0] || {};
+    const pre = num(ppr.pre_pct) === null ? null : Math.round(num(ppr.pre_pct)), post = num(ppr.post_pct) === null ? null : Math.round(num(ppr.post_pct));
+    const mm = (mastery.data || []).filter((m) => m.mastery_pct !== null).map((m) => ({ m: m.module_title, pct: Math.round(Number(m.mastery_pct)), n: m.answered }));
+    const graded = st.filter((x) => x.correct_pct !== null && x.answered > 0).map((x) => ({ t: x.title, mod: x.module_title, pct: Math.round(Number(x.correct_pct)), n: x.answered, phase: x.phase })).sort((a, b) => a.pct - b.pct);
+    const fbs = fb.data || [];
+    return {
+      v: 1, sid, title: s.title, code: s.join_code, created: s.created_at, ended: s.ended_at, status: s.status, n,
+      pre, post, gain: pre !== null && post !== null ? Math.round(post - pre) : null,
+      mastery: mm, mastAvg: avg(mm.map((x) => x.pct)), hard: graded.slice(0, 8),
+      part: n && opened.length ? Math.min(100, pct(answers, n * opened.length)) : null, activities: opened.length,
+      fb: { n: fbs.length, avg: avg(fbs.map((x) => x.rating)), comments: fbs.filter((x) => x.comment).map((x) => x.comment) },
+      ev: evalPart(evr), top: members.slice(0, 5).map((m) => ({ name: m.display_name, points: m.points })),
+    };
+  }
+
+  function health(r) {
+    const parts = [r.post, r.mastAvg, r.ev?.mat !== null && r.ev?.mat !== undefined ? (r.ev.mat / 5) * 100 : null, r.ev?.tr != null ? (r.ev.tr / 5) * 100 : null, r.ev?.nps != null ? (r.ev.nps + 100) / 2 : null, r.part].map(num).filter((x) => x !== null);
+    return parts.length ? Math.round(parts.reduce((a, b) => a + b, 0) / parts.length) : null;
+  }
+
+  /* ───── التنبيهات والإرشادات الذكية ───── */
+  function insights(r) {
+    const A = [], S = [];
+    const add = (sev, title, detail, action) => A.push({ sev, title, detail, action });
+    if (r.gain !== null) {
+      if (r.gain < 10) add("bad", "التعلّم بين القبلي والبعدي ضعيف", `القبلي ${r.pre}% ← البعدي ${r.post}% (+${r.gain} نقطة فقط).`, "راجع الأسئلة البعدية التي لم تتحسن، وأضف قبل الاختبار البعدي تمرينًا قصيرًا يطبّق الفكرة نفسها.");
+      else if (r.gain >= 25) S.push(`ارتفاع واضح في التعلّم: +${r.gain} نقطة بين القبلي والبعدي.`);
+    }
+    if (r.post !== null && r.post < 70) add("warn", "نتيجة الاختبار البعدي أقل من 70%", `متوسط البعدي ${r.post}%.`, "ابدأ الختام بمراجعة سريعة للأفكار الخمس الأساسية قبل الاختبار البعدي.");
+    for (const m of r.mastery) {
+      if (m.pct < 60) add("bad", `استيعاب ضعيف في «${m.m}»`, `${m.pct}% من الإجابات صحيحة في هذه الوحدة.`, "أعد شرح الوحدة بمثال من بيئة المتدربين، وأضف سؤال تثبيت مباشرة بعد الشرح، وقلّل المعلومات الجانبية.");
+      else if (m.pct < 75) add("warn", `استيعاب متوسط في «${m.m}»`, `${m.pct}% من الإجابات صحيحة.`, "أضف مثالًا تطبيقيًا واحدًا أو لعبة ترتيب قصيرة تثبّت الفكرة.");
+      else if (m.pct >= 90) S.push(`استيعاب ممتاز في «${m.m}» (${m.pct}%).`);
+    }
+    for (const h of r.hard.filter((x) => x.pct < 50).slice(0, 3)) add("bad", "سؤال لم تصل فكرته", `«${h.t}» — صحيح ${h.pct}% (${h.mod || ""}).`, "راجع الشريحة التي تسبق السؤال: هل شرحت الفكرة بوضوح؟ ثم راجع صياغة السؤال والبديل الخاطئ الأكثر اختيارًا.");
+    if (r.ev) {
+      for (const row of r.ev.rows) {
+        const adv = ADVICE[row.id];
+        if (row.kind === "score" && row.val !== null) {
+          if (row.val < 3.8) add("bad", `تقييم منخفض: ${adv?.[0] || row.q}`, `${row.val} من 5 — «${row.q}»`, adv?.[1] || "");
+          else if (row.val < 4.2) add("warn", `قابل للتحسين: ${adv?.[0] || row.q}`, `${row.val} من 5 — «${row.q}»`, adv?.[1] || "");
+          else if (row.val >= 4.6) S.push(`${adv?.[0] || row.q}: ${row.val} من 5.`);
+        }
+        if (row.kind === "level") {
+          const [easy, , hard] = row.dist.map((d) => d[1]);
+          if (hard >= 30) add("warn", "المحتوى صعب على جزء كبير من القاعة", `${hard}% وجدوه أصعب مما توقعوا.`, "أبطئ الإيقاع في الوحدات الأولى، وقدّم مسارًا مبسطًا للمبتدئين في التمارين.");
+          if (easy >= 30) add("warn", "المحتوى سهل على جزء كبير من القاعة", `${easy}% وجدوه أسهل مما توقعوا.`, "أضف تحديات متقدمة اختيارية في كل تمرين لمن ينهي مبكرًا.");
+        }
+      }
+      if (r.ev.nps !== null) {
+        if (r.ev.nps < 0) add("bad", "صافي التوصية سلبي", `NPS = ${r.ev.nps}`, "اقرأ أمنيات المتدربين أدناه؛ غالبًا السبب في الإيقاع أو واقعية الأمثلة.");
+        else if (r.ev.nps < 30) add("warn", "صافي التوصية منخفض", `NPS = ${r.ev.nps}`, "ركّز على أعلى بندين انخفاضًا في التقييم؛ تحسينهما يرفع التوصية مباشرة.");
+        else if (r.ev.nps >= 50) S.push(`المتدربون يوصون بالدورة بقوة (NPS = ${r.ev.nps}).`);
+      }
+    } else add("warn", "لم يُستكمل تقييم الدورة", "لا توجد إجابات على شريحة التقييم.", "افتح شريحة «تقييم الدورة» قبل الختام، وانتظر حتى يكمل أغلب القاعة.");
+    if (r.part !== null && r.part < 60) add("warn", "المشاركة في الأنشطة منخفضة", `${r.part}% من الإجابات الممكنة فقط.`, "افتح الإجابة فور عرض السؤال، وذكّر بالرمز، واستخدم الفرق والمنافسة مبكرًا.");
+    else if (r.part !== null && r.part >= 85) S.push(`مشاركة عالية في الأنشطة (${r.part}%).`);
+    const order = { bad: 0, warn: 1 };
+    return { alerts: A.sort((a, b) => order[a.sev] - order[b.sev]), strengths: S };
+  }
+
+  /* ───── برومبت جاهز لـ Claude ───── */
+  function prompt(r, ins) {
+    const L = [];
+    L.push("أنت مستشار خبير في التصميم التعليمي وتطوير الحقائب التدريبية.");
+    L.push(`أقدّم دورة «${DECK.title || "الذكاء الاصطناعي… من الصفر إلى الإنجاز"}»: يوم تدريبي تفاعلي لطلاب الجامعات والمعلمين والإداريين، ${SL.length} شريحة في ${RD.mods.length} وحدات (${RD.mods.join("، ")}).`);
+    L.push(`\nهذه نتائج الدفعة «${r.title}» (${r.n} متدربًا، ${date(r.created)}):`);
+    if (r.pre !== null) L.push(`- الاختبار القبلي ${r.pre}% ← البعدي ${r.post}% (التحسن ${r.gain >= 0 ? "+" : ""}${r.gain} نقطة).`);
+    if (r.mastery.length) L.push(`- الاستيعاب لكل وحدة: ${r.mastery.map((m) => `${m.m} ${m.pct}%`).join("، ")}.`);
+    if (r.hard.length) L.push(`- أصعب الأسئلة: ${r.hard.slice(0, 4).map((h) => `«${h.t}» ${h.pct}%`).join("، ")}.`);
+    if (r.part !== null) L.push(`- نسبة المشاركة في الأنشطة: ${r.part}%.`);
+    if (r.ev) {
+      L.push(`- تقييم المادة ${f1(r.ev.mat)}/5، تقييم المدرب ${f1(r.ev.tr)}/5، صافي التوصية NPS = ${r.ev.nps ?? "—"} (${r.ev.n} مقيّمًا).`);
+      L.push(`- بنود التقييم: ${r.ev.rows.filter((x) => x.kind === "score").map((x) => `${ADVICE[x.id]?.[0] || x.q} ${x.val ?? "—"}`).join("، ")}.`);
+      const lv = r.ev.rows.find((x) => x.kind === "level"); if (lv) L.push(`- مستوى المحتوى: ${lv.dist.map(([o, p]) => `${o} ${p}%`).join("، ")}.`);
+      if (r.ev.wishes.length) L.push(`- ما يتمناه المتدربون: ${r.ev.wishes.slice(0, 12).map((w) => `«${w}»`).join("؛ ")}.`);
+    }
+    if (ins.alerts.length) L.push(`- التنبيهات: ${ins.alerts.slice(0, 6).map((a) => `${a.title} (${a.detail})`).join("؛ ")}.`);
+    L.push("\nالمطلوب:");
+    L.push("1. حدّد أهم 5 تعديلات ذات أثر أعلى، مرتبة حسب الأولوية.");
+    L.push("2. لكل تعديل: الوحدة أو الشريحة المعنية، المشكلة كما تظهر في البيانات، والتعديل المقترح بصياغة جاهزة للتنفيذ (نص الشريحة الجديد، أو تمرين بديل بتعليماته، أو سؤال بديل بخياراته وإجابته)، والوقت المقترح.");
+    L.push("3. صمّم نشاطًا تفاعليًا جديدًا لأضعف وحدة، يناسب الفئات الثلاث.");
+    L.push("4. لا تحذف محتوى أساسيًا، ولا تخترع أرقامًا غير الواردة هنا.");
+    L.push("أخرج النتيجة في جدول (الأولوية | الوحدة | المشكلة | التعديل | الوقت)، ثم قائمة تنفيذ مختصرة.");
+    return L.join("\n");
+  }
+  function promptAll(list, agg) {
+    const L = ["أنت مستشار خبير في التصميم التعليمي وتطوير الحقائب التدريبية.", `أقدّم دورة «الذكاء الاصطناعي… من الصفر إلى الإنجاز» (${SL.length} شريحة، ${RD.mods.length} وحدات) لطلاب الجامعات والمعلمين والإداريين، وهذه نتائج ${list.length} دفعات بالترتيب الزمني:`];
+    for (const r of list) L.push(`- ${r.title} (${date(r.created)}، ${r.n} متدربًا): قبلي ${r.pre ?? "—"}% ← بعدي ${r.post ?? "—"}%، الاستيعاب ${r.mastAvg !== null ? Math.round(r.mastAvg) : "—"}%، المادة ${f1(r.ev?.mat ?? null)}/5، المدرب ${f1(r.ev?.tr ?? null)}/5، NPS ${r.ev?.nps ?? "—"}، المشاركة ${r.part ?? "—"}%.`);
+    if (agg.repeat.length) L.push(`\nنقاط ضعف تكررت في أكثر من دفعة: ${agg.repeat.map((x) => `${x.t} (${x.c} دفعات)`).join("؛ ")}.`);
+    if (agg.wishes.length) L.push(`ما يتمناه المتدربون عبر الدفعات: ${agg.wishes.slice(0, 15).map((w) => `«${w}»`).join("؛ ")}.`);
+    L.push("\nالمطلوب:", "1. حلّل الاتجاه: ما الذي تحسّن وما الذي تراجع بين الدفعات، ولماذا على الأرجح.", "2. أعطني خطة تطوير للدورة من 5 تعديلات مرتبة بالأولوية، لكل تعديل: الوحدة، المشكلة المتكررة، التعديل بصياغة جاهزة، ومؤشر نجاحه في الدفعة القادمة.", "3. اقترح ما يجب أن أحافظ عليه لأنه ناجح باستمرار.", "4. لا تخترع أرقامًا غير الواردة.", "أخرج النتيجة في جداول واضحة.");
+    return L.join("\n");
+  }
+
+  /* ───── عناصر العرض ───── */
+  const LBL = { good: "ممتاز", warn: "انتبه", bad: "عالجه", na: "لا بيانات" };
+  const delta = (cur, prev, unit = "") => { if (cur === null || prev === null || prev === undefined) return ""; const d = Math.round((cur - prev) * 10) / 10; if (!d) return `<em class="dl eq">= كالسابقة</em>`; return `<em class="dl ${d > 0 ? "up" : "down"}">${d > 0 ? "▲" : "▼"} ${Math.abs(d)}${unit} عن السابقة</em>`; };
+  const tile = (lv, val, lab, target, dl = "") => `<div class="kp ${lv}"><span class="kp-lv">${LBL[lv]}</span><b class="ltr">${val}</b><span class="kp-l">${lab}</span><small>${target}</small>${dl}</div>`;
+  const bar = (label, v, max, lv, txt) => `<div class="hb ${lv}"><span>${esc(label)}</span><i><i style="width:${v === null ? 0 : Math.max(3, Math.min(100, (v / max) * 100))}%"></i></i><b class="ltr">${txt}</b></div>`;
+  const ring = (v) => { const C = 2 * Math.PI * 52, lv = v === null ? "na" : v >= 80 ? "good" : v >= 65 ? "warn" : "bad"; return `<div class="hr ${lv}"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" class="t"/><circle cx="60" cy="60" r="52" class="p" style="stroke-dasharray:${C};stroke-dashoffset:${v === null ? C : C * (1 - v / 100)}"/></svg><div><b class="ltr">${v ?? "—"}</b><span>مؤشر الدفعة</span></div></div>`; };
+
+  function dash(r, prev) {
+    const ins = insights(r), h = health(r), p = prev || null;
+    const ev = r.ev;
+    return `<section class="rp-hero"><div class="rp-id"><p class="rp-kick">تقرير الدفعة</p><h1>${esc(r.title)}</h1><p>${date(r.created)} • الرمز <b class="ltr">${esc(r.code)}</b> • <b class="ltr">${r.n}</b> متدربًا${r.status !== "ended" ? ' • <span class="live">الجلسة لم تنتهِ</span>' : ""}</p>
+        <div class="rp-acts"><button data-r="rename">✏️ تغيير الاسم</button><button data-r="refresh">↻ تحديث</button><button data-r="csv">⬇ Excel</button><button data-r="all">📚 كل الدفعات</button></div></div>${ring(h)}</section>
+      <section class="kps">
+        ${tile(LV.gain(r.gain), r.gain === null ? "—" : `${r.gain >= 0 ? "+" : ""}${r.gain}`, "تحسّن التعلّم", r.pre !== null ? `قبلي ${r.pre}% ← بعدي ${r.post}%` : "يحتاج القبلي والبعدي", delta(r.gain, p?.gain))}
+        ${tile(LV.pct(r.mastAvg), r.mastAvg === null ? "—" : `${Math.round(r.mastAvg)}%`, "الاستيعاب العام", "الهدف ≥ 75%", delta(r.mastAvg === null ? null : Math.round(r.mastAvg), p?.mastAvg == null ? null : Math.round(p.mastAvg), "%"))}
+        ${tile(LV.score(ev?.mat ?? null), f1(ev?.mat ?? null), "تقييم المادة /5", "الهدف ≥ 4.3", delta(ev?.mat ?? null, p?.ev?.mat ?? null))}
+        ${tile(LV.score(ev?.tr ?? null), f1(ev?.tr ?? null), "تقييم المدرب /5", "الهدف ≥ 4.3", delta(ev?.tr ?? null, p?.ev?.tr ?? null))}
+        ${tile(LV.nps(ev?.nps ?? null), ev?.nps ?? "—", "صافي التوصية NPS", "ممتاز ≥ 50", delta(ev?.nps ?? null, p?.ev?.nps ?? null))}
+        ${tile(LV.part(r.part), r.part === null ? "—" : `${r.part}%`, "المشاركة في الأنشطة", `${r.activities} نشاطًا مفتوحًا`, delta(r.part, p?.part, "%"))}
+      </section>
+      <section class="rp-grid">
+        <div class="rp-card alerts"><h2>🚨 ركّز على هذه أولًا <small>${ins.alerts.length}</small></h2>${ins.alerts.length ? ins.alerts.map((a, i) => `<div class="al ${a.sev}"><b>${i + 1}. ${esc(a.title)}</b><p>${esc(a.detail)}</p>${a.action ? `<p class="act">💡 ${esc(a.action)}</p>` : ""}</div>`).join("") : `<p class="ok-all">لا توجد تنبيهات — حافظ على هذا المستوى 👏</p>`}</div>
+        <div class="rp-col">
+          <div class="rp-card strong"><h2>✅ نقاط القوة</h2>${ins.strengths.length ? `<ul>${ins.strengths.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : `<p class="muted">تظهر هنا عند اكتمال البيانات.</p>`}</div>
+          <div class="rp-card ai"><h2>🤖 برومبت التطوير لـ Claude</h2><p class="muted">انسخه والصقه في Claude ليقترح تعديلات جاهزة على الدورة بناءً على هذه النتائج.</p><textarea readonly rows="7">${esc(prompt(r, ins))}</textarea><button class="cp" data-r="copy">📋 نسخ البرومبت</button></div>
+        </div>
+      </section>
+      <section class="rp-grid two">
+        <div class="rp-card"><h2>📚 الاستيعاب لكل وحدة</h2>${r.mastery.length ? r.mastery.map((m) => bar(m.m, m.pct, 100, LV.pct(m.pct), `${m.pct}%`)).join("") : `<p class="muted">لا توجد أسئلة مصححة بعد.</p>`}
+          ${r.hard.some((x) => x.pct < 80) ? `<h3>أصعب الأسئلة</h3>${r.hard.filter((x) => x.pct < 80).slice(0, 5).map((x) => bar(x.t.slice(0, 70), x.pct, 100, LV.pct(x.pct), `${x.pct}%`)).join("")}` : ""}</div>
+        <div class="rp-card"><h2>⭐ تقييم المادة والمدرب ${ev ? `<small>${ev.n} مقيّم</small>` : ""}</h2>${ev ? ev.rows.map((x) => x.kind === "score" ? bar(ADVICE[x.id]?.[0] || x.q, x.val, 5, LV.score(x.val), f1(x.val)) : x.kind === "level" ? `<div class="lvl"><span>مستوى المحتوى</span><div class="stack">${x.dist.map(([o, v], k) => `<i class="s${k}" style="width:${v}%" title="${esc(o)}">${v >= 12 ? `${v}%` : ""}</i>`).join("")}</div><small>${x.dist.map(([o, v]) => `${esc(o)} ${v}%`).join(" • ")}</small></div>` : "").join("") : `<p class="muted">لم يُستكمل التقييم في هذه الجلسة.</p>`}</div>
+      </section>
+      <section class="rp-grid two">
+        <div class="rp-card"><h2>💭 ماذا يتمنى المتدربون؟ ${ev?.wishes.length ? `<small>${ev.wishes.length}</small>` : ""}</h2>${ev?.wishes.length ? `<ul class="wish">${ev.wishes.map((w) => `<li>${esc(w)}</li>`).join("")}</ul>` : `<p class="muted">لا توجد أمنيات مكتوبة.</p>`}
+          ${r.fb.comments.length ? `<h3>ملاحظات نهاية الجلسة</h3><ul class="wish">${r.fb.comments.map((w) => `<li>${esc(w)}</li>`).join("")}</ul>` : ""}</div>
+        <div class="rp-card"><h2>🏆 المتصدرون</h2>${r.top.length ? `<ol class="top">${r.top.map((m) => `<li><span>${esc(m.name)}</span><b class="ltr">${m.points}</b></li>`).join("")}</ol>` : `<p class="muted">—</p>`}</div>
+      </section>`;
+  }
+
+  /* ───── الأرشيف والمقارنة بين الدفعات ───── */
+  function aggregate(list) {
+    const flags = new Map();
+    const flag = (k, t) => { const f = flags.get(k) || { t, c: 0 }; f.c++; flags.set(k, f); };
+    for (const r of list) {
+      for (const m of r.mastery) if (m.pct < 70) flag("m:" + m.m, `ضعف الاستيعاب في «${m.m}»`);
+      for (const h of r.hard) if (h.pct < 50) flag("q:" + h.t, `سؤال صعب: «${h.t.slice(0, 60)}»`);
+      for (const x of r.ev?.rows || []) if (x.kind === "score" && x.val !== null && x.val < 4.2) flag("e:" + x.id, `تقييم أقل من 4.2: ${ADVICE[x.id]?.[0] || x.q}`);
+    }
+    const repeat = [...flags.values()].filter((f) => f.c >= 2).sort((a, b) => b.c - a.c);
+    const once = list.length < 2 ? [...flags.values()].sort((a, b) => b.c - a.c).slice(0, 6) : [];
+    return { repeat, once, wishes: list.flatMap((r) => r.ev?.wishes || []) };
+  }
+  function trend(list, key, get, max, lab, fmt, min = 0) {
+    const vals = list.map(get), pts = vals.map((v, i) => [list.length === 1 ? 50 : 6 + (i * 88) / (list.length - 1), v === null ? null : 92 - ((Math.max(min, Math.min(max, v)) - min) / (max - min)) * 80]);
+    const path = pts.filter(([, y]) => y !== null).map(([x, y], i) => `${i ? "L" : "M"}${x} ${y}`).join(" ");
+    const last = vals.filter((v) => v !== null), d = last.length >= 2 ? last[last.length - 1] - last[last.length - 2] : null;
+    return `<div class="tr"><div class="tr-h"><b>${lab}</b>${d === null ? "" : `<em class="dl ${d > 0 ? "up" : d < 0 ? "down" : "eq"}">${d > 0 ? "▲" : d < 0 ? "▼" : "="} ${Math.abs(Math.round(d * 10) / 10)}</em>`}</div>
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="${path}" class="ln ${key}"/>${pts.map(([x, y], i) => (y === null ? "" : `<circle cx="${x}" cy="${y}" r="2.6" class="dt ${key}"/>`)).join("")}</svg>
+      <div class="tr-x">${list.map((r, i) => `<span>${esc(r.title)}<b class="ltr">${vals[i] === null ? "—" : fmt(vals[i])}</b></span>`).join("")}</div></div>`;
+  }
+
+  async function Page(sidArg) {
+    document.body.className = "m remote rep";
+    await gate("تقارير الدفعات");
+    const EXC = "st-rep-excluded";
+    let rows = [], view = sidArg ? "one" : "all", cur = null, err = "", confirmDel = null, busy = false;
+    const excluded = new Set(store.get(EXC) || []);
+    const saveExc = () => store.set(EXC, [...excluded]);
+    async function loadList() { rows = (await call("list_reports", {})) || []; }
+    async function openOne(sid) {
+      view = "one"; cur = null; err = ""; paint();
+      try { cur = await build(sid); await call("save_session_report", { p_session: sid, p_summary: cur }); await loadList(); } catch (e) { err = msg(e); }
+      paint();
+    }
+    function prevOf(r) { const older = rows.filter((x) => x.summary && x.session_id !== r.sid && new Date(x.created_at) < new Date(r.created) && !excluded.has(x.session_id)); return older.length ? older[0].summary : null; }
+    function paint() {
+      if (view === "one") {
+        app.innerHTML = isolate(`<header class="r-top rp-top"><button class="r-btn ghost" data-r="back">→ ${sidArg && store.get("st-remote-sid") === sidArg ? "جهاز المدرب" : "كل الدفعات"}</button><b>📊 لوحة الدفعة</b></header>
+          <main class="rp">${err ? `<p class="m-err">${esc(err)}</p>` : ""}${cur ? dash(cur, prevOf(cur)) : `<p class="m-soft rp-load">جارٍ تحليل الدفعة…</p>`}</main>`);
+        return;
+      }
+      const sum = rows.filter((x) => x.summary).map((x) => ({ ...x.summary, sid: x.session_id, title: x.title, created: x.created_at }));
+      const inc = sum.filter((x) => !excluded.has(x.sid)).sort((a, b) => new Date(a.created) - new Date(b.created));
+      const ag = aggregate(inc);
+      app.innerHTML = isolate(`<header class="r-top rp-top"><button class="r-btn ghost" data-r="home">→ رجوع</button><b>📚 تقارير الدفعات</b></header><main class="rp">
+        ${err ? `<p class="m-err">${esc(err)}</p>` : ""}
+        <section class="rp-hero"><div class="rp-id"><p class="rp-kick">المقارنة بين الدفعات</p><h1>كيف تتطور الدورة؟</h1><p>${inc.length} دفعة داخل المقارنة من أصل ${rows.length} جلسة • استبعد الجلسات التجريبية من القائمة أدناه.</p></div></section>
+        ${inc.length ? `<section class="trs">
+          ${trend(inc, "a", (r) => r.ev?.mat ?? null, 5, "تقييم المادة /5", f1)}
+          ${trend(inc, "b", (r) => r.ev?.tr ?? null, 5, "تقييم المدرب /5", f1)}
+          ${trend(inc, "c", (r) => r.gain, 60, "تحسّن التعلّم (نقطة)", (v) => `+${Math.round(v)}`)}
+          ${trend(inc, "d", (r) => r.ev?.nps ?? null, 100, "صافي التوصية (NPS)", (v) => Math.round(v), -100)}
+          ${trend(inc, "e", (r) => (r.mastAvg === null ? null : Math.round(r.mastAvg)), 100, "الاستيعاب العام %", (v) => `${v}%`)}
+          ${trend(inc, "f", (r) => r.part, 100, "المشاركة %", (v) => `${v}%`)}
+        </section>
+        <section class="rp-grid">
+          <div class="rp-card alerts"><h2>🔁 ${inc.length >= 2 ? "نقاط تتكرر عبر الدفعات" : "أهم نقاط التطوير"}</h2>${(ag.repeat.length ? ag.repeat : ag.once).map((x) => `<div class="al ${x.c >= 2 ? "bad" : "warn"}"><b>${esc(x.t)}</b>${x.c >= 2 ? `<p>تكرر في ${x.c} دفعات</p>` : ""}</div>`).join("") || `<p class="ok-all">لا توجد نقاط ضعف متكررة 👏</p>`}</div>
+          <div class="rp-col"><div class="rp-card ai"><h2>🤖 برومبت تطوير الدورة من كل الدفعات</h2><p class="muted">يجمع نتائج الدفعات المختارة في طلب واحد إلى Claude.</p><textarea readonly rows="7">${esc(promptAll(inc, ag))}</textarea><button class="cp" data-r="copy">📋 نسخ البرومبت</button></div>
+            ${ag.wishes.length ? `<div class="rp-card"><h2>💭 أمنيات المتدربين <small>${ag.wishes.length}</small></h2><ul class="wish">${ag.wishes.slice(0, 20).map((w) => `<li>${esc(w)}</li>`).join("")}</ul></div>` : ""}</div>
+        </section>` : `<p class="m-soft">لا توجد تقارير محفوظة داخل المقارنة بعد. افتح تقرير أي دفعة من القائمة لإنشائه.</p>`}
+        <section class="rp-card"><h2>🗂️ كل الجلسات</h2><div class="cl">${rows.map((x) => { const s = x.summary, inC = !excluded.has(x.session_id); return `<div class="co ${inC ? "" : "off"}">
+            <div class="co-h"><b>${esc(x.title)}</b><span>${date(x.created_at)} • <span class="ltr">${esc(x.join_code)}</span> • ${x.members} متدرب • ${x.status === "ended" ? "منتهية" : x.status === "live" ? "جارية" : "لم تبدأ"}</span></div>
+            ${s ? `<div class="co-m"><span class="${LV.score(s.ev?.mat ?? null)}">المادة ${f1(s.ev?.mat ?? null)}</span><span class="${LV.score(s.ev?.tr ?? null)}">المدرب ${f1(s.ev?.tr ?? null)}</span><span class="${LV.gain(s.gain)}">التعلّم <b class="ltr">${s.gain === null ? "—" : (s.gain >= 0 ? "+" : "") + s.gain}</b></span><span class="${LV.nps(s.ev?.nps ?? null)}">NPS <b class="ltr">${s.ev?.nps ?? "—"}</b></span></div>` : `<p class="muted">لم يُنشأ تقرير بعد — افتحه لإنشائه.</p>`}
+            <div class="co-a"><button data-open="${x.session_id}">📊 فتح التقرير</button><button data-ren="${x.session_id}">✏️ الاسم</button><button data-inc="${x.session_id}" class="${inC ? "on" : ""}">${inC ? "☑ ضمن المقارنة" : "☐ مستبعدة (تجريبية)"}</button>
+              ${confirmDel === x.session_id ? `<button data-delok="${x.session_id}" class="danger">تأكيد الحذف النهائي</button><button data-delno>تراجع</button>` : `<button data-del="${x.session_id}" class="del">🗑 حذف</button>`}</div></div>`; }).join("") || `<p class="muted">لا توجد جلسات.</p>`}</div>
+          <p class="muted">الحذف نهائي: يحذف الجلسة وإجاباتها وتقريرها. للجلسات التجريبية يكفي غالبًا «استبعادها» من المقارنة.</p></section></main>`);
+    }
+    async function rename(sid, old) {
+      const v = window.prompt("اسم الدفعة (مثال: الدفعة 3 — جامعة جازان):", old || ""); if (v === null || !v.trim()) return;
+      const r = await sb.from("sessions").update({ title: v.trim() }).eq("id", sid); if (r.error) { err = msg(r.error); paint(); return; }
+      if (cur && cur.sid === sid) { cur.title = v.trim(); await call("save_session_report", { p_session: sid, p_summary: cur }).catch(() => {}); }
+      await loadList(); paint();
+    }
+    function csv(r) {
+      const e = (v) => { const s = String(v ?? ""); return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
+      const ins = insights(r);
+      const rows2 = [["تقرير الدفعة", r.title], ["التاريخ", date(r.created)], ["عدد المتدربين", r.n], ["مؤشر الدفعة", health(r)], [], ["المؤشر", "القيمة"], ["القبلي %", r.pre], ["البعدي %", r.post], ["التحسن", r.gain], ["الاستيعاب العام %", r.mastAvg === null ? "" : Math.round(r.mastAvg)], ["المشاركة %", r.part], ["تقييم المادة /5", f1(r.ev?.mat ?? null)], ["تقييم المدرب /5", f1(r.ev?.tr ?? null)], ["NPS", r.ev?.nps ?? ""], [],
+        ["الوحدة", "الاستيعاب %"], ...r.mastery.map((m) => [m.m, m.pct]), [], ["أصعب الأسئلة", "الصحة %"], ...r.hard.map((h) => [h.t, h.pct]), [],
+        ["بند التقييم", "النتيجة"], ...(r.ev?.rows || []).map((x) => [x.q, x.kind === "level" ? x.dist.map(([o, v]) => `${o} ${v}%`).join(" • ") : x.val]), [],
+        ["التنبيه", "التفاصيل", "الإجراء المقترح"], ...ins.alerts.map((a) => [a.title, a.detail, a.action]), [], ["ماذا يتمنى المتدربون؟"], ...(r.ev?.wishes || []).map((w) => [w])];
+      const blob = new Blob(["﻿" + rows2.map((x) => x.map(e).join(",")).join("\r\n")], { type: "text/csv;charset=utf-8" });
+      Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: `تقرير-${r.title}.csv` }).click();
+    }
+    app.onclick = async (e) => {
+      const b = e.target.closest("button"); if (!b || busy) return;
+      const d = b.dataset;
+      if (d.r === "back") { if (sidArg && store.get("st-remote-sid") === sidArg) location.hash = "#/remote"; else { location.hash = "#/reports"; } return; }
+      if (d.r === "home") { location.hash = "#/remote"; return; }
+      if (d.r === "all") { location.hash = "#/reports"; return; }
+      if (d.r === "refresh" && cur) { openOne(cur.sid); return; }
+      if (d.r === "csv" && cur) { csv(cur); return; }
+      if (d.r === "rename" && cur) { rename(cur.sid, cur.title); return; }
+      if (d.r === "copy") { const ta = b.parentElement.querySelector("textarea"); try { await navigator.clipboard.writeText(ta.value); b.textContent = "تم النسخ ✓"; } catch (er) { ta.select(); b.textContent = "حدّد النص وانسخه"; } return; }
+      if (d.open) { location.hash = `#/reports/${d.open}`; return; }
+      if (d.ren) { rename(d.ren, rows.find((x) => x.session_id === d.ren)?.title); return; }
+      if (d.inc) { excluded.has(d.inc) ? excluded.delete(d.inc) : excluded.add(d.inc); saveExc(); paint(); return; }
+      if (d.del) { confirmDel = d.del; paint(); return; }
+      if (d.delno !== undefined) { confirmDel = null; paint(); return; }
+      if (d.delok) {
+        busy = true;
+        try { await call("delete_session", { p_session: d.delok }); excluded.delete(d.delok); saveExc(); if (store.get("st-remote-sid") === d.delok) store.set("st-remote-sid", null); if (store.get("st-display-sid") === d.delok) store.set("st-display-sid", null); confirmDel = null; await loadList(); } catch (er) { err = msg(er); }
+        busy = false; paint();
+      }
+    };
+    try { await loadList(); } catch (e) { err = msg(e); }
+    if (sidArg) openOne(sidArg); else paint();
+  }
+  return { Page, build, insights, health };
+})();
+
 function route() {
   const h = location.hash || "#/";
+  if (h.startsWith("#/reports")) return RPT.Page(h.split("/")[2] || null);
   if (h.startsWith("#/display")) Display();
   else if (h.startsWith("#/remote")) Remote();
   else if (h.startsWith("#/join")) Join(h.split("/")[2]);
