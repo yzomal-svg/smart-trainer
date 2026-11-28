@@ -1369,11 +1369,11 @@ body.rep{background:#0a1230}
 .kp-lv{inset-inline-end:auto;inset-inline-start:auto;left:12px}
 
 /* ───── صورة المدرب: دائرة يبرز منها الرأس، والصورة نفسها دون أي تعديل ───── */
-.tr-ph{--s:150px;position:relative;display:block;flex:none;width:var(--s);height:calc(var(--s) * 1.2)}
+.tr-ph{--s:150px;--w:calc(var(--s) * .058);position:relative;isolation:isolate;display:block;flex:none;width:var(--s);height:calc(var(--s) * 1.2)}
 .tr-ph::before{content:"";position:absolute;inset:auto 0 0;height:var(--s);border-radius:50%;
   background:radial-gradient(circle at 32% 26%,#c4b5fd 0,#7c3aed 46%,#3b1a8a 100%);
-  box-shadow:0 0 0 calc(var(--s) * .026) #fff,0 0 calc(var(--s) * .22) rgba(167,139,250,.55),0 calc(var(--s) * .1) calc(var(--s) * .24) rgba(5,10,40,.4)}
-.tr-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none;pointer-events:none;
+  box-shadow:0 0 0 calc(var(--s) * .022) rgba(255,255,255,.55),0 0 calc(var(--s) * .22) rgba(167,139,250,.5),0 calc(var(--s) * .1) calc(var(--s) * .24) rgba(5,10,40,.4)}
+.tr-ph img{position:absolute;inset:0;z-index:2;width:100%;height:100%;object-fit:cover;user-select:none;pointer-events:none;
   -webkit-mask:radial-gradient(closest-side circle at 50% calc(100% - var(--s) / 2),#000 99%,transparent 100%),linear-gradient(#000 36%,transparent 36%);
   mask:radial-gradient(closest-side circle at 50% calc(100% - var(--s) / 2),#000 99%,transparent 100%),linear-gradient(#000 36%,transparent 36%)}
 .tr-card{display:flex;align-items:flex-end;gap:26px;margin-top:44px}
@@ -1399,6 +1399,15 @@ body.rep{background:#0a1230}
 .ty-msg .p-tr{margin-bottom:8px}
 
 .slide:is([data-type=cover],[data-type=closing],[data-type=join]) .orbs i:nth-child(3){right:auto;left:44%;bottom:4%}
+
+/* وميض لامع يدور على إطار الصورة (خلف الرأس البارز، فوق الدائرة) */
+.tr-ph::after{content:"";position:absolute;z-index:1;left:calc(var(--w) * -1);right:calc(var(--w) * -1);bottom:calc(var(--w) * -1);height:calc(var(--s) + var(--w) * 2);border-radius:50%;
+  background:conic-gradient(from 0deg,rgba(196,181,253,.28) 0 38%,#a78bfa 54%,#ffb3cd 64%,#fff 71%,#fff 74%,#7dd3fc 84%,rgba(196,181,253,.28) 96%);
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - var(--w)),#000 calc(100% - var(--w) + .6px));
+  mask:radial-gradient(farthest-side,transparent calc(100% - var(--w)),#000 calc(100% - var(--w) + .6px));
+  filter:drop-shadow(0 0 calc(var(--s) * .06) rgba(255,255,255,.85)) drop-shadow(0 0 calc(var(--s) * .12) rgba(167,139,250,.7));animation:trSpin 2.8s linear infinite}
+@keyframes trSpin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.tr-ph::after{animation-duration:12s}}
 </style>
 </head>
 <body class="m">
@@ -1433,7 +1442,7 @@ window.DECK.slides.push(
 { id: "cover", type: "cover", mod: 0, tag: "دورة تطبيقية للمبتدئين",
   title: "الذكاء الاصطناعي…<br>من الصفر إلى الإنجاز",
   sub: "يوم عملي لإنجاز التقارير، الأبحاث، العروض، المحتوى وتحليل البيانات",
-  tools: ["Claude", "ChatGPT", "Gemini", "Copilot"], by: "إعداد وتقديم: د. ياسر زمل • أغسطس 2026", byDate: "أغسطس 2026",
+  tools: ["Claude", "ChatGPT", "Gemini", "Copilot"], by: "إعداد وتقديم: د. ياسر زمل",
   outTitle: "ماذا ستنجز اليوم؟", outputs: ["تقرير احترافي", "بحث موثّق", "عرض تقديمي", "حزمة محتوى", "تحليل بيانات"],
   notes: { goal: "افتتاح يركّز على النتيجة لا على الأداة.", say: "اليوم لن نتحدث عن الذكاء الاصطناعي؛ سننجز به خمسة مخرجات حقيقية قبل نهاية اليوم.", question: "من منكم يريد أن يخرج اليوم بتقرير جاهز يستخدمه غدًا؟", time: "دقيقتان", next: "قبل أن أشرح أي شيء، أريد أن أعرف أنتم من…" } },
 
@@ -1890,7 +1899,7 @@ window.DECK.slides.push(
   notes: { goal: "تحويل التعلم إلى التزام علني.", time: "دقيقتان", next: "الخطوة التالية ليست غدًا…" } },
 
 { id: "closing", type: "closing", mod: 7, tag: "الخطوة التالية", title: "ليست غدًا…<br>بل أول مهمة بعد انتهاء الدورة", sub: "اختر مهمة واحدة حقيقية، افتح الأداة المناسبة، وطبّق ما تعلمته.",
-  by: "شكرًا لحضوركم — د. ياسر زمل • أغسطس 2026", byDate: "أغسطس 2026", rule: ["المهمة أولًا", "ثم الأداة", "ثم التحقق", "ثم النشر"], tools: ["Claude", "ChatGPT", "Gemini", "Copilot"],
+  by: "شكرًا لحضوركم — د. ياسر زمل", rule: ["المهمة أولًا", "ثم الأداة", "ثم التحقق", "ثم النشر"], tools: ["Claude", "ChatGPT", "Gemini", "Copilot"],
   notes: { goal: "ختام يحوّل التعلم إلى فعل.", say: "القاعدة الذهبية: المهمة أولًا، ثم الأداة، ثم التحقق، ثم النشر.", time: "دقيقتان" } },
 );
 </script>
