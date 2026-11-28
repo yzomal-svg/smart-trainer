@@ -1415,6 +1415,11 @@ body.rep{background:#0a1230}
 .m-endrow{flex:none;border:2px solid #fecaca;background:#fff5f5;color:#b91c1c;border-radius:16px;padding:0 14px;font:inherit;font-weight:700;font-size:14px;cursor:pointer}
 .m-endrow.sure{background:#dc2626;color:#fff;border-color:#dc2626}
 .m-last{white-space:nowrap;display:inline-block;background:#ede9fe;color:#6d28d9;border-radius:999px;padding:1px 8px;font-size:12px;font-weight:700}
+
+.m-wait{display:flex;gap:14px;align-items:center;background:#f5f3ff;border-radius:16px;padding:16px;margin:8px 0 4px}
+.m-wait p{margin:0;color:#4c1d95;line-height:1.6}
+.m-wait i{flex:none;width:28px;height:28px;border-radius:50%;border:4px solid #ddd6fe;border-top-color:#7c3aed;animation:mspin 1s linear infinite}
+@keyframes mspin{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body class="m">
@@ -3036,8 +3041,9 @@ async function pickSession(where, storeKey) {
   const open = rows || [];
   const { data: allRows } = await sb.from("sessions").select("id").eq("course_id", courseId);
   const allN = (allRows || []).length;
-  /* لا نعيد فتح آخر جلسة تلقائيًا: كان ذلك يُرجع الشاشة إلى جلسة قديمة (مثل شريحة التقييم) بدل بدء دفعة جديدة */
-  open.sort((x, y) => (x.id === saved ? -1 : y.id === saved ? 1 : 0));
+  /* جهاز المدرب لا يُنشئ جلسة: يلتحق بالجلسة التي بدأتها شاشة العرض */
+  if (storeKey === "st-remote-sid") return remotePick(where, storeKey, courseId, open, saved, allN);
+  /* شاشة العرض: لا نعيد فتح آخر جلسة تلقائيًا (كانت تُرجع الشاشة إلى شريحة التقييم بدل بدء دفعة جديدة) */
   return new Promise((resolve) => {
     app.innerHTML = isolate(`<main class="m-wrap"><div class="m-card"><p class="m-kick">${esc(where)}</p><h1>ابدأ جلسة جديدة</h1>
       <label class="m-lbl">اسم الدفعة<input id="sname" maxlength="60" value="الدفعة ${allN + 1}"></label>
@@ -3069,6 +3075,42 @@ async function pickSession(where, storeKey) {
         store.set(storeKey, sid); resolve(sid);
       } catch (err) { $("#pe").textContent = msg(err); e.target.disabled = false; }
     });
+  });
+}
+
+/* جهاز المدرب: يتصل تلقائيًا بالجلسة المفتوحة على الشاشة، ولا يُنشئ جلسة ثانية بالخطأ */
+function remotePick(where, storeKey, courseId, open, saved, allN) {
+  const take = (id) => { store.set(storeKey, id); return id; };
+  if (open.length === 1) return Promise.resolve(take(open[0].id));
+  if (open.length > 1 && saved === open[0].id) return Promise.resolve(saved);
+  return new Promise((resolve) => {
+    let timer = null;
+    const done = (id) => { clearInterval(timer); resolve(take(id)); };
+    const row = (r, k) => `<div class="m-srow"><button class="m-row" data-sid="${r.id}"><b class="ltr">${esc(r.join_code)}</b><span class="m-tt">${esc(r.title || "")}${k === 0 ? ` <small class="m-last">الأحدث</small>` : ""}</span><span>${new Date(r.created_at).toLocaleString("ar-SA", { timeStyle: "short" })}</span><span class="m-pill">${r.status === "lobby" ? "لم تبدأ" : "جارية"}</span></button><button class="m-endrow" data-endsid="${r.id}">إنهاء</button></div>`;
+    app.innerHTML = isolate(`<main class="m-wrap"><div class="m-card"><p class="m-kick">${esc(where)}</p>
+      ${open.length ? `<h1>اختر الجلسة المعروضة على الشاشة</h1><p class="m-soft">طابِق الرمز مع الرمز الظاهر على شاشة العرض.</p><div class="m-list">${open.map(row).join("")}</div><p class="m-soft">أنهِ الجلسات القديمة حتى يتصل جوالك تلقائيًا في المرة القادمة.</p>`
+        : `<h1>بانتظار شاشة العرض…</h1><div class="m-wait"><i></i><p>ابدأ الجلسة من شاشة العرض أولًا، وسيتصل جوالك بها تلقائيًا خلال ثوانٍ.</p></div>`}
+      <p class="m-err" id="pe"></p>
+      <details class="m-pass"><summary>إنشاء جلسة من الجوال (عند عدم وجود شاشة عرض)</summary><label class="m-lbl">اسم الدفعة<input id="sname" maxlength="60" value="الدفعة ${allN + 1}"></label><button class="m-btn alt" id="newS">＋ جلسة جديدة</button></details>
+      <a class="m-link" href="#/reports">📚 تقارير الدفعات والمقارنة بينها</a></div></main>`);
+    app.querySelectorAll("[data-sid]").forEach((b) => b.addEventListener("click", () => done(b.dataset.sid)));
+    app.querySelectorAll("[data-endsid]").forEach((b) => b.addEventListener("click", async () => {
+      if (!b.classList.contains("sure")) { b.classList.add("sure"); b.textContent = "تأكيد الإنهاء"; return; }
+      b.disabled = true;
+      try { await call("end_session", { p_session: b.dataset.endsid }); b.closest(".m-srow").remove(); const left = app.querySelectorAll("[data-sid]"); if (left.length === 1) done(left[0].dataset.sid); }
+      catch (err) { $("#pe").textContent = msg(err); b.disabled = false; }
+    }));
+    $("#newS").addEventListener("click", async (e) => {
+      e.target.disabled = true;
+      try { const r = await call("create_session", { p_course_id: courseId, p_title: ($("#sname")?.value || "").trim() || null }); done((Array.isArray(r) ? r[0] : r).session_id); }
+      catch (err) { $("#pe").textContent = msg(err); e.target.disabled = false; }
+    });
+    /* لا جلسة بعد: نراقب حتى تبدأ شاشة العرض جلسة، ثم نتصل بها تلقائيًا */
+    if (!open.length) timer = setInterval(async () => {
+      const { data } = await sb.from("sessions").select("id").eq("course_id", courseId).neq("status", "ended").order("created_at", { ascending: false }).limit(2);
+      if (data && data.length === 1) done(data[0].id);
+      else if (data && data.length > 1) { clearInterval(timer); location.reload(); }
+    }, 2500);
   });
 }
 
@@ -3448,7 +3490,7 @@ async function Remote() {
         <div class="r-teams"><span>تقسيم عشوائي إلى</span><input id="tn" type="number" min="2" max="8" value="${t.teams.length || 4}" inputmode="numeric"><span>فرق</span><button data-a="teams" ${t.participants.length < 2 ? "disabled" : ""}>قسّم</button></div>
         ${t.teams.length ? `<ul class="r-res">${t.teams.map((x) => `<li><span><i class="tdot" style="background:${esc(x.color)}"></i>${esc(x.name)} (${x.members})</span><b class="ltr">${x.points}</b></li>`).join("")}</ul>` : ""}</section>
       <section class="r-card"><p class="r-lbl">الترتيب</p>${t.leaderboard.length ? `<ol class="r-res">${t.leaderboard.slice(0, 5).map((r) => `<li><span>${r.rank}. ${esc(r.name)}</span><b class="ltr">${r.points}</b></li>`).join("")}</ol>` : `<p class="m-soft">تُحتسب النقاط بعد كشف الإجابات.</p>`}</section>
-      <div class="r-end">${S.status === "ended" ? `<button class="r-btn" data-a="report">تقرير الجلسة</button><button class="r-btn ghost" data-a="newsession">جلسة جديدة</button>` : confirmEnd ? `<button class="r-btn danger" data-a="end">تأكيد إنهاء الجلسة</button><button class="r-btn ghost" data-a="noend">تراجع</button>` : `<button class="r-btn ghost" data-a="askend">إنهاء الجلسة</button>`}</div>`);
+      <div class="r-end">${S.status === "ended" ? `<button class="r-btn" data-a="report">تقرير الجلسة</button><button class="r-btn ghost" data-a="newsession">الجلسة التالية</button>` : confirmEnd ? `<button class="r-btn danger" data-a="end">تأكيد إنهاء الجلسة</button><button class="r-btn ghost" data-a="noend">تراجع</button>` : `<button class="r-btn ghost" data-a="askend">إنهاء الجلسة</button>`}</div>`);
     bind(it, idx, items, s, lr);
   }
   function describeKey(s) {
