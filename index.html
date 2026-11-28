@@ -1408,6 +1408,13 @@ body.rep{background:#0a1230}
   filter:drop-shadow(0 0 calc(var(--s) * .06) rgba(255,255,255,.85)) drop-shadow(0 0 calc(var(--s) * .12) rgba(167,139,250,.7));animation:trSpin 2.8s linear infinite}
 @keyframes trSpin{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.tr-ph::after{animation-duration:12s}}
+
+.m-sub{margin:20px 0 8px;font-weight:700;color:var(--navy)}
+.m-srow{display:flex;gap:8px;align-items:stretch}
+.m-srow .m-row{flex:1;min-width:0;flex-wrap:wrap}
+.m-endrow{flex:none;border:2px solid #fecaca;background:#fff5f5;color:#b91c1c;border-radius:16px;padding:0 14px;font:inherit;font-weight:700;font-size:14px;cursor:pointer}
+.m-endrow.sure{background:#dc2626;color:#fff;border-color:#dc2626}
+.m-last{white-space:nowrap;display:inline-block;background:#ede9fe;color:#6d28d9;border-radius:999px;padding:1px 8px;font-size:12px;font-weight:700}
 </style>
 </head>
 <body class="m">
@@ -3029,12 +3036,13 @@ async function pickSession(where, storeKey) {
   const open = rows || [];
   const { data: allRows } = await sb.from("sessions").select("id").eq("course_id", courseId);
   const allN = (allRows || []).length;
-  if (saved && open.some((r) => r.id === saved)) return saved;
+  /* لا نعيد فتح آخر جلسة تلقائيًا: كان ذلك يُرجع الشاشة إلى جلسة قديمة (مثل شريحة التقييم) بدل بدء دفعة جديدة */
+  open.sort((x, y) => (x.id === saved ? -1 : y.id === saved ? 1 : 0));
   return new Promise((resolve) => {
-    app.innerHTML = isolate(`<main class="m-wrap"><div class="m-card"><p class="m-kick">${esc(where)}</p><h1>اختر الجلسة</h1>
-      ${open.length ? `<div class="m-list">${open.map((r) => `<button class="m-row" data-sid="${r.id}"><b class="ltr">${esc(r.join_code)}</b><span class="m-tt">${esc(r.title || "")}</span><span>${new Date(r.created_at).toLocaleString("ar-SA", { dateStyle: "medium", timeStyle: "short" })}</span><span class="m-pill">${r.status === "lobby" ? "لم تبدأ" : "جارية"}</span></button>`).join("")}</div>` : `<p class="m-soft">لا توجد جلسة مفتوحة.</p>`}
-      <label class="m-lbl">اسم الدفعة الجديدة<input id="sname" maxlength="60" value="الدفعة ${allN + 1}"></label>
+    app.innerHTML = isolate(`<main class="m-wrap"><div class="m-card"><p class="m-kick">${esc(where)}</p><h1>ابدأ جلسة جديدة</h1>
+      <label class="m-lbl">اسم الدفعة<input id="sname" maxlength="60" value="الدفعة ${allN + 1}"></label>
       <button class="m-btn" id="newS">＋ جلسة جديدة</button><p class="m-err" id="pe"></p>
+      ${open.length ? `<p class="m-sub">أو تابع جلسة مفتوحة</p><div class="m-list">${open.map((r) => `<div class="m-srow"><button class="m-row" data-sid="${r.id}"><b class="ltr">${esc(r.join_code)}</b><span class="m-tt">${esc(r.title || "")}${r.id === saved ? ` <small class="m-last">آخر جلسة</small>` : ""}</span><span>${new Date(r.created_at).toLocaleString("ar-SA", { dateStyle: "medium", timeStyle: "short" })}</span><span class="m-pill">${r.status === "lobby" ? "لم تبدأ" : "جارية"}</span></button><button class="m-endrow" data-endsid="${r.id}">إنهاء</button></div>`).join("")}</div><p class="m-soft">«إنهاء» يغلق الجلسة القديمة ويحفظ نتائجها في التقارير.</p>` : ""}
       <a class="m-link" href="#/reports">📚 تقارير الدفعات والمقارنة بينها</a>
       <details class="m-pass"><summary>تغيير كلمة المرور</summary><form id="cp"><label>كلمة المرور الجديدة<input name="a" type="password" autocomplete="new-password" dir="ltr" minlength="8" required></label><label>أعد كتابتها<input name="b" type="password" autocomplete="new-password" dir="ltr" minlength="8" required></label><p class="m-err" id="cpe"></p><button class="m-btn alt">حفظ كلمة المرور</button><p class="m-soft">8 خانات على الأقل. تُطبَّق على كل أجهزتك.</p></form></details></div></main>`);
     $("#cp").addEventListener("submit", async (e) => {
@@ -3047,6 +3055,12 @@ async function pickSession(where, storeKey) {
       else { f.reset(); out.className = "p-ok"; out.textContent = "تم حفظ كلمة المرور الجديدة ✓"; }
     });
     app.querySelectorAll("[data-sid]").forEach((b) => b.addEventListener("click", () => { store.set(storeKey, b.dataset.sid); resolve(b.dataset.sid); }));
+    app.querySelectorAll("[data-endsid]").forEach((b) => b.addEventListener("click", async () => {
+      if (!b.classList.contains("sure")) { b.classList.add("sure"); b.textContent = "تأكيد الإنهاء"; return; }
+      b.disabled = true;
+      try { await call("end_session", { p_session: b.dataset.endsid }); if (store.get(storeKey) === b.dataset.endsid) store.set(storeKey, null); b.closest(".m-srow").remove(); }
+      catch (err) { $("#pe").textContent = msg(err); b.disabled = false; }
+    }));
     $("#newS").addEventListener("click", async (e) => {
       e.target.disabled = true;
       try {
